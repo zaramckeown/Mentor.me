@@ -22,19 +22,22 @@ angular.module('profile').controller('MentorListController', ['$scope', '$filter
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+
+      for(var usercounter =0; usercounter<$scope.users.length; usercounter++)
+      {
+        $scope.schoolmodel = [];
+        for(var i=0; i<$scope.users[usercounter].profile.education.length; i++)
+        {
+          $scope.schooldata = [{ id: $scope.users[usercounter].profile.education[i].schoolName, label: $scope.users[usercounter].profile.education[i].schoolName }];
+        }
+
+        $scope.schoolsettings = {enableSearch: true};
+        $scope.schooltext = { buttonDefaultText: 'Search by School', dynamicButtonTextSuffix: 'Search by School' };
+      }
     };
 
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
     };
-
-    $scope.example9model = [];
-    $scope.example9data = [ { id: 1, label: "David" }, { id: 2, label: "Jhon" }, { id: 3, label: "Danny" }];
-    $scope.example9settings = { enableSearch: true };
-
-    $scope.schoolsData = [];
-    $scope.schoolModel = [];
-    $scope.schoolsSettings = { enableSearch: true };
-
   }
 ]);
