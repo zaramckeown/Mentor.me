@@ -3,7 +3,6 @@
 angular.module('users').controller('EditProfileController', ['$scope', '$http', '$location', 'Users', 'Authentication',
   function ($scope, $http, $location, Users, Authentication) {
     $scope.user = Authentication.user;
-    console.log($scope.user);
 
     $scope.eduD = {};
     $scope.eduD.sdt = [];

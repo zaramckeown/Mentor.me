@@ -29,12 +29,12 @@ angular.module('profile').controller('MentorListController', ['$scope', '$filter
     };
 
     $scope.example9model = [];
-    $scope.example9data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}];
-    $scope.example9settings = {enableSearch: true};
+    $scope.example9data = [ { id: 1, label: "David" }, { id: 2, label: "Jhon" }, { id: 3, label: "Danny" }];
+    $scope.example9settings = { enableSearch: true };
 
     $scope.schoolsData = [];
     $scope.schoolModel = [];
-    $scope.schoolsSettings = {enableSearch: true};
+    $scope.schoolsSettings = { enableSearch: true };
 
   }
 ]);
