@@ -18,7 +18,7 @@ module.exports = function (app) {
     .put(questions.update)
     .delete(questions.delete);
 
-  app.route('/api/questions/:questionId/comments')
+  app.route('/api/questions/:id/comments')
     .post(questions.addComment);
 
   // Finish by binding the article middleware

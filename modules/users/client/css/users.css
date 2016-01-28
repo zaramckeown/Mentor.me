@@ -34,3 +34,26 @@
   min-height: 150px;
   max-height: 150px;
 }
+
+.cust-list{
+  font-size: 100px;
+}
+
+
+.rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #000000;
+}
+
+.glyphicon.glyphicon-briefcase {
+  font-size: 20px;
+}
+
+.glyphicon.glyphicon-bookmark {
+  font-size: 20px;
+}
+
+.glyphicon.glyphicon-education {
+  font-size: 20px;
+}
+

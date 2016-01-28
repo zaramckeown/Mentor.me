@@ -28,8 +28,8 @@ exports.create = function (req, res) {
 };
 
 exports.addComment = function (req, res) {
-  var comment = new Comments(req.body);
-  comment.question = req.question;
+  var comment = new Comments(req.body.body);
+  comment.question = req.params.id;
   comment.user = req.user;
 
   comment.save(function (err) {
@@ -41,14 +41,14 @@ exports.addComment = function (req, res) {
       res.json(comment);
     }
 
-    req.question.comments.push(comment);
-    req.question.save(function (err) {
+    /*req.body.question.comments.push(comment);
+    req.body.question.save(function (err) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       }
-    });
+    });*/
   });
 };
 

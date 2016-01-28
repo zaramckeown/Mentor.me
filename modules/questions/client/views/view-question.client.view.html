@@ -27,6 +27,7 @@
       <form name="questionForm" class="form-horizontal" ng-submit="addComment()" novalidate>
         <fieldset>
           <div class="form-group">
+            <input type="hidden" id="question" name="question" ng-bind="question.question" class="form-control">
             <label for="comment">Comment</label>
             <textarea name="comment" ng-model="comment" id="comment" class="form-control" cols="1" rows="10"
                       placeholder="Content"></textarea>

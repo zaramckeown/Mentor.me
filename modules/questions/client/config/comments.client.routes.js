@@ -6,7 +6,7 @@ angular.module('questions.comments').config(['$stateProvider',
     // Articles state routing
     $stateProvider
     .state('comments.addComment', {
-      url: '/:questionId/comments',
+      url: '/:id/comments',
       templateUrl: 'modules/questions/client/views/view-question.client.view.html'
     });
   }

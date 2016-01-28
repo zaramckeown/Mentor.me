@@ -34,7 +34,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
 
     $scope.addComment = function () {
       var comment = new Comments({
-        body: this.comment
+        body: this.comment,
+        question: this.question.question
       });
 
       if ($scope.comment === '') {
@@ -42,9 +43,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       }
 
       // Redirect after save
-      comment.$save({ questionId: $stateParams.questionId }, function (response) {
+      comment.$save({ id: $stateParams.questionId }, function (response) {
         $location.path('questions');
-
         // Clear form fields
         $scope.body = '';
       }, function (errorResponse) {
@@ -92,7 +92,6 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.find = function () {
       $scope.questions = Questions.query();
     };
-
 
     // Find existing Article
     $scope.findOne = function () {
