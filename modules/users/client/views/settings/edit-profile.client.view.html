@@ -1,123 +1,115 @@
 <section ng-controller="EditProfileController">
     <div class="row">
-    <div class="col-sm-3">
-    <section ng-controller="ChangeProfilePictureController">
-        <form class="signin form-horizontal">
-          <fieldset>
-            <div class="form-group text-center">
-              <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail img-circle user-profile-picture">
-            </div>
-            <div class="text-center form-group" ng-hide="uploader.queue.length">
-              <span class="btn btn-default btn-file">
-                  Select Image <input type="file" nv-file-select uploader="uploader">
-              </span>
-            </div>
-            <div class="text-center form-group" ng-show="uploader.queue.length">
-              <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
-              <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
-            </div>
-            <div ng-show="success" class="text-center text-success">
-              <strong>Profile Picture Changed Successfully</strong>
-            </div>
-            <div ng-show="error" class="text-center text-danger">
-              <strong ng-bind="error"></strong>
-            </div>
-          </fieldset>
-        </form>
-    </section>
-    </div>
-
-    <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" autocomplete="off">
-
-    <div class="col-sm-9"
-        layout="column" ng-cloak class="md-inline-form">
-        <div class="row">
-            <md-content class="col-sm-8">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <md-input-container>
-                          <label>Firstname</label>
-                          <input ng-model="user.firstname" size="50">
-                        </md-input-container>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                      <md-input-container>
-                        <label>Lastname</label>
-                        <input ng-model="user.lastname" size="50">
-                      </md-input-container>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                      <md-input-container>
-                        <label>Location</label>
-                        <input ng-model="user.location" size="50">
-                      </md-input-container>
-                    </div>
-                </div>
-            </md-content>
-
-            <div class="col-sm-4">
-                    Put profile complete % info here
-            </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <section ng-controller="ChangeProfilePictureController">
+              <form class="signin form-horizontal">
+                <fieldset>
+                  <div class="form-group text-center">
+                    <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail img-circle user-profile-picture">
+                  </div>
+                  <div class="text-center form-group" ng-hide="uploader.queue.length">
+                    <span class="btn btn-default btn-file">
+                        Select Image <input type="file" nv-file-select uploader="uploader">
+                    </span>
+                  </div>
+                  <div class="text-center form-group" ng-show="uploader.queue.length">
+                    <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
+                    <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+                  </div>
+                  <div ng-show="success" class="text-center text-success">
+                    <strong>Profile Picture Changed Successfully</strong>
+                  </div>
+                  <div ng-show="error" class="text-center text-danger">
+                    <strong ng-bind="error"></strong>
+                  </div>
+                </fieldset>
+              </form>
+          </section>
         </div>
-
-        <div class="row panel panel-default">
-            <div class="col-sm-6">
-                <md-input-container>
-                  <label>Description</label>
-                  <textarea ng-model="user.description" md-maxlength="150" rows="3"></textarea>
-                </md-input-container>
-            </div>
-            <md-content class="col-sm-6">
-                <!-- put helps with stuff here -->
-            </md-content>
-        </div>
-
-        <div class="row panel panel-default">
-            <label class="col-xs-12">Experience</label>
-            <div class="col-xs-12">
-                <md-input-container>
-                  <label>Company</label>
-                  <input ng-model="" size="50">
-                </md-input-container>
-            </div>
-            <div class="col-xs-12">
-                <md-input-container>
-                  <label>From</label>
-                  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                </md-input-container>
-                <md-input-container>
-                  <label>To</label>
-                  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                </md-input-container>
-            </div>
-            <div class="col-xs-12">
-                <md-input-container>
-                  <label>Description</label>
-                  <input ng-model="user.location" size="50">
-                </md-input-container>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
     <div class="row">
-      <div class="text-center form-group">
-        <button type="submit" class="btn btn-primary">Save Profile</button>
+      <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" autocomplete="off">
+
+          <div class="row">
+              <md-content class="col-sm-8">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <md-input-container>
+                            <label>Firstname</label>
+                            <input ng-model="user.firstname" size="50">
+                          </md-input-container>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-12">
+                        <md-input-container>
+                          <label>Lastname</label>
+                          <input ng-model="user.lastname" size="50">
+                        </md-input-container>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-12">
+                        <md-input-container>
+                          <label>Location</label>
+                          <input ng-model="user.location" size="50">
+                        </md-input-container>
+                      </div>
+                  </div>
+              </md-content>
+            </div>
+
+          <div class="row panel panel-default">
+              <div class="col-sm-6">
+                  <md-input-container>
+                    <label>Description</label>
+                    <textarea ng-model="user.description" md-maxlength="150" rows="3"></textarea>
+                  </md-input-container>
+              </div>
+              <md-content class="col-sm-6">
+                  <!-- put helps with stuff here -->
+              </md-content>
+          </div>
+
+          <div class="row panel panel-default">
+              <label class="col-xs-12">Experience</label>
+              <div class="col-xs-12">
+                  <md-input-container>
+                    <label>Company</label>
+                    <input ng-model="" size="50">
+                  </md-input-container>
+              </div>
+              <div class="col-xs-12">
+                  <md-input-container>
+                    <label>From</label>
+                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                  </md-input-container>
+                  <md-input-container>
+                    <label>To</label>
+                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                  </md-input-container>
+              </div>
+              <div class="col-xs-12">
+                  <md-input-container>
+                    <label>Description</label>
+                    <input ng-model="user.location" size="50">
+                  </md-input-container>
+              </div>
+          </div>
+
+      <div class="row">
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+        <div ng-show="success" class="text-center text-success">
+          <strong>Profile Saved Successfully</strong>
+        </div>
+        <div ng-show="error" class="text-center text-danger">
+          <strong ng-bind="error"></strong>
+        </div>
       </div>
-      <div ng-show="success" class="text-center text-success">
-        <strong>Profile Saved Successfully</strong>
-      </div>
-      <div ng-show="error" class="text-center text-danger">
-        <strong ng-bind="error"></strong>
-      </div>
-    </div>
     </form>
     </div>
+    </div>
+   </div>
 </section>
