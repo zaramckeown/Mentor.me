@@ -52,7 +52,7 @@
                           <div class="col-sm-12">
                             <md-input-container>
                               <label>Location</label>
-                              <input ng-model="user.location" size="50">
+                              <input ng-model="user.profile.location" size="50">
                             </md-input-container>
                           </div>
                       </div>
@@ -63,7 +63,7 @@
                   <div class="col-sm-6">
                       <md-input-container>
                         <label>Description</label>
-                        <textarea ng-model="user.description" md-maxlength="150" rows="3"></textarea>
+                        <textarea ng-model="user.profile.description" md-maxlength="150" rows="3"></textarea>
                       </md-input-container>
                   </div>
                   <md-content class="col-sm-6">
@@ -72,102 +72,112 @@
               </div>
 
               <div class="row panel panel-default">
-                  <label class="col-xs-12">Experience</label>
+                <label class="col-xs-12">Experience</label>
+                  <div ng-repeat="exp in user.profile.experience">
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Company</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="exp.company" size="50">
                       </md-input-container>
                   </div>
                   <div class="col-xs-12">
-                      <md-input-container>
+                      <md-input>
                         <label>From</label>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                      </md-input-container>
-                      <md-input-container>
+                        <md-datepicker ng-model="exp.startDate" md-placeholder="Enter date"></md-datepicker>
+                      </md-input>
+                      <md-input>
                         <label>To</label>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                      </md-input-container>
+                        <md-datepicker ng-model="exp.endDate" md-placeholder="Enter date"></md-datepicker>
+                      </md-input>
                   </div>
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Description</label>
-                        <input ng-model="user.location" size="50">
+                        <input ng-model="exp.description" size="50">
                       </md-input-container>
+                  </div>
                   </div>
               </div>
 
               <div class="row panel panel-default">
                   <label class="col-xs-12">Education</label>
+                  <div ng-repeat="edu in user.profile.education">
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>School</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="edu.schoolName" size="50">
                       </md-input-container>
                   </div>
                   <div class="col-xs-12">
-                      <md-input-container>
+                      <md-input>
                         <label>From</label>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                      </md-input-container>
-                      <md-input-container>
+                        <md-datepicker ng-model="edu.startDate" md-placeholder="Enter date"></md-datepicker>
+                      </md-input>
+                      <md-input>
                         <label>To</label>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                      </md-input-container>
+                        <md-datepicker ng-model="edu.endDate" md-placeholder="Enter date"></md-datepicker>
+                      </md-input>
                   </div>
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Course Name</label>
-                        <input ng-model="user.location" size="50">
+                        <input ng-model="edu.courseTitle" size="50">
                       </md-input-container>
+                  </div>
                   </div>
               </div>
 
-              <div class="row panel panel-default">
+              <div ng-hide="true" class="row panel panel-default">
                   <label class="col-xs-12">Awards</label>
+                  <div np-repeat="award in user.profile.awards">
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Title</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="award.title" size="50">
                       </md-input-container>
                   </div>
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Issuer</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="award.issuer" size="50">
                       </md-input-container>
                   </div>
                   <div class="col-xs-12">
-                      <md-input-container>
+                      <md-input>
                         <label>Date</label>
-                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                      </md-input-container>
+                        <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
+                      </md-input>
                   </div>
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Description</label>
-                        <input ng-model="user.location" size="50">
+                        <input ng-model="user.description" size="50">
                       </md-input-container>
+                  </div>
                   </div>
               </div>
 
               <div class="row panel panel-default">
                   <label class="col-xs-12">Interests</label>
+                  <div ng-repeat="activity in user.profile.interests">
                   <div class="col-xs-3">
                       <md-input-container>
                         <label>Interest</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="activity" size="50">
                       </md-input-container>
+                  </div>
                   </div>
               </div>
 
               <div class="row panel panel-default">
                   <label class="col-xs-12">Links</label>
+                  <div ng-repeat="url in user.profile.links">
                   <div class="col-xs-3">
                       <md-input-container>
                         <label>Link</label>
-                        <input ng-model="" size="50">
+                        <input ng-model="url" size="50">
                       </md-input-container>
+                  </div>
                   </div>
               </div>
 
