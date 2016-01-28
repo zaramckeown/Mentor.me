@@ -118,11 +118,10 @@ var UserSchema = new Schema({
       company: String
     }],
     interests:[{
-      title: String
+      interest: String
     }],
     links: [{
-      type: String,
-      URL: String
+      url : String
     }],
     awards:[{
       title: String,

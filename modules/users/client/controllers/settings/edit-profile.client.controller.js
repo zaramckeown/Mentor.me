@@ -23,11 +23,11 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
     };
 
     $scope.addNewInterest = function() {
-      $scope.user.profile.interests.push('');
+      $scope.user.profile.interests.push({ item : '' });
     };
 
     $scope.addNewLink = function() {
-      $scope.user.profile.links.push('');
+      $scope.user.profile.links.push({ url : '' });
     };
 
     $scope.addNewEducation();
