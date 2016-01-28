@@ -73,7 +73,7 @@
 
               <div class="row panel panel-default">
                 <label class="col-xs-12">Experience</label>
-                  <div ng-repeat="exp in user.profile.experience">
+                  <section ng-repeat="exp in user.profile.experience">
                   <div class="col-xs-12">
                       <md-input-container>
                         <label>Company</label>
@@ -96,7 +96,8 @@
                         <input ng-model="exp.description" size="50">
                       </md-input-container>
                   </div>
-                  </div>
+                  </section>
+                  <md-button ng-click="addNewExperience()" class="md-raised">Add New experience</md-button>
               </div>
 
               <div class="row panel panel-default">
@@ -125,6 +126,7 @@
                       </md-input-container>
                   </div>
                   </div>
+                  <md-button ng-click="addNewEducation()" class="md-raised">Add New Education</md-button>
               </div>
 
               <div ng-hide="true" class="row panel panel-default">
@@ -155,6 +157,7 @@
                       </md-input-container>
                   </div>
                   </div>
+                  <md-button ng-click="addNewAward()" class="md-raised">Add New Award</md-button>
               </div>
 
               <div class="row panel panel-default">
@@ -167,6 +170,7 @@
                       </md-input-container>
                   </div>
                   </div>
+                  <md-button ng-click="addNewInterest()" class="md-raised">Add New Interest</md-button>
               </div>
 
               <div class="row panel panel-default">
@@ -179,6 +183,7 @@
                       </md-input-container>
                   </div>
                   </div>
+                  <md-button ng-click="addNewLink()" class="md-raised">Add New Link</md-button>
               </div>
 
               <div class="row">
