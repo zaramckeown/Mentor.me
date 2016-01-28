@@ -6,6 +6,14 @@
       </div>
       <div class="col-md-4" style="margin-top: 2em">
         <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+        <div ng-dropdown-multiselect="" options="example9data" selected-model="example9model" extra-settings="example9settings"></div>
+
+        <div ng-dropdown-multiselect="" options="schoolsData" selected-model="schoolsModel"
+             extra-settings="schoolSettings"></div>
+        <div ng-dropdown-multiselect="" options="locationData" selected-model="locationModel"
+             extra-settings="locationSettings"></div>
+        <div ng-dropdown-multiselect="" options="skillsData" selected-model="skillsModel"
+             extra-settings="skillsSettings"></div>
       </div>
     </div>
   </div>
