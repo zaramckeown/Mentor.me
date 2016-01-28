@@ -1,10 +1,10 @@
 {
-  "name": "meanjs",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "name": "mentorme",
+  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
   "version": "0.4.2",
   "meanjs-version": "0.4.2",
   "private": false,
-  "author": "https://github.com/meanjs/mean/graphs/contributors",
+  "author": "ZaNic",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "method-override": "^2.3.3",
     "mocha": "~1.20.0",
     "mongoose": "~4.2.3",
+    "mongoose-deep-populate": "^2.0.3",
     "morgan": "^1.6.1",
     "multer": "~1.0.5",
     "nodemailer": "^1.4.0",

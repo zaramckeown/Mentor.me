@@ -23,3 +23,9 @@ angular.module('users.admin').factory('Admin', ['$resource',
     });
   }
 ]);
+
+angular.module('profile').factory('Profile', ['$resource',
+  function ($resource) {
+    return $resource('api/mentorSearch');
+  }
+]);
