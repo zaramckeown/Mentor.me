@@ -55,6 +55,11 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       $scope.awardD.sdt.push({ dt : new Date($scope.user.profile.awards[$scope.user.profile.awards.length - 1].date) });
     };
 
+    $scope.removeAward = function(index) {
+      $scope.user.profile.awards.splice(index, 1);
+      $scope.awardD.sdt.splice(index, 1);
+    }
+
     $scope.addNewInterest = function() {
       $scope.user.profile.interests.push({ item : '' });
     };

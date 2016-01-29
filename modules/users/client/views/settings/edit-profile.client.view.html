@@ -147,34 +147,43 @@
               </div>
 
               <div class="row panel panel-default">
-                  <label class="col-xs-12">Awards</label>
+                  <label class="col-xs-12 section-heading horizontal-center">Awards</label>
                   <div ng-repeat="awd in user.profile.awards">
-                  <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-sm-push-1 col-sm-4 horizontal-center">
                       <md-input-container>
                         <label>Title</label>
                         <input ng-model="awd.title" size="50">
                       </md-input-container>
+                    </div>
+                    <div class="col-sm-push-1 col-sm-6 horizontal-center">
+                      <label class="horizontal-center">Description</label>
+                      <textarea class="horizontal-center rcorners2" ng-model="awd.description" size="200" cols="50">
+                      </textarea>
+                    </div>
                   </div>
-                  <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-sm-push-1 col-sm-4 horizontal-center">
                       <md-input-container>
                         <label>Issuer</label>
                         <input ng-model="awd.issuer" size="50">
                       </md-input-container>
-                  </div>
-                  <div class="col-xs-12">
+
+                    </div>
+                    <div class="col-sm-push-1 col-sm-4 horizontal-center">
                       <md-input>
                         <label>Date</label>
                         <md-datepicker ng-model="awardD.sdt[$index].dt" ng-change="awd.endDate = awardD.sdt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
                       </md-input>
-                  </div>
-                  <div class="col-xs-12">
-                      <md-input-container>
-                        <label>Description</label>
-                        <input ng-model="awd.description" size="100">
-                      </md-input-container>
+                    </div>
+                    <div class="col-sm-1 horizontal-center">
+                      <md-button ng-click="removeAward($index)" class="md-raised md-warn">Remove</md-button>
+                    </div>
                   </div>
                   </div>
-                  <md-button ng-click="addNewAward()" class="md-raised">Add New Award</md-button>
+                  <div class="horizontal-center">
+                    <md-button ng-click="addNewAward()" class="md-raised md-primary">Add New Award</md-button>
+                  </div>
               </div>
 
               <div class="row panel panel-default">
