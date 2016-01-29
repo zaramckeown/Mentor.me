@@ -31,7 +31,7 @@ angular.module('profile').controller('MentorListController', ['$scope', '$filter
           $scope.schooldata = [{ id: $scope.users[usercounter].profile.education[i].schoolName, label: $scope.users[usercounter].profile.education[i].schoolName }];
         }
 
-        $scope.schoolsettings = {enableSearch: true};
+        $scope.schoolsettings = { enableSearch: true };
         $scope.schooltext = { buttonDefaultText: 'Search by School', dynamicButtonTextSuffix: 'Search by School' };
       }
     };

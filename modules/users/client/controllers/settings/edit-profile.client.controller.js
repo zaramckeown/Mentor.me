@@ -36,7 +36,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       $scope.user.profile.education.splice(index, 1);
       $scope.eduD.sdt.splice(index, 1);
       $scope.eduD.edt.splice(index, 1);
-    }
+    };
 
     $scope.addNewExperience = function() {
       $scope.user.profile.experience.push({ company : '', description : '', startDate : new Date(), endDate : new Date() });
@@ -48,7 +48,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       $scope.user.profile.experience.splice(index, 1);
       $scope.expD.sdt.splice(index, 1);
       $scope.expD.edt.splice(index, 1);
-    }
+    };
 
     $scope.addNewAward = function() {
       $scope.user.profile.awards.push({ title : '', description : '', issuer : '', date : new Date() });
