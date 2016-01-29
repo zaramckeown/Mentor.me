@@ -58,7 +58,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
     $scope.removeAward = function(index) {
       $scope.user.profile.awards.splice(index, 1);
       $scope.awardD.sdt.splice(index, 1);
-    }
+    };
 
     $scope.addNewInterest = function() {
       $scope.user.profile.interests.push({ item : '' });
@@ -66,7 +66,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
     $scope.removeInterest = function(index) {
       $scope.user.profile.interests.splice(index, 1);
-    }
+    };
 
     $scope.addNewLink = function() {
       $scope.user.profile.links.push({ url : '' });
@@ -74,7 +74,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
     $scope.removeLink = function(index) {
       $scope.user.profile.links.splice(index, 1);
-    }
+    };
 
     if ($scope.user.profile.education.length === 0) {
       $scope.addNewEducation();
