@@ -59,74 +59,91 @@
                   </md-content>
                 </div>
 
-              <div class="row panel panel-default">
+              <div class="row horizontal-center panel panel-default">
                   <div class="col-sm-6">
-                      <md-input-container>
-                        <label>Description</label>
-                        <textarea ng-model="user.profile.description" md-maxlength="150" rows="3"></textarea>
-                      </md-input-container>
+                        <label class="col-sm-10 section-heading horizontal-center">Description</label>
+                        <textarea class="col-sm-push-1 col-sm-10 horizontal-center rcorners2" ng-model="user.profile.description" size="250" rows="3">
+                        </textarea>
                   </div>
                   <md-content class="col-sm-6">
                       <!-- put helps with stuff here -->
+                      <label class="col-sm-10 section-heading horizontal-center">Helps With</label>
                   </md-content>
               </div>
 
               <div class="row panel panel-default">
-                <label class="col-xs-12">Experience</label>
-                  <section ng-repeat="exp in user.profile.experience">
-                  <div class="col-xs-12">
-                      <md-input-container>
-                        <label>Company</label>
-                        <input ng-model="exp.company" size="50">
-                      </md-input-container>
+                <label class="col-xs-12 horizontal-center section-heading">Experience</label>
+                  <div class="row" ng-repeat="exp in user.profile.experience">
+                    <div class="col-sm-push-1 col-sm-3">
+                        <md-input-container>
+                          <label>Company</label>
+                          <input ng-model="exp.company" size="50">
+                        </md-input-container>
+                    </div>
+                    <div class="col-sm-push-2 col-sm-6">
+                        <md-input class="form-inline horizontal-center">
+                          <label>From</label>
+                          <md-datepicker ng-model="expD.sdt[$index].dt" ng-change="exp.startDate = expD.sdt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
+                        </md-input>
+                        <md-input class="form-inline horizontal-center">
+                          <label>To</label>
+                          <md-datepicker ng-model="expD.edt[$index].dt" ng-change="exp.endDate = expD.edt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
+                        </md-input>
+                    </div>
+                    <div class="col-sm-10 horizontal-center">
+
+                          <label class="control-label col-sm-push-1 col-sm-1 horizontal-center">Description</label>
+                          <textarea class="col-sm-push-2 col-sm-6 rcorners2" ng-model="exp.description" size="1000" rows="5">
+                          </textarea>
+                          <div class="col-sm-push-3 col-sm-2">
+                              <md-button ng-click="removeExperience($index)" class="md-raised md-warn">Remove</md-button>
+                          </div>
+                    </div>
+                    <div class="col-sm-2">
+
+                    </div>
+                    </div>
+                  <div class="horizontal-center">
+                    <md-button ng-click="addNewExperience()" class="md-raised md-primary">Add New Experience</md-button>
                   </div>
-                  <div class="col-xs-12">
-                      <md-input>
-                        <label>From</label>
-                        <md-datepicker ng-model="expD.sdt[$index].dt" ng-change="exp.startDate = expD.sdt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
-                      </md-input>
-                      <md-input>
-                        <label>To</label>
-                        <md-datepicker ng-model="expD.edt[$index].dt" ng-change="exp.endDate = expD.edt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
-                      </md-input>
-                  </div>
-                  <div class="col-xs-12">
-                      <md-input-container>
-                        <label>Description</label>
-                        <input ng-model="exp.description" size="50">
-                      </md-input-container>
-                  </div>
-                  </section>
-                  <md-button ng-click="addNewExperience()" class="md-raised">Add New experience</md-button>
               </div>
 
               <div class="row panel panel-default">
-                  <label class="col-xs-12">Education</label>
+                  <label class="col-xs-12 horizontal-center section-heading">Education</label>
                   <div ng-repeat="edu in user.profile.education">
-                  <div class="col-xs-12">
-                      <md-input-container>
-                        <label>School</label>
-                        <input ng-model="edu.schoolName" size="50">
-                      </md-input-container>
+                    <div class="row">
+                      <div class="col-sm-push-1 col-sm-4 horizontal-center">
+                          <md-input-container>
+                            <label>School</label>
+                            <input ng-model="edu.schoolName" size="50">
+                          </md-input-container>
+                      </div>
+                      <div class="col-sm-push-1 col-sm-6 horizontal-center">
+                          <md-input class="horizontal-center">
+                            <label>From</label>
+                            <md-datepicker ng-model="eduD.sdt[$index].dt" ng-change="edu.startDate = eduD.sdt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
+                          </md-input>
+                          <md-input class="horizontal-center">
+                            <label>To</label>
+                            <md-datepicker ng-model="eduD.edt[$index].dt" ng-change="edu.endDate = eduD.edt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
+                          </md-input>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-push-1 col-sm-4 horizontal-center">
+                          <md-input-container>
+                            <label>Course Name</label>
+                            <input ng-model="edu.courseTitle" size="50">
+                          </md-input-container>
+                      </div>
+                      <div class="col-sm-push-1 col-sm-6 horizontal-center">
+                          <md-button ng-click="removeEducation($index)" class="md-raised md-warn">Remove</md-button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-xs-12">
-                      <md-input>
-                        <label>From</label>
-                        <md-datepicker ng-model="eduD.sdt[$index].dt" ng-change="edu.startDate = eduD.sdt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
-                      </md-input>
-                      <md-input>
-                        <label>To</label>
-                        <md-datepicker ng-model="eduD.edt[$index].dt" ng-change="edu.endDate = eduD.edt[$index].dt.toISOString()" md-placeholder="Enter date"></md-datepicker>
-                      </md-input>
+                  <div class="horizontal-center">
+                      <md-button ng-click="addNewEducation()" class="md-raised md-primary">Add New Education</md-button>
                   </div>
-                  <div class="col-xs-12">
-                      <md-input-container>
-                        <label>Course Name</label>
-                        <input ng-model="edu.courseTitle" size="50">
-                      </md-input-container>
-                  </div>
-                  </div>
-                  <md-button ng-click="addNewEducation()" class="md-raised">Add New Education</md-button>
               </div>
 
               <div class="row panel panel-default">

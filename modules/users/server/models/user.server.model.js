@@ -99,7 +99,7 @@ var UserSchema = new Schema({
     type: Date
   },
   profile: {
-    summary:{
+    description:{
       type: String
     },
     location: {

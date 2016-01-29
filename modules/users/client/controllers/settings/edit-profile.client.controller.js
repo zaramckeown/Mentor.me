@@ -32,11 +32,23 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       $scope.eduD.edt.push({ dt : new Date($scope.user.profile.education[$scope.user.profile.education.length - 1].endDate) });
     };
 
+    $scope.removeEducation = function(index) {
+      $scope.user.profile.education.splice(index, 1);
+      $scope.eduD.sdt.splice(index, 1);
+      $scope.eduD.edt.splice(index, 1);
+    }
+
     $scope.addNewExperience = function() {
       $scope.user.profile.experience.push({ company : '', description : '', startDate : new Date(), endDate : new Date() });
       $scope.expD.sdt.push({ dt : new Date($scope.user.profile.experience[$scope.user.profile.experience.length - 1].startDate) });
       $scope.expD.edt.push({ dt : new Date($scope.user.profile.experience[$scope.user.profile.experience.length - 1].endDate) });
     };
+
+    $scope.removeExperience = function(index) {
+      $scope.user.profile.experience.splice(index, 1);
+      $scope.expD.sdt.splice(index, 1);
+      $scope.expD.edt.splice(index, 1);
+    }
 
     $scope.addNewAward = function() {
       $scope.user.profile.awards.push({ title : '', description : '', issuer : '', date : new Date() });
@@ -82,6 +94,7 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
 
       var user = new Users($scope.user);
 
+      user.profile.description = $scope.user.profile.description;
       user.profile.education = $scope.user.profile.education;
       user.profile.experience = $scope.user.profile.experience;
       user.profile.interests = $scope.user.profile.interests;

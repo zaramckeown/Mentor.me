@@ -39,10 +39,9 @@
   font-size: 100px;
 }
 
-
 .rcorners2 {
   border-radius: 25px;
-  border: 2px solid #000000;
+  border: 1px solid #033330;
 }
 
 .glyphicon.glyphicon-briefcase {
@@ -57,3 +56,12 @@
   font-size: 20px;
 }
 
+.horizontal-center {
+  text-align: center;
+  margin: 10px 10px 10px 10px;
+}
+
+.section-heading {
+  font-size : 25px;
+  margin: 20px 20px 20px 20px;
+}
