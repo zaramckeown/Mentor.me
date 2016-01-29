@@ -136,7 +136,7 @@
                             <input ng-model="edu.courseTitle" size="50">
                           </md-input-container>
                       </div>
-                      <div class="col-sm-push-1 col-sm-6 horizontal-center">
+                      <div class="col-sm-push-2 col-sm-6 horizontal-center">
                           <md-button ng-click="removeEducation($index)" class="md-raised md-warn">Remove</md-button>
                       </div>
                     </div>
@@ -187,29 +187,39 @@
               </div>
 
               <div class="row panel panel-default">
-                  <label class="col-xs-12">Interests</label>
-                  <div ng-repeat="activity in user.profile.interests">
-                  <div class="col-xs-3">
-                      <md-input-container>
-                        <label>Interest</label>
-                        <input ng-model="activity.interest" size="50">
-                      </md-input-container>
+                  <label class="col-xs-12 section-heading horizontal-center">Interests</label>
+                  <div class="row" ng-repeat="activity in user.profile.interests">
+                    <div class="col-sm-push-3 col-sm-4">
+                        <md-input-container>
+                          <label>Interest</label>
+                          <input ng-model="activity.interest" size="50">
+                        </md-input-container>
+                    </div>
+                    <div class="col-sm-push-3 col-sm-4 horizontal-center">
+                      <md-button ng-click="removeInterest($index)" class="md-raised md-warn">Remove</md-button>
+                    </div>
                   </div>
+                  <div class="horizontal-center">
+                    <md-button ng-click="addNewInterest()" class="md-raised md-primary">Add New Interest</md-button>
                   </div>
-                  <md-button ng-click="addNewInterest()" class="md-raised">Add New Interest</md-button>
               </div>
 
               <div class="row panel panel-default">
-                  <label class="col-xs-12">Links</label>
-                  <div ng-repeat="link in user.profile.links">
-                  <div class="col-xs-3">
-                      <md-input-container>
-                        <label>Link</label>
-                        <input ng-model="link.url" size="50">
-                      </md-input-container>
+                  <label class="col-xs-12 section-heading horizontal-center">Links</label>
+                  <div class="row" ng-repeat="link in user.profile.links">
+                    <div class="col-sm-push-3 col-sm-4">
+                        <md-input-container>
+                          <label>Link</label>
+                          <input ng-model="link.url" size="50">
+                        </md-input-container>
+                    </div>
+                    <div class="col-sm-push-3 col-sm-4 horizontal-center">
+                      <md-button ng-click="removeLink($index)" class="md-raised md-warn">Remove</md-button>
+                    </div>
                   </div>
+                  <div class="horizontal-center">
+                    <md-button ng-click="addNewLink()" class="md-raised md-primary">Add New Link</md-button>
                   </div>
-                  <md-button ng-click="addNewLink()" class="md-raised">Add New Link</md-button>
               </div>
 
               <div class="row">

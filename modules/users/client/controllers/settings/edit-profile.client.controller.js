@@ -64,9 +64,17 @@ angular.module('users').controller('EditProfileController', ['$scope', '$http', 
       $scope.user.profile.interests.push({ item : '' });
     };
 
+    $scope.removeInterest = function(index) {
+      $scope.user.profile.interests.splice(index, 1);
+    }
+
     $scope.addNewLink = function() {
       $scope.user.profile.links.push({ url : '' });
     };
+
+    $scope.removeLink = function(index) {
+      $scope.user.profile.links.splice(index, 1);
+    }
 
     if ($scope.user.profile.education.length === 0) {
       $scope.addNewEducation();
