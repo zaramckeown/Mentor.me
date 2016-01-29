@@ -23,22 +23,19 @@ angular.module('profile').controller('MentorListController', ['$scope', '$filter
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
 
-      var placeholderSchool =[];
+      var placeholderSchool = [];
       for(var usercounter =0; usercounter<$scope.users.length; usercounter++)
       {
         $scope.schoolmodel = [];
         for(var i=0; i<$scope.users[usercounter].profile.education.length; i++)
         {
-          placeholderSchool.push([{ id: $scope.users[usercounter].profile.education[i].schoolName, label: $scope.users[usercounter].profile.education[i].schoolName }]);
+          placeholderSchool.push({ id: $scope.users[usercounter].profile.education[i].schoolName, label: $scope.users[usercounter].profile.education[i].schoolName });
         }
 
-        console.log(placeholderSchool);
-
-        $scope.schooldata = placeholderSchool;
-        $scope.schoolsettings = { enableSearch: true };
-        $scope.schooltext = { buttonDefaultText: 'Search by School', dynamicButtonTextSuffix: 'Search by School' };
-      }
+        $scope.schooldata = placeholderSchool;}
     };
+    $scope.schoolsettings = { enableSearch: true };
+    $scope.schooltext = { buttonDefaultText: 'Search by School', dynamicButtonTextSuffix: 'Search by School' };
 
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
