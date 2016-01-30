@@ -16,6 +16,8 @@ exports.create = function (req, res) {
   var question = new Question(req.body);
   question.user = req.user;
 
+  console.log(req.body);
+
   question.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -28,8 +30,7 @@ exports.create = function (req, res) {
 };
 
 exports.addComment = function (req, res) {
-  var comment = new Comments(req.body.body);
-  comment.question = req.params.id;
+  var comment = new Comments(req.body);
   comment.user = req.user;
 
   comment.save(function (err) {
@@ -41,14 +42,23 @@ exports.addComment = function (req, res) {
       res.json(comment);
     }
 
-    /*req.body.question.comments.push(comment);
-    req.body.question.save(function (err) {
+    Question.findById(req.body.question._id).exec(function (err, question) {
       if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
+        return err;
+      } else if (!question) {
+        return res.status(404).send({
+          message: 'No question with that identifier has been found'
         });
       }
-    });*/
+      question.comments.push(comment);
+      question.save(function (err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        }
+      });
+    });
   });
 };
 
@@ -60,7 +70,7 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a article
+ * Update a question
  */
 exports.update = function (req, res) {
   var question = req.question;
@@ -96,21 +106,6 @@ exports.delete = function (req, res) {
   });
 };
 
-/**
- * List of Articles
-
- exports.list = function (req, res) {
-  Question.find().sort('-created').populate('user', 'displayName').exec(function (err, question) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
- */
 
 exports.list = function (req, res) {
   Question.find().populate('user', 'displayName').exec(function (err, question) {
@@ -125,7 +120,7 @@ exports.list = function (req, res) {
 };
 
 /**
- * Article middleware
+ * question middleware
  */
 
 exports.commentByID = function (req, res, next, id) {
@@ -136,41 +131,6 @@ exports.commentByID = function (req, res, next, id) {
     });
   }
 };
-
-
-/*
-exports.questionByID = function (req, res, next, id) {
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({
-      message: 'question is invalid'
-    });
-  }
-
-
-  Question.findById(id).deepPopulate('user').exec(function (err, question) {
-    if (err) {
-      return next(err);
-    } else if (!question) {
-      return res.status(404).send({
-        message: 'No question with that identifier has been found'
-      });
-    }
-    Question.findById(id).deepPopulate('user').exec(function (err, comments) {
-      if (err) {
-        return next(err);
-      } else if (!comments) {
-        return res.status(404).send({
-          message: 'No question with that identifier has been found'
-        });
-      }
-      req.question = question;
-      console.log(req.question);
-      next();
-    });
-  });
-};
-*/
 
 exports.questionByID = function (req, res, next, id) {
 

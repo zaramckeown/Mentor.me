@@ -1,4 +1,4 @@
-<section ng-controller="QuestionsController" ng-init="findOne()">
+<div ng-controller="QuestionsController" ng-init="findOne()">
   <div class="page-header">
     <h1 ng-bind="question.question.title"></h1>
   </div>
@@ -17,9 +17,10 @@
   </small>
   <p class="lead" ng-bind="question.question.content"></p>
 
-  <a ng-repeat="question in question.commentsSent.comments">
+  <div ng-repeat="question in question.commentsSent.comments">
     <h4 class="list-group-item-heading" ng-bind="question.body"></h4>
-  </a>
+    </br>
+  </div>
 
     <label for="comment">Add A Comment</label>
     <br>
@@ -41,4 +42,4 @@
         </fieldset>
       </form>
     </div>
-</section>
+</div>
