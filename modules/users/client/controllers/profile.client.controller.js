@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('profile').controller('MentorListController', ['$scope', '$filter', 'Profile',
+angular.module('core.profile').controller('MentorListController', ['$scope', '$filter', 'Profile',
   function ($scope, $filter, Profile) {
     Profile.query(function (data) {
       $scope.users = data;
