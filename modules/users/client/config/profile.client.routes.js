@@ -21,16 +21,3 @@ angular.module('users.profile.routes').config(['$stateProvider',
       });
   }
 ]);
-
-/*
-
-resolve: {
-  userResolve: ['$stateParams', '$http', function ($stateParams, $http) {
-    var path = '/api/users/' + $stateParams.userId;
-    console.log($stateParams);
-    $http.get(path)
-      .then(function(response) {
-        return response.data;
-      });
-  }]
-}*/
