@@ -10,7 +10,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a article
+ * Create a question
  */
 exports.create = function (req, res) {
   var question = new Question(req.body);
@@ -27,6 +27,9 @@ exports.create = function (req, res) {
   });
 };
 
+/**
+ * up vote a question
+ */
 exports.upvote = function (req, res) {
 
   var user = req.user;
@@ -79,6 +82,9 @@ exports.downvote = function (req, res) {
   });
 };
 
+/**
+ * Create a comment
+ */
 exports.addComment = function (req, res) {
   var comment = new Comments(req.body);
   comment.user = req.user;
@@ -113,7 +119,7 @@ exports.addComment = function (req, res) {
 };
 
 /**
- * Show the current article
+ * Show the current question
  */
 exports.read = function (req, res) {
   res.json(req.question);
@@ -140,7 +146,7 @@ exports.update = function (req, res) {
 };
 
 /**
- * Delete an article
+ * Delete an question
  */
 exports.delete = function (req, res) {
   var question = req.question;
@@ -211,7 +217,6 @@ exports.questionByID = function (req, res, next, id) {
       questionData.question = question;
       questionData.commentsSent = comments;
       req.question = questionData;
-      console.log(req.question);
       next();
     });
   });

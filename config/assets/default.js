@@ -6,7 +6,10 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-material/angular-material.css'
+        'public/lib/angular-material/angular-material.css',
+        'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
+        'public/lib/ng-dialog/css/ngDialog.min.css',
+        'public/lib/ng-dialog/css/ngDialog-theme-plain.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -21,7 +24,8 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/lodash/dist/lodash.js',
-        'public/lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js'
+        'public/lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js',
+        'public/lib/ng-dialog/js/ngDialog.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

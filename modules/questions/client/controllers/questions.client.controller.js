@@ -1,8 +1,8 @@
 'use strict';
 
 // Questions controller
-angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions',
-  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions) {
+angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions', 'ngDialog',
+  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions, ngDialog) {
     $scope.authentication = Authentication;
     $scope.currentUser = Authentication.user.id;
 
@@ -36,14 +36,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.upvote = function (questionId) {
 
       var path = '/api/questions/' + questionId + '/upvote';
-      $http.post(path).success(function(data, status, headers, config){
-          $scope.error = data.error.message;
-        })
-        .error(function(data, status, headers, config){
-          $scope.error = data.error.message;
-        });
+      $http.post(path);
     };
-
     $scope.downvote = function () {
 
     };
@@ -116,11 +110,17 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       });
     };
 
-    $scope.listQuestion = function()
-    {
+    $scope.listQuestion = function () {
       $scope.questions = Questions.findAnswer({
         questionId: $stateParams.questionId
       });
+    };
+    $scope.alreadyVoted = function () {
+      ngDialog.open({ template: 'firstDialogId' });
+    };
+
+    $scope.ownerQuestion = function () {
+      ngDialog.open({ template: 'ownerQuestion' });
     };
   }
 ]);

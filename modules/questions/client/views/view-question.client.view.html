@@ -19,10 +19,9 @@
   <div class="row">
     </br>
     <div class="col-xs-12">
-
       <div ng-if="question.question.user._id !== currentUser">
         <div ng-repeat="user in question.question.usersWhoUpvoted" ng-if="user === currentUser">
-          <span style="color: #0000f6;" class="glyphicon glyphicon-chevron-up"
+          <span style="color: #0000f6;" ng-click="alreadyVoted()" class="glyphicon glyphicon-chevron-up"
                 disabled></span>
         </div>
 
@@ -33,8 +32,23 @@
     </div>
 
     <div ng-if="question.question.user._id === currentUser">
-      <span ng-click="" class="glyphicon glyphicon-chevron-up" disabled></span>
+      <span ng-click="ownerQuestion()" class="glyphicon glyphicon-chevron-up" disabled></span>
     </div>
+
+    <script type="text/ng-template" id="firstDialogId">
+      <div class="ngdialog-content">
+        <div class="ngdialog-message">
+          <p>You have already voted this question</p>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="ownerQuestion">
+      <div class="ngdialog-message">
+        <p>You cannot upvote your own question</p>
+      </div>
+    </script>
+
 
     <p class="lead" ng-bind="question.question.content"></p>
 
