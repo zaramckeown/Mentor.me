@@ -24,6 +24,12 @@ module.exports = function (app) {
   app.route('/api/questions/:questionId/downvote').all(questionsPolicy.isAllowed)
     .post(questions.downvote);
 
+  app.route('/api/questions/:questionId/upvotecomments').all(questionsPolicy.isAllowed)
+    .post(questions.upvoteComment);
+
+  app.route('/api/questions/:questionId/downvotecomments').all(questionsPolicy.isAllowed)
+    .post(questions.downvoteComment);
+
   app.route('/api/questions/:id/comments')
     .post(questions.addComment);
 

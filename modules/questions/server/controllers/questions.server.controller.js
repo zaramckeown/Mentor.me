@@ -70,6 +70,9 @@ exports.upvote = function (req, res) {
   });
 };
 
+/**
+ * down vote a question
+ */
 exports.downvote = function (req, res) {
   var user = req.user;
   var questionId = req.params.questionId;
@@ -108,6 +111,21 @@ exports.downvote = function (req, res) {
       }
     });
   });
+};
+
+/**
+ * up vote a answer
+ */
+
+exports.upvoteComment = function (req, res) {
+
+};
+
+/**
+ * down vote a answer
+ */
+exports.downvoteComment = function (req, res) {
+
 };
 
 /**

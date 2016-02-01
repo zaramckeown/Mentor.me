@@ -23,8 +23,14 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/questions/:questionId/upvote',
       permissions: ['*']
-    },{
+    }, {
       resources: '/api/questions/:questionId/downvote',
+      permissions: ['*']
+    }, {
+      resources: '/api/questions/:questionId/upvotecomments',
+      permissions: ['*']
+    }, {
+      resources: '/api/questions/:questionId/downvotecomments',
       permissions: ['*']
     }]
   }, {
@@ -40,6 +46,12 @@ exports.invokeRolesPolicies = function () {
       permissions: ['post']
     }, {
       resources: '/api/questions/:questionId/downvote',
+      permissions: ['post']
+    }, {
+      resources: '/api/questions/:questionId/upvotecomments',
+      permissions: ['post']
+    }, {
+      resources: '/api/questions/:questionId/downvotecomments',
       permissions: ['post']
     }]
   }, {
