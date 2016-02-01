@@ -21,7 +21,7 @@ module.exports = function (app) {
   app.route('/api/questions/:questionId/upvote').all(questionsPolicy.isAllowed)
     .post(questions.upvote);
 
-  app.route('/api/questions/:id/downvote').all(questionsPolicy.isAllowed)
+  app.route('/api/questions/:questionId/downvote').all(questionsPolicy.isAllowed)
     .post(questions.downvote);
 
   app.route('/api/questions/:id/comments')

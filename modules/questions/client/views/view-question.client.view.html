@@ -25,8 +25,8 @@
                 disabled></span>
         </div>
 
-        <div ng-repeat="user in question.question.usersWhoUpvoted" ng-if="user != currentUser">
-          <span ng-click="upvote(question.question._id)" class="glyphicon glyphicon-chevron-up" disabled></span>
+        <div ng-if="upvotedOrNot===-1">
+          <span ng-click="upvote(question.question._id)" class="glyphicon glyphicon-chevron-up"></span>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
 
     <script type="text/ng-template" id="ownerQuestion">
       <div class="ngdialog-message">
-        <p>You cannot upvote your own question</p>
+        <p>You cannot vote on your own question</p>
       </div>
     </script>
 
@@ -53,11 +53,21 @@
     <p class="lead" ng-bind="question.question.content"></p>
 
     <div class="col-xs-12">
-      <button type="button" class="btn btn-info">
-        <span class="glyphicon glyphicon-chevron-down"></span>
-      </button>
+      <div ng-if="question.question.user._id !== currentUser">
+        <div ng-repeat="user in question.question.usersWhoDownvoted" ng-if="user === currentUser">
+          <span style="color: #0000f6;" ng-click="alreadyVoted()" class="glyphicon glyphicon-chevron-down"
+                disabled></span>
+        </div>
+
+        <div ng-if="downvotedOrNot===-1">
+          <span ng-click="downvote(question.question._id)" class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+      </div>
     </div>
 
+    <div ng-if="question.question.user._id === currentUser">
+      <span ng-click="ownerQuestion()" class="glyphicon glyphicon-chevron-down" disabled></span>
+    </div>
   </div>
 
   <div ng-repeat="question in question.commentsSent.comments">

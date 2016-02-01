@@ -23,6 +23,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/questions/:questionId/upvote',
       permissions: ['*']
+    },{
+      resources: '/api/questions/:questionId/downvote',
+      permissions: ['*']
     }]
   }, {
     roles: ['user'],
@@ -33,10 +36,10 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/questions/:questionId',
       permissions: ['get']
     }, {
-      resources: '/api/questions/:id/upvote',
+      resources: '/api/questions/:questionId/upvote',
       permissions: ['post']
     }, {
-      resources: '/api/questions/:id/downvote',
+      resources: '/api/questions/:questionId/downvote',
       permissions: ['post']
     }]
   }, {

@@ -1,8 +1,8 @@
 'use strict';
 
 // Questions controller
-angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions', 'ngDialog',
-  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions, ngDialog) {
+angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions', 'ngDialog', '$window',
+  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions, ngDialog, $window) {
     $scope.authentication = Authentication;
     $scope.currentUser = Authentication.user.id;
 
@@ -37,9 +37,13 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
 
       var path = '/api/questions/' + questionId + '/upvote';
       $http.post(path);
+      location.reload();
     };
-    $scope.downvote = function () {
 
+    $scope.downvote = function (questionId) {
+      var path = '/api/questions/' + questionId + '/downvote';
+      $http.post(path);
+      location.reload();
     };
 
     $scope.addComment = function () {
@@ -107,7 +111,27 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.findOne = function () {
       $scope.question = Questions.get({
         questionId: $stateParams.questionId
-      });
+      },
+        function (successResponse) {
+          if (successResponse.question.usersWhoUpvoted.length > 0){
+            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser) === -1;
+          }
+          else{
+            $scope.upvotedOrNot = -1;
+          }
+
+          if (successResponse.question.usersWhoDownvoted.length > 0){
+            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser) === -1;
+          }
+          else {
+            $scope.downvotedOrNot = -1;
+          }
+        },
+        function (errorResponse) {
+          // failure callback
+          console.log(errorResponse);
+        }
+      );
     };
 
     $scope.listQuestion = function () {

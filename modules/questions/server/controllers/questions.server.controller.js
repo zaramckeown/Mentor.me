@@ -44,12 +44,15 @@ exports.upvote = function (req, res) {
       });
     }
 
-    for (var i=0; i<question.usersWhoUpvoted.length; i++){
-      if (question.usersWhoUpvoted === user._id)
-      {
-        return res.status(400).send({
-          message: "You have already up voted this question"
-        });
+    for (var i=0; i<question.usersWhoDownvoted.length; i++){
+      if (question.usersWhoDownvoted[i].equals(user._id)) {
+        question.usersWhoDownvoted.remove(user._id);
+        if (question.downvotes === 1){
+          question.downvotes = 0;
+        }
+        else {
+          question.downvotes = -1;
+        }
       }
     }
 
@@ -68,17 +71,42 @@ exports.upvote = function (req, res) {
 };
 
 exports.downvote = function (req, res) {
-  var question = req.question;
+  var user = req.user;
+  var questionId = req.params.questionId;
 
-
-  question.save(function (err) {
+  Question.findById(questionId).exec(function (err, question) {
     if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+      return err;
+    } else if (!question) {
+      return res.status(404).send({
+        message: 'No question with that identifier has been found'
       });
-    } else {
-      res.json(question);
     }
+    question.usersWhoDownvoted.push(user._id);
+    question.downvotes = +1;
+
+    for (var i=0; i<question.usersWhoUpvoted.length; i++){
+      if (question.usersWhoUpvoted[i].equals(user._id)) {
+        question.usersWhoUpvoted.remove(user._id);
+
+        if (question.upvotes === 1){
+          question.upvotes = 0;
+        }
+        else{
+          question.upvotes = -1;
+        }
+      }
+    }
+
+    question.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(question);
+      }
+    });
   });
 };
 
