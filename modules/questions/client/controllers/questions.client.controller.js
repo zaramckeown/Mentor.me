@@ -1,11 +1,12 @@
 'use strict';
 
-// Articles controller
+// Questions controller
 angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions',
   function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions) {
     $scope.authentication = Authentication;
+    $scope.currentUser = Authentication.user.id;
 
-    // Create new Article
+    // Create new Question
     $scope.create = function (isValid) {
       $scope.error = null;
 
@@ -14,7 +15,7 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         return false;
       }
 
-      // Create new Article object
+      // Create new Question object
       var question = new Questions({
         title: this.title,
         content: this.content
@@ -30,6 +31,21 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+
+    $scope.upvote = function (questionId) {
+
+      var path = '/api/questions/' + questionId + '/upvote';
+      $http.post(path).success(function(data, status, headers, config){
+          $scope.error = data.error.message;
+        })
+        .error(function(data, status, headers, config){
+          $scope.error = data.error.message;
+        });
+    };
+
+    $scope.downvote = function () {
+
     };
 
     $scope.addComment = function () {

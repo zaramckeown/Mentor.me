@@ -19,7 +19,8 @@ exports.renderIndex = function (req, res) {
       email: validator.escape(req.user.email),
       lastName: validator.escape(req.user.lastName),
       firstName: validator.escape(req.user.firstName),
-      profile: req.user.profile
+      profile: req.user.profile,
+      id: req.user._id
     };
   }
 

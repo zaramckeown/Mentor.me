@@ -16,7 +16,57 @@ exports.create = function (req, res) {
   var question = new Question(req.body);
   question.user = req.user;
 
-  console.log(req.body);
+  question.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(question);
+    }
+  });
+};
+
+exports.upvote = function (req, res) {
+
+  var user = req.user;
+  var questionId = req.params.questionId;
+
+  Question.findById(questionId).exec(function (err, question) {
+    if (err) {
+      return err;
+    } else if (!question) {
+      return res.status(404).send({
+        message: 'No question with that identifier has been found'
+      });
+    }
+
+    for (var i=0; i<question.usersWhoUpvoted.length; i++){
+      if (question.usersWhoUpvoted === user._id)
+      {
+        return res.status(400).send({
+          message: "You have already up voted this question"
+        });
+      }
+    }
+
+    question.usersWhoUpvoted.push(user._id);
+    question.upvotes = +1;
+    question.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(question);
+      }
+    });
+  });
+};
+
+exports.downvote = function (req, res) {
+  var question = req.question;
+
 
   question.save(function (err) {
     if (err) {

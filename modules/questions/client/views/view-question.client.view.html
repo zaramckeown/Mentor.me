@@ -15,7 +15,36 @@
       <span ng-bind="question.question.user.displayName"></span>
     </em>
   </small>
-  <p class="lead" ng-bind="question.question.content"></p>
+
+  <div class="row">
+    </br>
+    <div class="col-xs-12">
+
+      <div ng-if="question.question.user._id !== currentUser">
+        <div ng-repeat="user in question.question.usersWhoUpvoted" ng-if="user === currentUser">
+          <span style="color: #0000f6;" class="glyphicon glyphicon-chevron-up"
+                disabled></span>
+        </div>
+
+        <div ng-repeat="user in question.question.usersWhoUpvoted" ng-if="user != currentUser">
+          <span ng-click="upvote(question.question._id)" class="glyphicon glyphicon-chevron-up" disabled></span>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="question.question.user._id === currentUser">
+      <span ng-click="" class="glyphicon glyphicon-chevron-up" disabled></span>
+    </div>
+
+    <p class="lead" ng-bind="question.question.content"></p>
+
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-info">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </button>
+    </div>
+
+  </div>
 
   <div ng-repeat="question in question.commentsSent.comments">
     <h4 class="list-group-item-heading" ng-bind="question.body"></h4>
