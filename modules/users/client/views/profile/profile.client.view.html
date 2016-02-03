@@ -1,15 +1,32 @@
 <section>
   <div class="page-header">
-    <div class="row">
-      <div class="col-md-4">
-        <h1>Mentor Search</h1>
-      </div>
-      <div class="col-md-4" style="margin-top: 2em">
-        <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
-        <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
-      </div>
+      <div class="row">
+
+        <div class="col-xs-12 col-md-3">
+          <input class="form-control" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+        </div>
+
+        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
+          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-2" style="width: auto;">
+          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
+          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-2" style="width: auto;">
+          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
+        </div>
+        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
+          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
+        </div>
     </div>
   </div>
+
   <div class="list-group">
     <div class="col-xs-12 col-sm-4" ng-repeat="user in pagedItems" >
       <div  class="list-group-item">
@@ -36,7 +53,9 @@
             <p class="glyphicon glyphicon-briefcase"></p>
           </div>
           <div class="col-xs-6">
-            <p>McKinsery Corprations</p>
+            <div ng-repeat="experience in user.profile.experience | orderBy : endDate : true | limitTo:1">
+              <p>{{experience.company}}</p>
+            </div>
           </div>
         </div>
 
@@ -47,7 +66,9 @@
             <p class="glyphicon glyphicon-education"></p>
           </div>
           <div class="col-xs-6">
-            <p>Macintosh</p>
+            <div ng-repeat="education in user.profile.education | orderBy : endDate : true | limitTo:1">
+              <p>{{education.schoolName}}</p>
+            </div>
           </div>
         </div>
 
@@ -58,7 +79,7 @@
             <p class="glyphicon glyphicon-bookmark"></p>
           </div>
           <div class="col-xs-6">
-            <p>List, Of, Stuff, gmaes</p>
+            school
           </div>
         </div>
 
