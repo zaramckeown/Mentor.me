@@ -18,14 +18,6 @@ var MessagesSchema = new Schema({
     type: String,
     default: '',
     trim: true
-  },
-  sender:{
-    type: Schema.ObjectId,
-    ref: 'User'
-  },
-  recipient: {
-    type: Schema.ObjectId,
-    ref: 'User'
   }
 });
 

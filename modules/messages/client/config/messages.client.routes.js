@@ -12,14 +12,18 @@ angular.module('messages').config(['$stateProvider',
       })
       .state('messages.create', {
         url: '/create',
-        templateUrl: 'modules/articles/client/views/create-article.client.view.html',
+        templateUrl: 'modules/messages/client/views/messages.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['student','mentor', 'admin']
         }
       })
       .state('messages.view', {
         url: '/:messageId',
-        templateUrl: 'modules/articles/client/views/view-article.client.view.html'
+        templateUrl: 'modules/messages/client/views/messages.client.view.html'
+      })
+      .state('messages.list', {
+        url: '',
+        templateUrl: 'modules/messages/client/views/messages.client.view.html'
       });
   }
 ]);

@@ -18,7 +18,7 @@ var conversationsSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  messageId:{
+  messages:{
     type: Schema.ObjectId,
     ref: 'Messages'
   }

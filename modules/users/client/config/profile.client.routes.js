@@ -10,7 +10,7 @@ angular.module('users.profile.routes').config(['$stateProvider',
         template: '<ui-view/>'
       })
       .state('profile.search', {
-        url: '/mentorSearch',
+        url: '',
         templateUrl: 'modules/users/client/views/profile/profile.client.view.html',
         controller: 'MentorListController'
       })
@@ -18,6 +18,9 @@ angular.module('users.profile.routes').config(['$stateProvider',
         url: '/users/:userId/profile',
         templateUrl: '/modules/users/client/views/profile/view-profile.client.view.html',
         controller: 'DisplayUserProfileController'
+      })
+      .state('profile.messages', {
+        url: '/users/:userId/messages'
       });
   }
 ]);

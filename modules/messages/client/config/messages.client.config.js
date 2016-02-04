@@ -6,7 +6,7 @@ angular.module('messages').run(['Menus',
     // Add the articles dropdown item
     Menus.addMenuItem('topbar', {
       title: 'Messages',
-      state: 'messages',
+      state: 'messages.list',
       type: 'item',
       roles: ['admin', 'student', 'mentor']
     });

@@ -6,81 +6,33 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Messages = mongoose.model('Messages'),
+  Conversations = mongoose.model('Conversations'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a article
+ * Create a question
  */
 exports.create = function (req, res) {
-  var article = new Article(req.body);
-  article.user = req.user;
+  var message = new Messages(req.body);
 
-  article.save(function (err) {
+  message.save(function (err) {
     if (err) {
       return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
+       // message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+     // res.json(question);
     }
   });
-};
 
-/**
- * Show the current article
- */
-exports.read = function (req, res) {
-  res.json(req.article);
-};
-
-/**
- * Update a article
- */
-exports.update = function (req, res) {
-  var article = req.article;
-
-  article.title = req.body.title;
-  article.content = req.body.content;
-
-  article.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(article);
+  Conversations.findOne({ sender: '', recipient:'' }, function(error, conversations) {
+    if (error) {
+     // return handleError(error);
     }
+    console.log(conversations);
   });
-};
 
-/**
- * Delete an article
- */
-exports.delete = function (req, res) {
-  var article = req.article;
+  //look it up to see if it already exists by using the recipient id and the sender id
+  //var conversation = new Conversations();
 
-  article.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(article);
-    }
-  });
-};
-
-/**
- * List of Articles
- */
-exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(articles);
-    }
-  });
 };
