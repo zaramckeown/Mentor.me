@@ -7,18 +7,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Messages Schema
+ * Conversations Schema
  */
-var MessagesSchema = new Schema({
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
+var conversationsSchema = new Schema({
   sender:{
     type: Schema.ObjectId,
     ref: 'User'
@@ -26,7 +17,11 @@ var MessagesSchema = new Schema({
   recipient: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  messageId:{
+    type: Schema.ObjectId,
+    ref: 'Messages'
   }
 });
 
-mongoose.model('Messages', MessagesSchema);
+mongoose.model('Conversations', conversationsSchema);
