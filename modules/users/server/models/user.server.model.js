@@ -129,9 +129,11 @@ var UserSchema = new Schema({
       description: String,
       date: Date
     }],
-    helpsWith:[{
-      name: String
-    }]
+    helpsWith:{
+      cvChecked: false,
+      checkedInterviews: false,
+      questionsChecked: false
+    }
   }
 });
 
