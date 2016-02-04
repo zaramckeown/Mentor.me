@@ -7,7 +7,7 @@ angular.module('messages').config(['$stateProvider',
     $stateProvider
       .state('messages', {
         abstract: true,
-        url: '/messages',
+        url: '/users/:userId/messages',
         template: '<ui-view/>'
       })
       .state('messages.create', {

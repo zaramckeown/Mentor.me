@@ -18,9 +18,6 @@ angular.module('users.profile.routes').config(['$stateProvider',
         url: '/users/:userId/profile',
         templateUrl: '/modules/users/client/views/profile/view-profile.client.view.html',
         controller: 'DisplayUserProfileController'
-      })
-      .state('profile.messages', {
-        url: '/users/:userId/messages'
       });
   }
 ]);
