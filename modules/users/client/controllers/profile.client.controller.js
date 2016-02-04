@@ -37,6 +37,23 @@ angular.module('core.profile').controller('MentorListController', ['$scope', '$f
     $scope.schoolsettings = { enableSearch: true };
     $scope.schooltext = { buttonDefaultText: 'Search by School', dynamicButtonTextSuffix: 'Search by School' };
 
+    $scope.locationModel = [];
+    $scope.locationSettings = { enableSearch: true };
+    $scope.locationText = { buttonDefaultText: 'Search by Location', dynamicButtonTextSuffix: 'Search by Location' };
+
+    $scope.companyModel = [];
+    $scope.companySettings = { enableSearch: true };
+    $scope.companyText = { buttonDefaultText: 'Search by Company', dynamicButtonTextSuffix: 'Search by Company' };
+
+    $scope.skillsModel = [];
+    $scope.skillsSettings = { enableSearch: true };
+    $scope.skillsText = { buttonDefaultText: 'Search by Skills', dynamicButtonTextSuffix: 'Search by Skills' };
+
+    $scope.helpsWithModel = [];
+    $scope.helpsWithSettings = { enableSearch: true };
+    $scope.helpsWithText = { buttonDefaultText: 'Search by Helps With', dynamicButtonTextSuffix: 'Search by Helps' +
+    ' With' };
+
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
     };
