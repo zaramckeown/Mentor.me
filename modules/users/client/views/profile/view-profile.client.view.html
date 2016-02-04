@@ -51,10 +51,22 @@
                                   ng-model="user.profile.description" size="250" rows="3" disabled>
                         </textarea>
             </div>
-            <md-content class="col-sm-6">
-              <!-- put helps with stuff here -->
-              <label class="col-sm-10 section-heading horizontal-center">Helps With</label>
-            </md-content>
+            <div class="col-sm-6">
+              <label class="col-sm-12 section-heading horizontal-center">Helps With</label>
+              </br>
+              <div class="col-sm-4">
+                <input type="checkbox"
+                       ng-model="user.profile.helpsWith.checkedInterviews" disabled> Interviews
+              </div>
+              <div class="col-sm-4">
+                <input type="checkbox"
+                       ng-model="user.profile.helpsWith.cvChecked" disabled> CV's
+              </div>
+              <div class="col-sm-4">
+                <input type="checkbox"
+                       ng-model="user.profile.helpsWith.questionsChecked" disabled> General Advice
+              </div>
+            </div>
           </div>
           <div class="row panel panel-default">
             <label class="col-xs-12 horizontal-center section-heading">Experience</label>
