@@ -10,7 +10,7 @@ angular.module('users').config(['$stateProvider',
         url: '/settings',
         templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
         data: {
-          roles: ['user', 'admin']
+          roles: ['mentor', 'admin', 'student', 'newUser']
         }
       })
       .state('settings.profile', {
@@ -25,9 +25,9 @@ angular.module('users').config(['$stateProvider',
         url: '/accounts',
         templateUrl: 'modules/users/client/views/settings/manage-social-accounts.client.view.html'
       })
-      .state('settings.picture', {
-        url: '/picture',
-        templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
+      .state('settings.role', {
+        url: '/role',
+        templateUrl: 'modules/users/client/views/settings/choose-role.html'
       })
       .state('authentication', {
         abstract: true,

@@ -166,7 +166,8 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
             // And save the user
             user.save(function (err) {
-              return done(err, user);
+              //here redirects after registering
+              return done(err, user,'/settings/role');
             });
           });
         } else {

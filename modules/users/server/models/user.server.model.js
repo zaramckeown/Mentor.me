@@ -79,9 +79,9 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['admin', 'mentor', 'student']
+      enum: ['admin', 'mentor', 'student', 'newUser']
     }],
-    default: ['admin'],
+    default: ['newUser'],
     required: 'Please provide at least one role'
   },
   updated: {
