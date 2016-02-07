@@ -34,7 +34,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['*']
     }]
   }, {
-    roles: ['user'],
+    roles: ['student', 'mentor'],
     allows: [{
       resources: '/api/questions',
       permissions: ['get', 'post']

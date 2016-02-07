@@ -27,7 +27,10 @@ angular.module('users').config(['$stateProvider',
       })
       .state('settings.role', {
         url: '/role',
-        templateUrl: 'modules/users/client/views/settings/choose-role.html'
+        templateUrl: 'modules/users/client/views/settings/choose-role.html',
+        data: {
+          roles: ['newUser']
+        }
       })
       .state('authentication', {
         abstract: true,

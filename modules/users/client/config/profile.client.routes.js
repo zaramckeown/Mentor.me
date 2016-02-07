@@ -7,7 +7,10 @@ angular.module('users.profile.routes').config(['$stateProvider',
       .state('profile', {
         abstract: true,
         url: '/mentorSearch',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        data: {
+          roles: ['admin', 'student']
+        }
       })
       .state('profile.search', {
         url: '',

@@ -1,20 +1,35 @@
-<section class="row" ng-controller="ChangeRole">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-4">
+<section class="row" ng-controller="ChangeRole" xmlns="http://www.w3.org/1999/html">
+  <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-10">
     <div class="row horizontal-center panel panel-default">
       <form name="roleForm" ng-submit="updateUserProfile()" class="signin" autocomplete="off">
-        <button type="submit">
-          <h4>Mentor</h4>
-          <p>As a mentor you will you could give advice such as review CVs or answer
-            general questions they will have.</p>
+        <button class="col-md-12" type="submit">
+          <div class="col-xs-1">
+            <p style="font-size: 70px; padding-top: 10px;" class="glyphicon glyphicon-user"></p>
+          </div>
+          <div class="col-xs-11">
+            <h4>Mentor</h4>
+            <p>As a mentor you will you could give advice such as review CVs or answer
+              general questions they will have.</p>
+          </div>
+
         </button>
         </form>
+    </div>
 
+    </br>
+
+    <div class="row horizontal-center panel panel-default">
       <form name="roleForm" ng-submit="updateUserProfileRoleStudent()" class="signin" autocomplete="off">
-        <button type="submit">
-          <h4>Student</h4>
-          <p>As a student you will be able to gain advice from the mentor you have chosen to reach out to. </p>
+        <button class="col-md-12" type="submit">
+          <div class="col-xs-1">
+            <p style="font-size: 80px; padding-top: 10px;" class="glyphicon glyphicon-education"></p>
+          </div>
+          <div class="col-xs-11">
+            <h4>Student</h4>
+            <p>As a student you will be able to gain advice from the mentor you have chosen to reach out to. </p>
+          </div>
         </button>
       </form>
       </div>
-  </div>
+    </div>
 </section>

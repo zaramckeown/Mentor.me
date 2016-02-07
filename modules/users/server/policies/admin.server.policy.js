@@ -21,6 +21,15 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/users/:userId',
       permissions: '*'
     }]
+  }, {
+    roles: ['student', 'mentor'],
+    allows: [{
+      resources: '/api/users/:userId',
+      permissions: ['get']
+    },{
+      resources: '/api/users',
+      permissions: ['get']
+    }]
   }]);
 };
 

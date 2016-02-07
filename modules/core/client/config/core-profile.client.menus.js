@@ -8,7 +8,7 @@ angular.module('core.profile').run(['Menus',
       title: 'Search Mentors',
       state: 'profile.search',
       type: 'item',
-      roles: ['admin', 'student', 'mentor']
+      roles: ['admin', 'student']
     });
   }
 ]);

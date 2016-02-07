@@ -3,7 +3,8 @@
 /**
  * Module dependencies
  */
-var profile = require('../controllers/profile.server.controller');
+var profile = require('../controllers/profile.server.controller'),
+  profilePolicy = require('../policies/profile.server.policy');
 
 module.exports = function (app) {
 
@@ -14,7 +15,7 @@ module.exports = function (app) {
 
   // Users collection routes
   app.route('/api/users')
-    .get(profile.list);
+    .get(profilePolicy.isAllowed, profile.list);
 
 
   // Finish by binding the user middleware

@@ -8,7 +8,7 @@ angular.module('questions').run(['Menus',
       title: 'Questions',
       state: 'questions',
       type: 'dropdown',
-      roles: ['user', 'admin']
+      roles: ['mentor', 'admin', 'student']
     });
 
     // Add the dropdown list item
