@@ -42,6 +42,18 @@
             </div>
           </div>
         </div>
+
+        <div class="form-group" show-errors>
+          <label for="password2">Confirm Password</label>
+          <input type="password" id="password2" name="password2" class="form-control" ng-model="credentials.password2"
+                 placeholder="Password" data-password-verify="credentials.password" required>
+          <div ng-messages="userForm.password2.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Password is required.</p>
+          </div>
+          <div class="msg-block" ng-show="userForm.password2.$error.passwordVerify">
+             <p style="color: red">Passwords don't match.</p>
+          </div>
+        </div>
         <div class="form-group" ng-show="!userForm.password.$error.required">
           <label>Password Requirements</label>
           <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
