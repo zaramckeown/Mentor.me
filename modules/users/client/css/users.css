@@ -65,3 +65,11 @@
   font-size : 25px;
   margin: 20px 20px 20px 20px;
 }
+
+.login_form_bg {
+  background-color: white;
+  border: 15px solid;
+  border-radius: 15px;
+  border-color: white;
+  margin-top: 50px;
+}

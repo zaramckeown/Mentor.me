@@ -29,9 +29,8 @@
         </div>
         <div class="row">
           <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" autocomplete="off">
-
               <div class="row">
-                  <md-content class="col-sm-8">
+                  <div class="panel panel-default col-sm-8">
                       <div class="row">
                           <div class="col-sm-12">
                               <md-input-container>
@@ -56,10 +55,11 @@
                             </md-input-container>
                           </div>
                       </div>
-                  </md-content>
+                  </div>
                 </div>
 
-              <div class="row horizontal-center panel panel-default">
+            <div class="col-xs-12">
+              <div class="row panel panel-default">
                   <div class="col-sm-6">
                         <label class="col-sm-10 section-heading horizontal-center">Description</label>
                         <textarea class="col-sm-push-1 col-sm-10 horizontal-center rcorners2" ng-model="user.profile.description" size="250" rows="3">
@@ -247,6 +247,7 @@
               </div>
           </form>
         </div>
-    </div>
+      </div>
+      </div>
    </div>
 </section>
