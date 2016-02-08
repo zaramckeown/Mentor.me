@@ -73,3 +73,6 @@
   border-color: white;
   margin-top: 50px;
 }
+
+.im-centered { margin: auto; max-width: 300px;}
+
