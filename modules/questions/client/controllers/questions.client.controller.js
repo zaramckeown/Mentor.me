@@ -58,7 +58,7 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
 
       // Redirect after save
       comment.$save({ id: $stateParams.questionId }, function (response) {
-        $location.path('questions');
+        location.reload();
         // Clear form fields
         $scope.body = '';
       }, function (errorResponse) {
