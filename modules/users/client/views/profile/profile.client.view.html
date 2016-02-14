@@ -5,29 +5,19 @@
   <div class="page-header">
       <div class="row">
 
+        <div class="col-xs-12">
+          <nit-advanced-searchbox
+            ng-model="searchParams"
+            parameters="availableSearchParams">
+          </nit-advanced-searchbox>
+        </div>
+        <!--
         <div class="col-xs-12 col-md-3">
           <input class="form-control" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
         </div>
+        -->
+      </div>
 
-        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
-          <div ng-dropdown-multiselect="" options="schooldata" selected-model="schoolmodel" extra-settings="schoolsettings" translation-texts="schooltext"></div>
-        </div>
-
-        <div class="col-xs-12 col-md-2" style="width: auto; ">
-          <div ng-dropdown-multiselect="" options="schooldata" selected-model="companyModel" extra-settings="companySettings" translation-texts="companyText"></div>
-        </div>
-
-        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
-          <div ng-dropdown-multiselect="" options="schooldata" selected-model="locationModel" extra-settings="locationSettings" translation-texts="locationText"></div>
-        </div>
-
-        <div class="col-xs-12 col-md-2" style="width: auto;">
-          <div ng-dropdown-multiselect="" options="schooldata" selected-model="skillsModel" extra-settings="skillsSettings" translation-texts="skillsText"></div>
-        </div>
-        <div class="col-xs-12 col-md-2" style="width: auto; padding: 0px;">
-          <div ng-dropdown-multiselect="" options="schooldata" selected-model="helpsWithModel" extra-settings="helpsWithSettings" translation-texts="helpsWithText"></div>
-        </div>
-    </div>
   </div>
 
   <div class="list-group">

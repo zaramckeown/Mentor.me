@@ -26,6 +26,11 @@ angular.module('users.admin').factory('Admin', ['$resource',
 
 angular.module('core.profile').factory('Profile', ['$resource',
   function ($resource) {
-    return $resource('api/mentorSearch');
+    return {
+      Users: $resource('api/users'),
+      Search: $resource('api/search')
+    };
   }
 ]);
+
+
