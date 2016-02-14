@@ -16,50 +16,11 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a User
- */
-exports.update = function (req, res) {
-  var user = req.model;
-
-  //For security purposes only merge these parameters
-  user.firstName = req.body.firstName;
-  user.lastName = req.body.lastName;
-  user.displayName = user.firstName + ' ' + user.lastName;
-  user.roles = req.body.roles;
-
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-
-    res.json(user);
-  });
-};
-
-/**
- * Delete a user
- */
-exports.delete = function (req, res) {
-  var user = req.model;
-
-  user.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-
-    res.json(user);
-  });
-};
-
-/**
  * List of Users
  */
 exports.list = function (req, res) {
-  User.find({}, '-salt -password -accessToken -refreshToken').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+  User.find({}, '-salt -password -accessToken -refreshToken').sort('-created').where('roles', 'mentor').
+  populate('user', 'displayName').exec(function (err, users) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -110,7 +71,7 @@ exports.search = function(req, res){
 
   //the query text also has to go in somewhere
 
-  User.find(findQuery).populate('user', 'displayName').exec(function(err, users) {
+  User.find(findQuery, '-salt -password -accessToken -refreshToken').where('roles', 'mentor').populate('user', 'displayName').exec(function(err, users) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
