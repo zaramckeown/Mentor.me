@@ -9,9 +9,11 @@ module.exports = {
         'public/lib/angular-material/angular-material.css',
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
-        'public/lib/ng-dialog/css/ngDialog-theme-plain.min.css'
+        'public/lib/ng-dialog/css/ngDialog-theme-plain.min.css',
+        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css'
       ],
       js: [
+        'public/lib/jquery/dist/jquery.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-resource/angular-resource.js',
@@ -24,8 +26,9 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/lodash/dist/lodash.js',
-        'public/lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js',
-        'public/lib/ng-dialog/js/ngDialog.js'
+        'public/lib/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js',
+        'public/lib/ng-dialog/js/ngDialog.js',
+        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
