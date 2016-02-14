@@ -89,23 +89,23 @@ exports.search = function(req, res){
   }
 
   if (req.query.firstname) {
-    findQuery.firstName = req.query.firstname;
+    findQuery.firstName = new RegExp(req.query.firstname, "i");
   }
 
   if (req.query.experience) {
-    findQuery['profile.experience.company'] = req.query.experience;
+    findQuery['profile.experience.company'] = new RegExp(req.query.experience, "i");
   }
 
   if (req.query.education) {
-    findQuery['profile.education.schoolName'] = req.query.education;
+    findQuery['profile.education.schoolName'] = new RegExp(req.query.education, "i");
   }
 
   if (req.query.interest) {
-    findQuery['profile.interest.interest'] = req.query.interest;
+    findQuery['profile.interest.interest'] = new RegExp(req.query.interest, "i");
   }
 
   if (req.query.location) {
-    findQuery['profile.location'] = req.query.location;
+    findQuery['profile.location'] = new RegExp(req.query.location, "i");
   }
 
   //the query text also has to go in somewhere
