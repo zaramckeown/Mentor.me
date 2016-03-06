@@ -86,15 +86,65 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.upvoteComment = function (questionId, commentId) {
-      var path = '/api/questions/' + questionId + '/upvoteComments/' + commentId;
-      $http.post(path);
-      location.reload();
+      var currentQuestion = $scope.question.question;     
+      if (currentQuestion.user._id === $scope.currentUser) {
+        $scope.ownerComment();
+        return;
+      }
+      
+      // find comment here
+      var comments = $scope.question.commentsSent.comments;
+      var commentIndex = -1;
+      for (var index = 0; index < comments.length; index = index + 1) {
+          if (comments[index]._id === commentId) {
+              commentIndex = index;
+              break;
+          }
+      }
+      
+      if (commentIndex === -1) {
+          return;
+      }
+      
+      var comment = comments[commentIndex];
+      if (comment.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
+        var path = '/api/questions/' + questionId + '/upvoteComments/' + commentId;
+        $http.post(path);
+        location.reload();    
+      } else {
+        $scope.votedComment();   
+      }
     };
 
     $scope.downvoteComment = function (questionId, commentId) {
-      var path = '/api/questions/' + questionId + '/downvoteComments/' + commentId;
-      $http.post(path);
-      location.reload();
+      var currentQuestion = $scope.question.question;     
+      if (currentQuestion.user._id === $scope.currentUser) {
+        $scope.ownerComment();
+        return;
+      }
+      
+      // find comment here
+      var comments = $scope.question.commentsSent.comments;
+      var commentIndex = -1;
+      for (var index = 0; index < comments.length; index = index + 1) {
+          if (comments[index]._id === commentId) {
+              commentIndex = index;
+              break;
+          }
+      }
+      
+      if (commentIndex === -1) {
+          return;
+      }
+      
+      var comment = comments[commentIndex];
+      if (comment.usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
+        var path = '/api/questions/' + questionId + '/downvoteComments/' + commentId;
+        $http.post(path);
+        location.reload();    
+      } else {
+        $scope.votedComment();
+      }
     };
 
     // Remove existing Article
@@ -164,6 +214,14 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
 
     $scope.ownerQuestion = function () {
       ngDialog.open({ template: 'ownerQuestion' });
+    };
+    
+    $scope.votedComment = function () {
+      ngDialog.open({ template: 'votedComment' });
+    };
+
+    $scope.ownerComment = function () {
+      ngDialog.open({ template: 'ownerComment' });
     };
     
   }
