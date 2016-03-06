@@ -54,15 +54,6 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/questions/:questionId/downvotecomments',
       permissions: ['post']
     }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/questions',
-      permissions: ['']
-    }, {
-      resources: '/api/questions/:questionId',
-      permissions: ['']
-    }]
   }]);
 };
 /**
