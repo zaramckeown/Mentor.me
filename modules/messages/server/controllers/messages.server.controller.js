@@ -15,35 +15,44 @@ var path = require('path'),
 exports.create = function (req, res) {
   //req.params.id or something similar
   var message = new Messages(req.body);
-  var conversations = new Conversations();
+  message.sender = req.user;
   message.save(function (err) {
     if (err) {
       return res.status(400).send({
        // message: errorHandler.getErrorMessage(err)
       });
     } else {
-     //res.json(question);
+      res.json(message);
     }
   });
 
-  conversations.sender = req.body.sender;
+  var conversations = new Conversations();
+  conversations.sender = req.user;
   conversations.recipient = req.body.recipient;
-  conversations.message = message._id;
+  conversations.messages.push(message);
   conversations.save(function (err) {
     if (err) {
       return res.status(400).send({
         // message: errorHandler.getErrorMessage(err)
       });
     } else {
-      //res.json(question);
+      //res.json(conversations);
     }
   });
 
- /* Conversations.findOne({ sender: req.body.sender, recipient: req.body.recipient}, function(error, conversations) {
+ /* Conversations.findOne({ sender: req.user._id, recipient: req.body.recipient}, function(error, conversation) {
     if (error) {
      // return handleError(error);
     }
-    console.log(conversations);
+    console.log(conversation);
+    conversation.messages.push(message);
+    conversation.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+    });
   });*/
 
 };

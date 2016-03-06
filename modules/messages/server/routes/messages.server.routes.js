@@ -12,5 +12,6 @@ module.exports = function (app) {
     .get(messages.list);
 
   app.route('/api/messages')
-    .get(messages.findAllMessagesForUser);
+    .get(messages.findAllMessagesForUser)
+    .post(messages.create);
 };

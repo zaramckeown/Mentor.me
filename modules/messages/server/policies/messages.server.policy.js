@@ -19,7 +19,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/messages',
-      permissions: ['get']
+      permissions: ['get', 'post']
     }]
   }]);
 };

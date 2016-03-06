@@ -6,19 +6,22 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     $scope.authentication = Authentication;
 
     // Create new Question
-    $scope.create = function (isValid) {
-      $scope.error = null;
-
+    $scope.create = function () {
+     // $scope.error = null;
+/*
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'questionForm');
         return false;
-      }
+      }*/
+
+      var userId = $stateParams.userId;
+      console.log(userId);
 
       // Create new Question object
-      var message = new Messages({
+      var message = new Messages.lookup({
         created: new Date(),
         content: this.content,
-        sender: $scope.currentUser
+        recipient: $stateParams.userId
       });
 
       // Redirect after save

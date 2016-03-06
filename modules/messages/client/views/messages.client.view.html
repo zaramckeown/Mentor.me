@@ -3,9 +3,21 @@
     <h1>Messages</h1>
   </div>
   <div class="row">
+    <form name="questionForm" class="form-horizontal" ng-submit="create()" novalidate>
 
-
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-default">
+      </div>
+    </form>
   </div>
+
+  <!--<div class="row settings-view">
+    <div ui-view></div>
+  </div>-->
   <div class="alert alert-warning text-center" ng-if="messages.$resolved && !messages.length">
     No messages yet, why don't you <a ui-sref="mentorSearch">find a mentor</a>?
   </div>

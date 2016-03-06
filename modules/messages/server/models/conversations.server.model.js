@@ -18,10 +18,10 @@ var conversationsSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  messages:{
+  messages:[{
     type: Schema.ObjectId,
     ref: 'Messages'
-  }
+  }]
 });
 
 mongoose.model('Conversations', conversationsSchema);

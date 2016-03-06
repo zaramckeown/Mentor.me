@@ -58,6 +58,7 @@
                   </div>
                 </div>
 
+
             <div class="col-xs-12">
               <div class="row panel panel-default">
                   <div class="col-sm-6">
@@ -81,6 +82,16 @@
                              ng-model="user.profile.helpsWith.questionsChecked"> General Advice
                     </div>
                   </div>
+              </div>
+
+              <div class="col-xs-12">
+                <div class="row panel panel-default" ng-if="user.roles === mentor">
+                  <div class="col-sm-12">
+                    <label class="col-sm-10 section-heading horizontal-center">Description</label>
+                        <textarea class="col-sm-push-1 col-sm-10 horizontal-center rcorners2" ng-model="user.profile.description" size="250" rows="3">
+                        </textarea>
+                  </div>
+                </div>
               </div>
 
               <div class="row panel panel-default">

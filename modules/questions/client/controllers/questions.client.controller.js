@@ -194,7 +194,20 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         questionId: $stateParams.questionId
       },
         function (successResponse) {
-        
+
+          if (successResponse.question.usersWhoUpvoted.length > 0){
+            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) === -1;
+          }
+          else{
+            $scope.upvotedOrNot = false;
+          }
+
+          if (successResponse.question.usersWhoDownvoted.length > 0){
+            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) === -1;
+          }
+          else {
+            $scope.downvotedOrNot = false;
+          }
         },
         function (errorResponse) {
           // failure callback
