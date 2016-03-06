@@ -96,14 +96,14 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       var comments = $scope.question.commentsSent.comments;
       var commentIndex = -1;
       for (var index = 0; index < comments.length; index = index + 1) {
-          if (comments[index]._id === commentId) {
-              commentIndex = index;
-              break;
-          }
+        if (comments[index]._id === commentId) {
+          commentIndex = index;
+          break;
+        }
       }
       
       if (commentIndex === -1) {
-          return;
+        return;
       }
       
       var comment = comments[commentIndex];
@@ -127,14 +127,14 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       var comments = $scope.question.commentsSent.comments;
       var commentIndex = -1;
       for (var index = 0; index < comments.length; index = index + 1) {
-          if (comments[index]._id === commentId) {
-              commentIndex = index;
-              break;
-          }
+        if (comments[index]._id === commentId) {
+          commentIndex = index;
+          break;
+        }
       }
       
       if (commentIndex === -1) {
-          return;
+        return;
       }
       
       var comment = comments[commentIndex];
