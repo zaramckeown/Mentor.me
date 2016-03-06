@@ -127,14 +127,14 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         function (successResponse) {
           console.log(successResponse.question);
           if (successResponse.question.usersWhoUpvoted.length > 0){
-            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) == -1;
+            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) === -1;
           }
           else{
             $scope.upvotedOrNot = false;
           }
 
           if (successResponse.question.usersWhoDownvoted.length > 0){
-            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) == -1;
+            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) === -1;
           }
           else {
             $scope.downvotedOrNot = false;
