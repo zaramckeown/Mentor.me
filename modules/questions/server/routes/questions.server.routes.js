@@ -24,10 +24,10 @@ module.exports = function (app) {
   app.route('/api/questions/:questionId/downvote').all(questionsPolicy.isAllowed)
     .post(questions.downvote);
 
-  app.route('/api/questions/:questionId/upvoteComments/:commentId').all(questionsPolicy.isAllowed)
+  app.route('/api/questions/:id/upvoteComments/:commentId').all(questionsPolicy.isAllowed)
     .post(questions.upvoteComment);
 
-  app.route('/api/questions/:questionId/downvoteComments/:commentId').all(questionsPolicy.isAllowed)
+  app.route('/api/questions/:id/downvoteComments/:commentId').all(questionsPolicy.isAllowed)
     .post(questions.downvoteComment);
 
   app.route('/api/questions/:id/comments')

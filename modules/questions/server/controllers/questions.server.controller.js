@@ -112,11 +112,38 @@ exports.downvote = function (req, res) {
 
 exports.upvoteComment = function (req, res) {
   var user = req.user;
-  var questionId = req.params.questionId;
   var commentId = req.params.commentId;
     
-  // add comment upvote code here
-    
+  Comments.findById(commentId).exec(function (err, comments) {
+    if (err) {
+      return err;
+    } else if (!comments) {
+      return res.status(404).send({
+        message: 'No question with that identifier has been found'
+      });
+    }
+
+    comments.usersWhoUpvoted.push(user._id);
+    comments.upvotes = +1;
+
+    for (var i=0; i<comments.usersWhoDownvoted.length; i++){
+      if (comments.usersWhoDownvoted[i].equals(user._id)) {
+        comments.usersWhoDownvoted.splice(i, 1);
+        comments.downvotes -= 1;
+        break;
+      }
+    }
+
+    comments.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(comments);
+      }
+    });
+  });
 };
 
 /**
@@ -124,10 +151,39 @@ exports.upvoteComment = function (req, res) {
  */
 exports.downvoteComment = function (req, res) {
   var user = req.user;
-  var questionId = req.params.questionId;
   var commentId = req.params.commentId;
     
   // ADD comment downvote code here
+  Comments.findById(commentId).exec(function (err, comment) {
+    if (err) {
+      return err;
+    } else if (!comment) {
+      return res.status(404).send({
+        message: 'No question with that identifier has been found'
+      });
+    }
+
+    comment.usersWhoDownvoted.push(user._id);
+    comment.downvotes = +1;
+
+    for (var i=0; i<comment.usersWhoUpvoted.length; i++){
+      if (comment.usersWhoUpvoted[i].equals(user._id)) {
+        comment.usersWhoUpvoted.splice(i, 1);
+        comment.upvotes -= 1;
+        break;
+      }
+    }
+
+    comment.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(comment);
+      }
+    });
+  });
 };
 
 /**

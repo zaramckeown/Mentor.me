@@ -48,10 +48,10 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/questions/:questionId/downvote',
       permissions: ['post']
     }, {
-      resources: '/api/questions/:questionId/upvotecomments',
+      resources: '/api/questions/:id/upvoteComments/:commentId',
       permissions: ['post']
     }, {
-      resources: '/api/questions/:questionId/downvotecomments',
+      resources: '/api/questions/:id/downvoteComments/:commentId',
       permissions: ['post']
     }]
   }]);
