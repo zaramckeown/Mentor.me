@@ -37,6 +37,18 @@
         <p>You cannot vote on your own question</p>
       </div>
     </script>
+    
+    <script type="text/ng-template" id="ownerComment">
+      <div class="ngdialog-message">
+        <p>You cannot vote on your own comment</p>
+      </div>
+    </script>
+    
+    <script type="text/ng-template" id="votedComment">
+      <div class="ngdialog-message">
+        <p>You cannot voted on this comment</p>
+      </div>
+    </script>
 
     <div class="col-xs-1">
       <h4>{{question.question.upvotes-question.question.downvotes}}</h4>
@@ -79,7 +91,6 @@
         <div class="col-xs-11">
           <p class="lead" ng-bind="comment.body"></p>
         </div>
-
       </div>
     </div>
   </div>

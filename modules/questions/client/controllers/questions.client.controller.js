@@ -36,8 +36,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.upvote = function (questionId) {
       var currentQuestion = $scope.question.question;
       if (currentQuestion.user._id === $scope.currentUser) {
-          $scope.ownerQuestion();
-          return;
+        $scope.ownerQuestion();
+        return;
       }
       
       if (currentQuestion.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
@@ -52,8 +52,8 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.downvote = function (questionId) {
       var currentQuestion = $scope.question.question;
       if (currentQuestion.user._id === $scope.currentUser) {
-          $scope.ownerQuestion();
-          return;
+        $scope.ownerQuestion();
+        return;
       }
       
       if (currentQuestion.usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
@@ -165,5 +165,6 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     $scope.ownerQuestion = function () {
       ngDialog.open({ template: 'ownerQuestion' });
     };
+    
   }
 ]);
