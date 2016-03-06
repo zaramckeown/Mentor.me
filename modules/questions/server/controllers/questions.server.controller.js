@@ -43,21 +43,18 @@ exports.upvote = function (req, res) {
         message: 'No question with that identifier has been found'
       });
     }
+    
+    question.usersWhoUpvoted.push(user._id);
+    question.upvotes = +1;
 
     for (var i=0; i<question.usersWhoDownvoted.length; i++){
       if (question.usersWhoDownvoted[i].equals(user._id)) {
-        question.usersWhoDownvoted.remove(user._id);
-        if (question.downvotes === 1){
-          question.downvotes = 0;
-        }
-        else {
-          question.downvotes = -1;
-        }
+        question.usersWhoDownvoted.splice(i, 1);        
+        question.downvotes -= 1;
+        break;
       }
     }
 
-    question.usersWhoUpvoted.push(user._id);
-    question.upvotes = +1;
     question.save(function (err) {
       if (err) {
         return res.status(400).send({
@@ -85,19 +82,15 @@ exports.downvote = function (req, res) {
         message: 'No question with that identifier has been found'
       });
     }
+
     question.usersWhoDownvoted.push(user._id);
     question.downvotes = +1;
 
     for (var i=0; i<question.usersWhoUpvoted.length; i++){
       if (question.usersWhoUpvoted[i].equals(user._id)) {
-        question.usersWhoUpvoted.remove(user._id);
-
-        if (question.upvotes === 1){
-          question.upvotes = 0;
-        }
-        else{
-          question.upvotes = -1;
-        }
+        question.usersWhoUpvoted.splice(i, 1);
+        question.upvotes -= 1;
+        break;
       }
     }
 
@@ -118,14 +111,23 @@ exports.downvote = function (req, res) {
  */
 
 exports.upvoteComment = function (req, res) {
-
+  var user = req.user;
+  var questionId = req.params.questionId;
+  var commentId = req.params.commentId;
+    
+  // add comment upvote code here
+    
 };
 
 /**
  * down vote a answer
  */
 exports.downvoteComment = function (req, res) {
-
+  var user = req.user;
+  var questionId = req.params.questionId;
+  var commentId = req.params.commentId;
+    
+  // ADD comment downvote code here
 };
 
 /**

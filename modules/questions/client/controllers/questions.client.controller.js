@@ -66,6 +66,18 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       });
     };
 
+    $scope.upvoteComment = function (questionId, commentId) {
+      var path = '/api/questions/' + questionId + '/upvoteComments/' + commentId;
+      $http.post(path);
+      location.reload();
+    };
+
+    $scope.downvoteComment = function (questionId, commentId) {
+      var path = '/api/questions/' + questionId + '/downvoteComments/' + commentId;
+      $http.post(path);
+      location.reload();
+    };
+
     // Remove existing Article
     $scope.remove = function (question) {
       if (question) {
@@ -113,18 +125,19 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         questionId: $stateParams.questionId
       },
         function (successResponse) {
+          console.log(successResponse.question);
           if (successResponse.question.usersWhoUpvoted.length > 0){
-            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser) === -1;
+            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) == -1;
           }
           else{
-            $scope.upvotedOrNot = -1;
+            $scope.upvotedOrNot = false;
           }
 
           if (successResponse.question.usersWhoDownvoted.length > 0){
-            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser) === -1;
+            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) == -1;
           }
           else {
-            $scope.downvotedOrNot = -1;
+            $scope.downvotedOrNot = false;
           }
         },
         function (errorResponse) {
@@ -132,6 +145,7 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
           console.log(errorResponse);
         }
       );
+      console.log($scope.question);
     };
 
     $scope.listQuestion = function () {
