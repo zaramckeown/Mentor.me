@@ -34,16 +34,35 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.upvote = function (questionId) {
-
-      var path = '/api/questions/' + questionId + '/upvote';
-      $http.post(path);
-      location.reload();
+      var currentQuestion = $scope.question.question;
+      if (currentQuestion.user._id === $scope.currentUser) {
+          $scope.ownerQuestion();
+          return;
+      }
+      
+      if (currentQuestion.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
+        var path = '/api/questions/' + questionId + '/upvote';
+        $http.post(path);
+        location.reload();
+      } else {
+        $scope.alreadyVoted();   
+      }
     };
 
     $scope.downvote = function (questionId) {
-      var path = '/api/questions/' + questionId + '/downvote';
-      $http.post(path);
-      location.reload();
+      var currentQuestion = $scope.question.question;
+      if (currentQuestion.user._id === $scope.currentUser) {
+          $scope.ownerQuestion();
+          return;
+      }
+      
+      if (currentQuestion.usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
+        var path = '/api/questions/' + questionId + '/downvote';
+        $http.post(path);
+        location.reload();          
+      } else {
+        $scope.alreadyVoted();   
+      }
     };
 
     $scope.addComment = function () {
@@ -125,27 +144,13 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         questionId: $stateParams.questionId
       },
         function (successResponse) {
-          console.log(successResponse.question);
-          if (successResponse.question.usersWhoUpvoted.length > 0){
-            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) === -1;
-          }
-          else{
-            $scope.upvotedOrNot = false;
-          }
-
-          if (successResponse.question.usersWhoDownvoted.length > 0){
-            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) === -1;
-          }
-          else {
-            $scope.downvotedOrNot = false;
-          }
+        
         },
         function (errorResponse) {
           // failure callback
           console.log(errorResponse);
         }
       );
-      console.log($scope.question);
     };
 
     $scope.listQuestion = function () {

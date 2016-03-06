@@ -19,10 +19,7 @@
   <div class="row">
     </br>
     <div class="col-xs-12">
-        <div ng-if="question.question.user._id === currentUser">
-            <span ng-click="ownerQuestion()" class="glyphicon glyphicon-chevron-up" disabled></span>
-        </div>
-        <div ng-hide="upvotedOrNot || question.question.user._id === currentUser">
+        <div>
           <span ng-click="upvote(question.question._id)" class="glyphicon glyphicon-chevron-up"></span>
         </div>
     </div>
@@ -51,12 +48,9 @@
     </div>
 
     <div class="col-xs-12">
-      <div ng-if="question.question.user._id === currentUser">
-        <span ng-click="ownerQuestion()" class="glyphicon glyphicon-chevron-down" disabled></span>
-      </div>
-      <div ng-hide="downvotedOrNot || question.question.user._id === currentUser">
+      <div>
           <span ng-click="downvote(question.question._id)" class="glyphicon glyphicon-chevron-down"></span>
-        </div>  
+      </div>  
     </div>
   </div>
   
