@@ -1,11 +1,12 @@
-<section ng-controller="MessagesController">
+<section ng-controller="MessagesController" ng-init="findMessages()">
   <div class="page-header">
     <h1>Messages</h1>
   </div>
-  <div class="list-group">
+  <div class="row">
+
 
   </div>
   <div class="alert alert-warning text-center" ng-if="messages.$resolved && !messages.length">
-    No messages yet, why don't you <a ui-sref="articles.create">find a mentor</a>?
+    No messages yet, why don't you <a ui-sref="mentorSearch">find a mentor</a>?
   </div>
 </section>

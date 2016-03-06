@@ -5,8 +5,6 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
   function ($scope, $stateParams, $location, Authentication, Messages) {
     $scope.authentication = Authentication;
 
-    $scope.currentUser = Authentication.user.id;
-
     // Create new Question
     $scope.create = function (isValid) {
       $scope.error = null;
@@ -19,7 +17,8 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       // Create new Question object
       var message = new Messages({
         created: new Date(),
-        content: this.content
+        content: this.content,
+        sender: $scope.currentUser
       });
 
       // Redirect after save
@@ -67,6 +66,16 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+    };
+
+    // Find a list of Articles
+    $scope.find = function () {
+      //$scope.messages = Messages.lookup.query();
+    };
+
+    // Find a list of messages for user
+    $scope.findMessages = function () {
+      $scope.messages = Messages.lookup.query();
     };
 
   }

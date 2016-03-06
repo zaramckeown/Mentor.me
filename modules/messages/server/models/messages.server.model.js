@@ -16,8 +16,11 @@ var MessagesSchema = new Schema({
   },
   content: {
     type: String,
-    default: '',
-    trim: true
+    default: ''
+  },
+  sender: {
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 });
 

@@ -25,3 +25,5 @@ var conversationsSchema = new Schema({
 });
 
 mongoose.model('Conversations', conversationsSchema);
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+conversationsSchema.plugin(deepPopulate);
