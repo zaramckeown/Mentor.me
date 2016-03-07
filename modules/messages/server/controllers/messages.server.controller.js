@@ -13,16 +13,15 @@ var path = require('path'),
  * Create a question
  */
 exports.create = function (req, res) {
-  //req.params.id or something similar
   var message = new Messages(req.body);
   message.sender = req.user;
   message.save(function (err) {
     if (err) {
       return res.status(400).send({
-       // message: errorHandler.getErrorMessage(err)
+        // message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(message);
+      //res.json(message);
     }
   });
 
@@ -40,20 +39,20 @@ exports.create = function (req, res) {
     }
   });
 
- /* Conversations.findOne({ sender: req.user._id, recipient: req.body.recipient}, function(error, conversation) {
-    if (error) {
-     // return handleError(error);
-    }
-    console.log(conversation);
-    conversation.messages.push(message);
-    conversation.save(function (err) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
-    });
-  });*/
+  /* Conversations.findOne({ sender: req.user._id, recipient: req.body.recipient}, function(error, conversation) {
+   if (error) {
+   // return handleError(error);
+   }
+   console.log(conversation);
+   conversation.messages.push(message);
+   conversation.save(function (err) {
+   if (err) {
+   return res.status(400).send({
+   message: errorHandler.getErrorMessage(err)
+   });
+   }
+   });
+   });*/
 
 };
 
@@ -71,14 +70,17 @@ exports.list = function (req, res) {
 
 exports.findAllMessagesForUser = function (req, res) {
 
-  //amend to also include reciever
-  Conversations.find({ sender: req.user._id }).deepPopulate('messages', 'sender', 'recipient').exec(function (err, question) {
+  Conversations.find({ $or:[ { recipient: req.user._id }, { sender: req.user._id } ] }).deepPopulate('messages,' +
+    ' sender, recipient').exec(function (err, messages) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.json(question);
+    } else if (!messages) {
+      return res.status(404).send({
+        message: 'No recipient with that identifier has been found'
+      });
     }
+    res.json(messages);
   });
 };

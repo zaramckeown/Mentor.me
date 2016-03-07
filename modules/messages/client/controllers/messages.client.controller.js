@@ -14,9 +14,6 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
         return false;
       }*/
 
-      var userId = $stateParams.userId;
-      console.log(userId);
-
       // Create new Question object
       var message = new Messages.lookup({
         created: new Date(),
@@ -52,25 +49,6 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       }
     };
 
-    // Update existing Article
-    $scope.update = function (isValid) {
-      $scope.error = null;
-
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'questionsForm');
-
-        return false;
-      }
-
-      var question = $scope.question;
-
-      question.$update(function () {
-        $location.path('questions/' + question._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
-
     // Find a list of Articles
     $scope.find = function () {
       //$scope.messages = Messages.lookup.query();
@@ -80,6 +58,5 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     $scope.findMessages = function () {
       $scope.messages = Messages.lookup.query();
     };
-
   }
 ]);
