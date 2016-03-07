@@ -49,6 +49,11 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       }
     };
 
+    $scope.formatDate = function(date){
+      var dateOut = new Date(date);
+      return dateOut;
+    };
+
     // Find a list of Articles
     $scope.find = function () {
       //$scope.messages = Messages.lookup.query();
