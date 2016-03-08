@@ -8,10 +8,10 @@ var messagesPolicy = require('../policies/messages.server.policy'),
 
 module.exports = function (app) {
 
-  app.route('/api/messages/:userId').all(messagesPolicy.isAllowed)
-    .get(messages.list);
-
-  app.route('/api/messages')
+  app.route('/api/messages').all(messagesPolicy.isAllowed)
     .get(messages.findAllMessagesForUser)
     .post(messages.create);
+
+  app.route('/api/messages/:messageId').all(messagesPolicy.isAllowed)
+    .get(messages.displayMessage);
 };

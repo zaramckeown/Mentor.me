@@ -71,7 +71,22 @@ exports.list = function (req, res) {
 exports.findAllMessagesForUser = function (req, res) {
 
   Conversations.find({ $or:[ { recipient: req.user._id }, { sender: req.user._id } ] }).deepPopulate('messages,' +
-    ' sender, recipient').exec(function (err, messages) {
+    'sender, recipient').exec(function (err, messages) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else if (!messages) {
+      return res.status(404).send({
+        message: 'No recipient with that identifier has been found'
+      });
+    }
+    res.json(messages);
+  });
+};
+
+exports.displayMessage = function (req, res) {
+  Conversations.findById(req.params.messageId).deepPopulate('messages, messages.sender').exec(function (err, messages) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

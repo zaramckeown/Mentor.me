@@ -15,7 +15,7 @@ exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['student', 'mentor'],
     allows: [{
-      resources: '/api/messages/:userId',
+      resources: '/api/messages/:messageId',
       permissions: ['get']
     }, {
       resources: '/api/messages',
@@ -29,9 +29,9 @@ exports.invokeRolesPolicies = function () {
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  if (req.params.userId !== req.user.id) {
+  /*if (req.params.userId !== req.user.id) {
     return res.status(403).send('User is not authorized');
-  }
+  }*/
 
   // Check for user roles
   acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function (err, isAllowed) {

@@ -54,10 +54,16 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       return dateOut;
     };
 
-    // Find a list of Articles
-    $scope.find = function () {
-      //$scope.messages = Messages.lookup.query();
+    $scope.find = function (messageId) {
+      $scope.showMessages = Messages.messageByIdLookUp.get({
+        messageId: messageId
+      });
+      console.log($scope.showMessages);
     };
+
+    // set the first question to the first to be automatically shown
+    // when the message button is selected from profile that message needs to be shown in box
+
 
     // Find a list of messages for user
     $scope.findMessages = function () {
