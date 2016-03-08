@@ -55,8 +55,11 @@
         <div class="row panel panel-default">
           <div class="col-xs-12">
             <div ng-repeat="conversation in showMessages.messages">
+              <div ng-bind="conversation.created"></div>
+              <div ng-bind="conversation.content"></div>
+
               <div ng-repeat="messagesInConversation in conversation">
-                <div ng-bind="messagesInConversation"></div>
+                <div ng-bind="messagesInConversation.displayName"></div>
               </div>
             </div>
           </div>
