@@ -45,7 +45,7 @@ exports.upvote = function (req, res) {
     }
     
     question.usersWhoUpvoted.push(user._id);
-    question.upvotes = +1;
+    question.upvotes+=1;
 
     for (var i=0; i<question.usersWhoDownvoted.length; i++){
       if (question.usersWhoDownvoted[i].equals(user._id)) {
@@ -84,7 +84,7 @@ exports.downvote = function (req, res) {
     }
 
     question.usersWhoDownvoted.push(user._id);
-    question.downvotes = +1;
+    question.downvotes +=1;
 
     for (var i=0; i<question.usersWhoUpvoted.length; i++){
       if (question.usersWhoUpvoted[i].equals(user._id)) {
@@ -124,7 +124,7 @@ exports.upvoteComment = function (req, res) {
     }
 
     comments.usersWhoUpvoted.push(user._id);
-    comments.upvotes = +1;
+    comments.upvotes +=1;
 
     for (var i=0; i<comments.usersWhoDownvoted.length; i++){
       if (comments.usersWhoDownvoted[i].equals(user._id)) {
@@ -164,7 +164,7 @@ exports.downvoteComment = function (req, res) {
     }
 
     comment.usersWhoDownvoted.push(user._id);
-    comment.downvotes = +1;
+    comment.downvotes +=1;
 
     for (var i=0; i<comment.usersWhoUpvoted.length; i++){
       if (comment.usersWhoUpvoted[i].equals(user._id)) {
@@ -268,7 +268,7 @@ exports.delete = function (req, res) {
 
 
 exports.list = function (req, res) {
-  Question.find().populate('user', 'displayName').exec(function (err, question) {
+  Question.find().sort({created: -1, upvotes: 1}).populate('user', 'displayName').exec(function (err, question) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
