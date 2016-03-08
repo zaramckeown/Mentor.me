@@ -70,8 +70,7 @@ exports.list = function (req, res) {
 
 exports.findAllMessagesForUser = function (req, res) {
 
-  Conversations.find({ $or:[ { recipient: req.user._id }, { sender: req.user._id } ] }).deepPopulate('messages,' +
-    'sender, recipient').exec(function (err, messages) {
+  Conversations.find({ $or: [ { recipient: req.user._id }, { sender: req.user._id } ] }).deepPopulate('messages,sender, recipient').exec(function (err, messages) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
