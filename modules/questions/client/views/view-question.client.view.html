@@ -3,7 +3,7 @@
     <h1 ng-bind="question.title"></h1>
   </div>
     <div class="row panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body" style="background-color: #c6c6c6">
         <div class="col-xs-5" style="position: absolute; right: 0px; width: 300px;">
           <small>
             Posted on
@@ -62,7 +62,9 @@
             </div>
 
             <div class="column">
-              <div class="col-xs-11" style="text-align: center; font-size: larger">
+              <div class="col-xs-11 lead" style="text-align: center; font-size: x-large; -o-text-overflow: ellipsis;
+                 text-overflow: ellipsis; overflow:hidden;
+                white-space:nowrap; width: 900px;">
                 <p ng-bind="question.content"></p>
               </div>
             </div>
@@ -76,10 +78,9 @@
         </div>
       </div>
 
-      <div class="panel-footer" style="background-color: #c6c6c6">
+      <div class="panel-body">
         <div ng-repeat="comment in pagedItemsForOneQuestion">
           <div class="row">
-            </br>
             </br>
             <div class="col-xs-1">
               <img style="min-height: 80px; max-height: 80px; width: 80px"
