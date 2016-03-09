@@ -21,10 +21,10 @@ exports.create = function (req, res) {
   conversations.save(function (err) {
     if (err) {
       return res.status(400).send({
-        // message: errorHandler.getErrorMessage(err)
+        message: errorHandler.getErrorMessage(err)
       });
     } else {
-      //res.json(conversations);
+      res.json(conversations);
     }
   });
 };
@@ -83,7 +83,7 @@ exports.appendMessage = function (req, res) {
         message: errorHandler.getErrorMessage(error)
       });
     } else {
-      //res.json(message);
+      res.json(message);
     }
   });
 
