@@ -88,19 +88,18 @@ exports.appendMessage = function (req, res) {
   });
 
   Conversations.findById(conversation_id).exec(function (error, conversation) {
+    if (error) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
+      });
+    }
+    conversation.messages.push(message);
+    conversation.save(function (error) {
       if (error) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(error)
         });
       }
-      conversation.messages.push(message);
-      conversation.save(function (error) {
-        if (error) {
-          return res.status(400).send({
-            message: errorHandler.getErrorMessage(error)
-          });
-        }
-      });
-    }
-  );
+    });
+  });
 };
