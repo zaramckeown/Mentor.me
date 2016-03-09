@@ -34,35 +34,48 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.upvote = function (questionId) {
-      var currentQuestion = $scope.question.question;
-      if (currentQuestion.user._id === $scope.currentUser) {
-        $scope.ownerQuestion();
-        return;
-      }
-      
-      if (currentQuestion.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
-        var path = '/api/questions/' + questionId + '/upvote';
-        $http.post(path);
-        location.reload();
-      } else {
-        $scope.alreadyVoted();   
+      var currentQuestion = $scope.pagedItems;
+      for (var i=0; i<$scope.pagedItems.length; i++)
+      {
+        if(currentQuestion[i]._id === questionId)
+        {
+          if (currentQuestion[i].user._id === $scope.currentUser) {
+            $scope.ownerQuestion();
+            return;
+          }
+
+          if (currentQuestion[i].usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
+            var path = '/api/questions/' + questionId + '/upvote';
+            $http.post(path);
+            location.reload();
+          } else {
+            $scope.alreadyVoted();
+          }
+        }
       }
     };
 
     $scope.downvote = function (questionId) {
-      var currentQuestion = $scope.question.question;
-      if (currentQuestion.user._id === $scope.currentUser) {
-        $scope.ownerQuestion();
-        return;
+      var currentQuestion = $scope.pagedItems;
+
+      for (var i=0; i<$scope.pagedItems.length; i++) {
+        if (currentQuestion[i]._id === questionId) {
+
+          if (currentQuestion[i].user._id === $scope.currentUser) {
+            $scope.ownerQuestion();
+            return;
+          }
+
+          if (currentQuestion[i].usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
+            var path = '/api/questions/' + questionId + '/downvote';
+            $http.post(path);
+            location.reload();
+          } else {
+            $scope.alreadyVoted();
+          }
+        }
       }
-      
-      if (currentQuestion.usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
-        var path = '/api/questions/' + questionId + '/downvote';
-        $http.post(path);
-        location.reload();          
-      } else {
-        $scope.alreadyVoted();   
-      }
+
     };
 
     $scope.addComment = function () {
@@ -86,14 +99,14 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.upvoteComment = function (questionId, commentId) {
-      var currentQuestion = $scope.question.question;     
-      if (currentQuestion.user._id === $scope.currentUser) {
-        $scope.ownerComment();
-        return;
+      var currentQuestion = $scope.pagedItems;
+      var comments = '';
+      for (var i=0; i<$scope.pagedItems.length; i++) {
+        if (currentQuestion[i]._id === questionId) {
+          comments = currentQuestion[i].comments;
+        }
       }
-      
       // find comment here
-      var comments = $scope.question.commentsSent.comments;
       var commentIndex = -1;
       for (var index = 0; index < comments.length; index = index + 1) {
         if (comments[index]._id === commentId) {
@@ -101,30 +114,35 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
           break;
         }
       }
-      
+
       if (commentIndex === -1) {
         return;
       }
-      
+
       var comment = comments[commentIndex];
+      if (comment.user._id === $scope.currentUser) {
+       $scope.ownerComment();
+       return;
+       }
       if (comment.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
         var path = '/api/questions/' + questionId + '/upvoteComments/' + commentId;
         $http.post(path);
-        location.reload();    
+        location.reload();
       } else {
-        $scope.votedComment();   
+        $scope.votedComment();
       }
     };
 
     $scope.downvoteComment = function (questionId, commentId) {
-      var currentQuestion = $scope.question.question;     
-      if (currentQuestion.user._id === $scope.currentUser) {
-        $scope.ownerComment();
-        return;
+      var currentQuestion = $scope.pagedItems;
+      var comments = '';
+      for (var i=0; i<$scope.pagedItems.length; i++) {
+        if (currentQuestion[i]._id === questionId) {
+          comments = currentQuestion[i].comments;
+        }
       }
       
       // find comment here
-      var comments = $scope.question.commentsSent.comments;
       var commentIndex = -1;
       for (var index = 0; index < comments.length; index = index + 1) {
         if (comments[index]._id === commentId) {
@@ -138,6 +156,10 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       }
       
       var comment = comments[commentIndex];
+      if (comment.user._id === $scope.currentUser) {
+        $scope.ownerComment();
+        return;
+      }
       if (comment.usersWhoDownvoted.indexOf($scope.currentUser) === -1) {
         var path = '/api/questions/' + questionId + '/downvoteComments/' + commentId;
         $http.post(path);
@@ -202,7 +224,6 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.figureOutItemsToDisplay = function () {
-      console.log($scope.questions);
       $scope.filteredItems = $filter('filter')($scope.questions, {
         $: $scope.search
       });

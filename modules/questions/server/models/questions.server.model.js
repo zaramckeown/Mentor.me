@@ -47,4 +47,18 @@ var QuestionsSchema = new Schema({
 
 mongoose.model('Questions', QuestionsSchema);
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-QuestionsSchema.plugin(deepPopulate);
+//QuestionsSchema.plugin(deepPopulate);
+QuestionsSchema.plugin(deepPopulate, {
+  populate: {
+    'comments': {
+      select: 'body upvotes downvotes usersWhoUpvoted usersWhoDownvoted user question created',
+      options: {
+        limit: 1,
+        sort: { created: -1 }
+      }
+    }
+  }
+});
+
+
+//      select: 'body user created upvotes downvotes usersWhoUpvoted usersWhoDownvoted',
