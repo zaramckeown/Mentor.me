@@ -1,8 +1,8 @@
 'use strict';
 
 // Questions controller
-angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions', 'ngDialog', '$window',
-  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions, ngDialog, $window) {
+angular.module('questions').controller('QuestionsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Comments', 'Questions', 'ngDialog', '$filter',
+  function ($scope, $http, $stateParams, $location, Authentication, Comments, Questions, ngDialog, $filter) {
     $scope.authentication = Authentication;
     $scope.currentUser = Authentication.user.id;
 
@@ -182,10 +182,39 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         $scope.error = errorResponse.data.message;
       });
     };
-
-    // Find a list of Articles
+/*
+    // Find a list of all questions
     $scope.find = function () {
       $scope.questions = Questions.query();
+      $scope.buildPager();
+    };*/
+
+    Questions.query(function (data) {
+      $scope.questions = data;
+      $scope.buildPager();
+    });
+
+    $scope.buildPager = function () {
+      $scope.pagedItems = [];
+      $scope.itemsPerPage = 4;
+      $scope.currentPage = 1;
+      $scope.figureOutItemsToDisplay();
+    };
+
+    $scope.figureOutItemsToDisplay = function () {
+      console.log($scope.questions);
+      $scope.filteredItems = $filter('filter')($scope.questions, {
+        $: $scope.search
+      });
+
+      $scope.filterLength = $scope.filteredItems.length;
+      var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+      var end = begin + $scope.itemsPerPage;
+      $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+    };
+
+    $scope.pageChanged = function () {
+      $scope.figureOutItemsToDisplay();
     };
 
     // Find existing Article
