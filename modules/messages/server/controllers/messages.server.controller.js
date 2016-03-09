@@ -98,3 +98,9 @@ exports.displayMessage = function (req, res) {
     res.json(messages);
   });
 };
+
+exports.appendMessage = function(req, res) {
+  var message_id = req.params.messageId;
+   
+  // find the conversation by the id and append to it
+};

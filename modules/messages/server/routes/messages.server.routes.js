@@ -13,5 +13,6 @@ module.exports = function (app) {
     .post(messages.create);
 
   app.route('/api/messages/:messageId').all(messagesPolicy.isAllowed)
-    .get(messages.displayMessage);
+    .get(messages.displayMessage)
+    .post(messages.appendMessage);
 };
