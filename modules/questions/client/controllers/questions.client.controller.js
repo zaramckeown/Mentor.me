@@ -121,9 +121,9 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
 
       var comment = comments[commentIndex];
       if (comment.user._id === $scope.currentUser) {
-       $scope.ownerComment();
-       return;
-       }
+        $scope.ownerComment();
+        return;
+      }
       if (comment.usersWhoUpvoted.indexOf($scope.currentUser) === -1) {
         var path = '/api/questions/' + questionId + '/upvoteComments/' + commentId;
         $http.post(path);
@@ -245,32 +245,52 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       },
         function (successResponse) {
 
-          if (successResponse.question.usersWhoUpvoted.length > 0){
-            $scope.upvotedOrNot = successResponse.question.usersWhoUpvoted.indexOf($scope.currentUser._str) === -1;
+          if (successResponse.usersWhoUpvoted.length > 0){
+            $scope.upvotedOrNot = successResponse.usersWhoUpvoted.indexOf($scope.currentUser._str) === -1;
           }
           else{
             $scope.upvotedOrNot = false;
           }
 
-          if (successResponse.question.usersWhoDownvoted.length > 0){
-            $scope.downvotedOrNot = successResponse.question.usersWhoDownvoted.indexOf($scope.currentUser._str) === -1;
+          if (successResponse.usersWhoDownvoted.length > 0){
+            $scope.downvotedOrNot = successResponse.usersWhoDownvoted.indexOf($scope.currentUser._str) === -1;
           }
           else {
             $scope.downvotedOrNot = false;
           }
+          $scope.buildPagerForOneQuestion();
         },
         function (errorResponse) {
           // failure callback
           console.log(errorResponse);
         }
       );
+
     };
 
-    $scope.listQuestion = function () {
-      $scope.questions = Questions.findAnswer({
-        questionId: $stateParams.questionId
-      });
+    $scope.buildPagerForOneQuestion = function () {
+      $scope.pagedItemsForOneQuestion = [];
+      $scope.itemsPerPageForOneQuestion = 4;
+      $scope.currentPageForOneQuestion = 1;
+      $scope.figureOutItemsToDisplayForOneQuestion();
     };
+
+    $scope.figureOutItemsToDisplayForOneQuestion = function () {
+      console.log($scope.filteredItemsForOneQuestion);
+      $scope.filteredItemsForOneQuestion = $filter('filter')($scope.question.comments, {
+        $: $scope.search
+      });
+
+      $scope.filterLengthForOneQuestion = $scope.filteredItemsForOneQuestion.length;
+      var begin = (($scope.currentPageForOneQuestion - 1) * $scope.itemsPerPageForOneQuestion);
+      var end = begin + $scope.itemsPerPageForOneQuestion;
+      $scope.pagedItemsForOneQuestion = $scope.filteredItemsForOneQuestion.slice(begin, end);
+    };
+
+    $scope.pageChangedForOneQuestion = function () {
+      $scope.figureOutItemsToDisplayForOneQuestion();
+    };
+
     $scope.alreadyVoted = function () {
       ngDialog.open({ template: 'firstDialogId' });
     };

@@ -292,6 +292,7 @@ exports.commentByID = function (req, res, next, id) {
   }
 };
 
+/*
 exports.questionByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -323,5 +324,27 @@ exports.questionByID = function (req, res, next, id) {
       req.question = questionData;
       next();
     });
+  });
+};
+*/
+
+exports.questionByID = function (req, res, next, id) {
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'question is invalid'
+    });
+  }
+
+  Question.findById(id).deepPopulate('user comments comments.user', { populate: { } }).exec(function (err, question) {
+    if (err) {
+      return next(err);
+    } else if (!question) {
+      return res.status(404).send({
+        message: 'No question with that identifier has been found'
+      });
+    }
+    req.question = question;
+    next();
   });
 };
