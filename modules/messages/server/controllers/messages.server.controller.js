@@ -13,22 +13,11 @@ var path = require('path'),
  * Create a question
  */
 exports.create = function (req, res) {
-  var message = new Messages(req.body);
-  message.sender = req.user;
-  message.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        // message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      //res.json(message);
-    }
-  });
-
   var conversations = new Conversations();
   conversations.sender = req.user;
-  conversations.recipient = req.body.recipient;
-  conversations.messages.push(message);
+
+  //needs to be a recipient Id passed
+  conversations.recipient = req.params.userId;
   conversations.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -38,22 +27,6 @@ exports.create = function (req, res) {
       //res.json(conversations);
     }
   });
-
-  /* Conversations.findOne({ sender: req.user._id, recipient: req.body.recipient}, function(error, conversation) {
-   if (error) {
-   // return handleError(error);
-   }
-   console.log(conversation);
-   conversation.messages.push(message);
-   conversation.save(function (err) {
-   if (err) {
-   return res.status(400).send({
-   message: errorHandler.getErrorMessage(err)
-   });
-   }
-   });
-   });*/
-
 };
 
 exports.list = function (req, res) {
@@ -92,15 +65,42 @@ exports.displayMessage = function (req, res) {
       });
     } else if (!messages) {
       return res.status(404).send({
-        message: 'No recipient with that identifier has been found'
+        message: 'No Convo with that identifier has been found'
       });
     }
     res.json(messages);
   });
 };
 
-exports.appendMessage = function(req, res) {
-  var message_id = req.params.messageId;
-   
-  // find the conversation by the id and append to it
+exports.appendMessage = function (req, res) {
+  var conversation_id = req.params.messageId;
+
+  var message = new Messages(req.body);
+  message.sender = req.user;
+  message.save(function (error) {
+    if (error) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(error)
+      });
+    } else {
+      //res.json(message);
+    }
+  });
+
+  Conversations.findById(conversation_id).exec(function (error, conversation) {
+      if (error) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(error)
+        });
+      }
+      conversation.messages.push(message);
+      conversation.save(function (error) {
+        if (error) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(error)
+          });
+        }
+      });
+    }
+  );
 };
