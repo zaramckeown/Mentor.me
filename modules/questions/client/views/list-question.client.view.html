@@ -7,6 +7,10 @@
       <div class="col-xs-4" style="padding-top: 30px;">
         <input class="form-control" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
       </div>
+      <div class="col-xs-6" style="padding-top: 30px;">
+        <button style="float: right" ui-sref="questions.create" type="button" class="btn btn-success btn-lg">Ask a
+          Question</button>
+      </div>
     </div>
   </div>
     <div ng-repeat="question in pagedItems">
