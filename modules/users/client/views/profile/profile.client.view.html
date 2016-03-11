@@ -84,7 +84,9 @@
             <a ui-sref="profile.view({userId: user._id})"> <md-button class="md-raised">Learn More</md-button> </a>
           </div>
           <div class="col-xs-12 col-sm-5" style="float: right;">
-            <a ng-href="/messages/{{user._id}}"> <md-button class="md-raised" style="background-color:
+            <!--<a ng-href="/messages/{{user._id}}"> <md-button class="md-raised" style="background-color:
+            #00A000">Message</md-button></a>-->
+            <a ng-click="sendMessage(user._id)"> <md-button class="md-raised" style="background-color:
             #00A000">Message</md-button></a>
           </div>
         </div>

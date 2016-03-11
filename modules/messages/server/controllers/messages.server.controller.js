@@ -17,7 +17,7 @@ exports.create = function (req, res) {
   conversations.sender = req.user;
 
   //needs to be a recipient Id passed
-  conversations.recipient = req.params.userId;
+  conversations.recipient = req.params.recipientId;
   conversations.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -30,7 +30,7 @@ exports.create = function (req, res) {
 };
 
 exports.list = function (req, res) {
-  Conversations.findOne({ sender: req.params.userId, recipient: req.user }).exec(function (err, conversations) {
+  Conversations.findOne({ sender: req.user._id, recipient:req.params.recipientId }).exec(function (err, conversations) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

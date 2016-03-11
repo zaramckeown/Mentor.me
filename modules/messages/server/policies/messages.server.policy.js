@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/messages',
       permissions: ['get', 'post']
+    }, {
+      resources: '/api/messages/create/:recipientId',
+      permissions: ['get', 'post']
     }]
   }]);
 };

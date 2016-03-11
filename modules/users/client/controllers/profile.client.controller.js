@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core.profile').controller('MentorListController', ['$scope', '$filter', 'Profile',
-  function ($scope, $filter, Profile) {
+angular.module('core.profile').controller('MentorListController', ['$scope', '$filter', 'Profile', '$http',
+  function ($scope, $filter, Profile, $http) {
 
     Profile.Users.query(function (data) {
       $scope.users = data;
@@ -50,22 +50,47 @@ angular.module('core.profile').controller('MentorListController', ['$scope', '$f
       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
       var end = begin + $scope.itemsPerPage;
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-
-      /*var placeholderSchool = [];
-      for(var usercounter =0; usercounter<$scope.users.length; usercounter++)
-      {
-        for(var i=0; i<$scope.users[usercounter].profile.education.length; i++)
-        {
-          placeholderSchool.push({ id: $scope.users[usercounter].profile.education[i].schoolName, label: $scope.users[usercounter].profile.education[i].schoolName });
-        }
-
-        $scope.schooldata = placeholderSchool;
-      }*/
-
     };
 
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
+    };
+
+    $scope.sendMessage = function (userId) {
+
+      $scope.messages = Profile.Messages.get({
+          recipientId: userId
+        },
+        function (successResponse) {
+          var result = JSON.stringify($scope.messages);
+          console.log(Object.keys(result).length);
+
+          if (Object.keys(result).length === 2){
+            var path = '/api/messages/create/'+ userId;
+            $http.post(path);
+            /*
+            $http({
+             url: '/api/messages',
+             method: "POST",
+             data: userId,
+             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+             }.error(function (data, status, headers, config) {
+             $scope.status = status;
+             }));*/
+
+            //then include some data to give it priority
+          }
+          else {
+            //redirect
+          }
+        },
+        function (errorResponse) {
+          // failure callback
+          console.log(errorResponse);
+        }
+      );
+
+
     };
   }
 ]);

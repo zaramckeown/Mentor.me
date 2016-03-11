@@ -276,7 +276,6 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
     };
 
     $scope.figureOutItemsToDisplayForOneQuestion = function () {
-      console.log($scope.filteredItemsForOneQuestion);
       $scope.filteredItemsForOneQuestion = $filter('filter')($scope.question.comments, {
         $: $scope.search
       });

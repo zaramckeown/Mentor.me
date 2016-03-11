@@ -28,9 +28,12 @@ angular.module('core.profile').factory('Profile', ['$resource',
   function ($resource) {
     return {
       Users: $resource('api/users'),
-      Search: $resource('api/search')
+      Search: $resource('api/search'),
+      Messages: $resource('api/messages/create/:recipientId')
     };
   }
 ]);
+
+
 
 
