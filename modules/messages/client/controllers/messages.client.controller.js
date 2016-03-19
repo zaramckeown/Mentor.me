@@ -23,7 +23,10 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
 
       // Redirect after save
       message.$save(function (response) {
-        $location.path('messages/' + response._id);
+        $scope.showMessages = Messages.messageByIdLookUp.get({
+          messageId: messageId
+        });
+        $location.path('messages/');
 
         // Clear form fields
         $scope.content = '';

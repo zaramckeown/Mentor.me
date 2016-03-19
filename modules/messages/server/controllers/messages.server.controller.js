@@ -75,8 +75,6 @@ exports.displayMessage = function (req, res) {
 exports.appendMessage = function (req, res) {
   var conversation_id = req.body.messageId;
 
-  console.log(conversation_id);
-
   var message = new Messages(req.body);
   message.sender = req.user;
   message.save(function (error) {
