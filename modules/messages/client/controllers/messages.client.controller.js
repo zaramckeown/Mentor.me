@@ -6,19 +6,19 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     $scope.authentication = Authentication;
 
     // Create new Question
-    $scope.create = function () {
-     // $scope.error = null;
-/*
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'questionForm');
-        return false;
-      }*/
+    $scope.create = function (messageId) {
+      // $scope.error = null;
+      /*
+       if (!isValid) {
+       $scope.$broadcast('show-errors-check-validity', 'questionForm');
+       return false;
+       }*/
 
       // Create new Question object
       var message = new Messages.lookup({
         created: new Date(),
         content: this.content,
-        recipient: $stateParams.userId
+        messageId: messageId
       });
 
       // Redirect after save
@@ -49,7 +49,7 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       }
     };
 
-    $scope.formatDate = function(date){
+    $scope.formatDate = function (date) {
       var dateOut = new Date(date);
       return dateOut;
     };
@@ -58,16 +58,31 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       $scope.showMessages = Messages.messageByIdLookUp.get({
         messageId: messageId
       });
-      console.log($scope.showMessages);
     };
-
-    // set the first question to the first to be automatically shown
-    // when the message button is selected from profile that message needs to be shown in box
-
 
     // Find a list of messages for user
     $scope.findMessages = function () {
-      $scope.messages = Messages.lookup.query();
+      $scope.messages = Messages.lookup.query(function(data) {
+        if ($stateParams.userId !== "") {
+          $scope.showMessages = Messages.messageByIdLookUp.get({
+            messageId: $stateParams.userId
+          });
+        }
+        else{
+          var convoId;
+
+          for (var count = 0; count < data.length; count++){
+            convoId =  data[0]._id;
+          }
+
+          $scope.showMessages = Messages.messageByIdLookUp.get({
+            messageId: convoId
+          });
+        }
+      }, function(error) {
+        console.log(error);
+      });
+
     };
   }
 ]);

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core.profile').controller('MentorListController', ['$scope', '$filter', 'Profile', '$http',
-  function ($scope, $filter, Profile, $http) {
+angular.module('core.profile').controller('MentorListController', ['$scope', '$filter', 'Profile', '$http', '$location',
+  function ($scope, $filter, Profile, $http, $location) {
 
     Profile.Users.query(function (data) {
       $scope.users = data;
@@ -58,30 +58,24 @@ angular.module('core.profile').controller('MentorListController', ['$scope', '$f
 
     $scope.sendMessage = function (userId) {
 
-      $scope.messages = Profile.Messages.get({
-          recipientId: userId
-        },
+      $scope.messages = Profile.Messages.get({ recipientId: userId },
         function (successResponse) {
           var result = JSON.stringify($scope.messages);
-          console.log(Object.keys(result).length);
+          //console.log(Object.keys(result).length);
 
-          if (Object.keys(result).length === 2){
-            var path = '/api/messages/create/'+ userId;
-            $http.post(path);
-            /*
-            $http({
-             url: '/api/messages',
-             method: "POST",
-             data: userId,
-             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-             }.error(function (data, status, headers, config) {
-             $scope.status = status;
-             }));*/
-
-            //then include some data to give it priority
+          if (Object.keys(result).length === 2) {
+            var path = '/api/messages/create/' + userId;
+            $http.post(path).then(function (success) {
+              var messageId = success.data._id;
+              $location.path('messages/' + messageId);
+            }, function (error) {
+              console.log(error);
+            });
           }
           else {
-            //redirect
+            //console.log(successResponse);
+            var messageId = successResponse._id;
+            $location.path('messages/' + messageId);
           }
         },
         function (errorResponse) {
@@ -89,8 +83,6 @@ angular.module('core.profile').controller('MentorListController', ['$scope', '$f
           console.log(errorResponse);
         }
       );
-
-
     };
   }
 ]);

@@ -9,11 +9,11 @@ var messagesPolicy = require('../policies/messages.server.policy'),
 module.exports = function (app) {
 
   app.route('/api/messages').all(messagesPolicy.isAllowed)
-    .get(messages.findAllMessagesForUser);
+    .get(messages.findAllMessagesForUser)
+    .post(messages.appendMessage);
 
   app.route('/api/messages/:messageId').all(messagesPolicy.isAllowed)
-    .get(messages.displayMessage)
-    .post(messages.appendMessage);
+    .get(messages.displayMessage);
 
   app.route('/api/messages/create/:recipientId').all(messagesPolicy.isAllowed)
     .get(messages.list)
