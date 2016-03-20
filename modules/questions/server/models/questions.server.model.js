@@ -55,10 +55,13 @@ QuestionsSchema.plugin(deepPopulate, {
       options: {
         limit: 1,
         sort: { created: -1 }
+      },
+      'user': {
+        select: 'firstName lastName displayName email profileImageURL roles profile'
+      },
+      'comments.user': {
+        select: 'firstName lastName displayName email profileImageURL roles profile'
       }
     }
   }
 });
-
-
-//      select: 'body user created upvotes downvotes usersWhoUpvoted usersWhoDownvoted',

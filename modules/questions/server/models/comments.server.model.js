@@ -40,4 +40,20 @@ var CommentSchema = new Schema({
 
 mongoose.model('Comments', CommentSchema);
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-CommentSchema.plugin(deepPopulate);
+CommentSchema.plugin(deepPopulate, {
+  populate: {
+    'comments': {
+      select: 'body upvotes downvotes usersWhoUpvoted usersWhoDownvoted user question created',
+      options: {
+        limit: 1,
+        sort: { created: -1 }
+      },
+      'user': {
+        select: 'firstName lastName displayName email profileImageURL roles profile'
+      },
+      'comments.user': {
+        select: 'firstName lastName displayName email profileImageURL roles profile'
+      }
+    }
+  }
+});
