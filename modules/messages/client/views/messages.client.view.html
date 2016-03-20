@@ -34,14 +34,14 @@
                   </div>
 
                   <div class="col-md-5" style="padding: 0 !important; margin: 0 !important;">
-                    <div ng-repeat="message in messages.messages | limitTo:1 | orderBy : message.created : true">
+                    <div ng-repeat="message in messages.messages |  orderBy : message.created : true | limitTo:1 ">
                       <span style="font-size: xx-small;" ng-bind="formatDate(message.created) | date:'dd/MM/yyyy'"></span>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
-                  <div ng-repeat="message in messages.messages | limitTo:1 | orderBy : message.created : true">
+                  <div ng-repeat="message in messages.messages  | orderBy : message.created : true | limitTo:1">
                     <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="message.content"></div>
                   </div>
                 </div>
@@ -55,12 +55,27 @@
         <div class="row panel panel-default">
           <div class="col-xs-12">
             <div ng-repeat="conversation in showMessages.messages">
-              <div ng-bind="conversation.created"></div>
-              <div ng-bind="conversation.content"></div>
 
-              <div ng-repeat="messagesInConversation in conversation">
-                <div ng-bind="messagesInConversation.displayName"></div>
+              <div ng-show="conversation.sender._id !== authentication.user.id">
+                <article class="message">
+                  <div ng-repeat="messagesInConversation in conversation">
+                    <div class="message__timestamp" style="font-weight: bold;" ng-bind="messagesInConversation.displayName"></div>
+                  </div>
+                  <div class="message__timestamp" ng-bind="formatDate(conversation.created) | date:'dd/MM/yyyy h:mm a'" ></div>
+                  <div class="bubble" ng-bind="conversation.content"></div>
+                </article>
               </div>
+
+              <div ng-show="conversation.sender._id === authentication.user.id">
+                <article class="message message--alt">
+                  <div ng-repeat="messagesInConversation in conversation">
+                    <div class="message__timestamp" style="font-weight: bold;" ng-bind="messagesInConversation.displayName"></div>
+                  </div>
+                  <div class="message__timestamp" ng-bind="formatDate(conversation.created) | date:'dd/MM/yyyy h:mm a'"></div>
+                  <div class="bubble" ng-bind="conversation.content"></div>
+                </article>
+              </div>
+              <br>
             </div>
           </div>
           <div class="col-xs-11" style="padding-left: 40px !important;">
