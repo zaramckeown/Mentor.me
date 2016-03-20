@@ -6,47 +6,94 @@
     <div class="col-xs-4 col-md-3">
       <div class="col-xs-12">
           <div ng-repeat="messages in messages">
-            <div class="row panel panel-default" style="padding-top: 10px !important;
-            padding-bottom: 10px !important;" ng-click="find(messages._id)">
-              <div class="col-xs-3" style="padding-right: 12px; margin: 0 !important; width: auto;">
-                <div ng-if="messages.recipient._id === authentication.user.id">
-                  <img style="min-height: 80px; max-height: 80px; width: 80px"
-                       ng-src="{{messages.sender.profileImageURL}}"
-                       alt="{{messages.sender.displayName}}"
-                       class="img-thumbnail img-circle user-profile-picture">
+            <div ng-show="showMessages._id === messages._id">
+              <div class="row panel panel-default" style="padding-top: 10px !important;
+            padding-bottom: 10px !important; background-color: lightgray" ng-click="find(messages._id)">
+                <div class="col-xs-3" style="padding-right: 12px; margin: 0 !important; width: auto;">
+                  <div ng-if="messages.recipient._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px"
+                         ng-src="{{messages.sender.profileImageURL}}"
+                         alt="{{messages.sender.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
+                  <div ng-if="messages.sender._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px;"
+                         ng-src="{{messages.recipient.profileImageURL}}"
+                         alt="{{messages.recipient.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
                 </div>
-                <div ng-if="messages.sender._id === authentication.user.id">
-                  <img style="min-height: 80px; max-height: 80px; width: 80px;"
-                       ng-src="{{messages.recipient.profileImageURL}}"
-                       alt="{{messages.recipient.displayName}}"
-                       class="img-thumbnail img-circle user-profile-picture">
-                </div>
-              </div>
-              <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important;">
-                <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
-                  <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold;">
-                    <div ng-if="messages.recipient._id === authentication.user.id">
-                      <div ng-bind="messages.sender.displayName"></div>
+                <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important;">
+                  <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
+                    <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold;">
+                      <div ng-if="messages.recipient._id === authentication.user.id">
+                        <div ng-bind="messages.sender.displayName"></div>
+                      </div>
+                      <div ng-if="messages.sender._id === authentication.user.id">
+                        <div ng-bind="messages.recipient.displayName"></div>
+                      </div>
                     </div>
-                    <div ng-if="messages.sender._id === authentication.user.id">
-                      <div ng-bind="messages.recipient.displayName"></div>
+
+                    <div class="col-md-5" style="padding: 0 !important; margin: 0 !important;">
+                      <div ng-repeat="message in messages.messages |  orderBy : message.created : true | limitTo:1 ">
+                        <span style="font-size: xx-small;" ng-bind="formatDate(message.created) | date:'dd/MM/yyyy'"></span>
+                      </div>
                     </div>
                   </div>
 
-                  <div class="col-md-5" style="padding: 0 !important; margin: 0 !important;">
-                    <div ng-repeat="message in messages.messages |  orderBy : message.created : true | limitTo:1 ">
-                      <span style="font-size: xx-small;" ng-bind="formatDate(message.created) | date:'dd/MM/yyyy'"></span>
+                  <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
+                    <div ng-repeat="message in messages.messages  | orderBy : message.created : true | limitTo:1">
+                      <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="message.content"></div>
                     </div>
-                  </div>
-                </div>
-
-                <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
-                  <div ng-repeat="message in messages.messages  | orderBy : message.created : true | limitTo:1">
-                    <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="message.content"></div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div ng-show="showMessages._id !== messages._id">
+              <div class="row panel panel-default" style="padding-top: 10px !important;
+            padding-bottom: 10px !important;" ng-click="find(messages._id)">
+                <div class="col-xs-3" style="padding-right: 12px; margin: 0 !important; width: auto;">
+                  <div ng-if="messages.recipient._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px"
+                         ng-src="{{messages.sender.profileImageURL}}"
+                         alt="{{messages.sender.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
+                  <div ng-if="messages.sender._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px;"
+                         ng-src="{{messages.recipient.profileImageURL}}"
+                         alt="{{messages.recipient.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
+                </div>
+                <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important;">
+                  <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
+                    <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold;">
+                      <div ng-if="messages.recipient._id === authentication.user.id">
+                        <div ng-bind="messages.sender.displayName"></div>
+                      </div>
+                      <div ng-if="messages.sender._id === authentication.user.id">
+                        <div ng-bind="messages.recipient.displayName"></div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-5" style="padding: 0 !important; margin: 0 !important;">
+                      <div ng-repeat="message in messages.messages |  orderBy : message.created : true | limitTo:1 ">
+                        <span style="font-size: xx-small;" ng-bind="formatDate(message.created) | date:'dd/MM/yyyy'"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" style="padding: 0 !important; margin: 0 !important;">
+                    <div ng-repeat="message in messages.messages  | orderBy : message.created : true | limitTo:1">
+                      <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="message.content"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
