@@ -26,4 +26,19 @@ var conversationsSchema = new Schema({
 
 mongoose.model('Conversations', conversationsSchema);
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-conversationsSchema.plugin(deepPopulate);
+//conversationsSchema.plugin(deepPopulate);
+conversationsSchema.plugin(deepPopulate,  {
+  populate: {
+    'recipient': {
+      select: 'firstName lastName displayName email profileImageURL roles profile',
+      options: {
+      }
+    },
+    'sender': {
+      select: 'firstName lastName displayName email profileImageURL roles profile'
+    },
+    'messages.sender':{
+      select: 'firstName lastName displayName email profileImageURL roles profile'
+    }
+  }
+});
