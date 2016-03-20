@@ -11,17 +11,17 @@
 }
 
 .bubble {
-  background-image: linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
-  background-image: -o-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
-  background-image: -moz-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
-  background-image: -webkit-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
-  background-image: -ms-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
+  background-image: linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
+  background-image: -o-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
+  background-image: -moz-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
+  background-image: -webkit-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
+  background-image: -ms-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
   background-image: -webkit-gradient(
           linear,
           left bottom,
           left top,
-          color-stop(0.25, rgb(210,244,254)),
-          color-stop(1, rgb(149,194,253))
+          color-stop(0.25, rgb(172,228,75)),
+          color-stop(1, rgb(122,205,71))
   );
   /*border: solid 1px rgba(0, 0, 0, 0.5); */
   /* vendor rules */
@@ -56,7 +56,7 @@
 
 .bubble:after {
   border: 8px solid transparent;
-  border-bottom-color: #d2f4fe;
+  border-bottom-color: #ace44b;
   bottom: 1px;
   left: -5px;
 }
@@ -70,17 +70,17 @@
 }
 
 .message--alt .bubble {
-  background-image: linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
-  background-image: -o-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
-  background-image: -moz-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
-  background-image: -webkit-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
-  background-image: -ms-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
+  background-image: linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
+  background-image: -o-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
+  background-image: -moz-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
+  background-image: -webkit-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
+  background-image: -ms-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
   background-image: -webkit-gradient(
           linear,
           left bottom,
           left top,
-          color-stop(0.25, rgb(172,228,75)),
-          color-stop(1, rgb(122,205,71))
+          color-stop(0.25, rgb(210,244,254)),
+          color-stop(1, rgb(149,194,253))
   );
 }
 
@@ -92,7 +92,7 @@
 }
 
 .message--alt .bubble:after {
-  border-bottom-color: #ace44b;
+  border-bottom-color: #d2f4fe;
   border-radius: 20px / 10px;
   left: auto;
   right: -5px;
