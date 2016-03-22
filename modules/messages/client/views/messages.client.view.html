@@ -2,7 +2,8 @@
   <div class="page-header">
     <h1>Messages</h1>
   </div>
-  <div ng-hide="authentication.user.roles[0] === 'mentor' && !showMessages">
+
+  <div ng-hide="authentication.user.roles[0] === 'mentor' && !showMessages || !messages.length">
     <div class="row">
       <div class="col-xs-4 col-md-3">
         <div class="col-xs-12">
@@ -46,6 +47,10 @@
                       <div ng-repeat="message in messages.messages  | orderBy : message.created : true | limitTo:1">
                         <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="message.content"></div>
                       </div>
+                    </div>
+
+                    <div class="col-md-12" style="padding-left: 130px; padding-top: 20px;">
+                      <div ng-click="removeConvo(messages)" class="glyphicon glyphicon-remove"></div>
                     </div>
                   </div>
                 </div>
@@ -140,7 +145,8 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
+
 
   <div ng-show="authentication.user.roles[0] === 'mentor' && !showMessages">
     <div class="alert alert-warning text-center">
@@ -148,8 +154,9 @@
     </div>
   </div>
 
-  <div ng-hide="authentication.user.role[0] === 'mentor'">
-    <div class="alert alert-warning text-center" ng-if="messages.$resolved && !messages.length">
+
+  <div ng-show="authentication.user.roles[0] === 'student'">
+    <div class="alert alert-warning text-center" ng-if="!messages.length">
       No messages yet, why don't you <a ui-sref="mentorSearch">find a mentor</a>?
     </div>
   </div>

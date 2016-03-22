@@ -21,7 +21,13 @@ var conversationsSchema = new Schema({
   messages:[{
     type: Schema.ObjectId,
     ref: 'Messages'
-  }]
+  }],
+  recipientDeleted: {
+    type: Boolean
+  },
+  senderDeleted: {
+    type: Boolean
+  }
 });
 
 mongoose.model('Conversations', conversationsSchema);

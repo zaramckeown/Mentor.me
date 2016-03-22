@@ -16,7 +16,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['student', 'mentor'],
     allows: [{
       resources: '/api/messages/:messageId',
-      permissions: ['get']
+      permissions: ['get', 'post']
     }, {
       resources: '/api/messages',
       permissions: ['get', 'post']
