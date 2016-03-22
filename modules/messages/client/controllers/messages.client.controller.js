@@ -37,6 +37,12 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       });
     };
 
+    $scope.find = function (messageId) {
+      $scope.showMessages = Messages.messageByIdLookUp.get({
+        messageId: messageId
+      });
+    };
+
     $scope.formatDate = function (date) {
       var dateOut = new Date(date);
       return dateOut;
