@@ -1,4 +1,4 @@
-<section ng-controller="MessagesController" ng-init="findMessages()">
+<section  ng-controller="MessagesController" ng-init="findMessages()">
   <div class="page-header">
     <h1>Messages</h1>
   </div>
@@ -148,8 +148,8 @@
   </div>
 
 
-  <div ng-show="authentication.user.roles[0] === 'mentor' && !showMessages">
-    <div class="alert alert-warning text-center">
+  <div ng-show="authentication.user.roles[0] === 'mentor'">
+    <div class="alert alert-warning text-center" ng-if="!messages.length">
       No messages yet!
     </div>
   </div>

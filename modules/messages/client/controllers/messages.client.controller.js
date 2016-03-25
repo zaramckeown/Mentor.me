@@ -1,8 +1,8 @@
 'use strict';
 
 // Messages controller
-angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages', '$filter', '$http',
-  function ($scope, $stateParams, $location, Authentication, Messages, $filter, $http) {
+angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages', '$filter', '$http', '$window',
+  function ($scope, $stateParams, $location, Authentication, Messages, $filter, $http, $window) {
     $scope.authentication = Authentication;
 
     // Create new Message
@@ -30,14 +30,18 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     };
 
     $scope.removeConvo = function (message) {
+      $scope.messages = null;
+      $scope.showMessages = null;
       $http.post('/api/messages/' + message._id).then(function successCallback(response) {
-        $scope.messages = response;
+        $window.location.href = 'messages/';
+
       }, function errorCallback(response) {
         console.log(response);
       });
     };
 
     $scope.find = function (messageId) {
+
       $scope.showMessages = Messages.messageByIdLookUp.get({
         messageId: messageId
       });
