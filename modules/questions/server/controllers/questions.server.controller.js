@@ -362,7 +362,7 @@ exports.mentor = function(req, res) {
 };
 
 exports.students = function (req, res) {
-  Question.find().sort({ "comments.created": -1, "created": -1 }).deepPopulate('user, comments, comments.user').exec(function (err, question) {
+  Question.find().sort({ "comments.created": -1 }).deepPopulate('user, comments, comments.user').exec(function (err, question) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

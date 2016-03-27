@@ -12,5 +12,11 @@ angular.module('core').controller('StudentController', ['$scope', 'Authenticatio
 
     });
 
+    $http.get('/api/student/questions').then(function(successCallback) {
+
+      $scope.newQuestions = successCallback.data;
+    }, function(errorCallback) {
+
+    });
   }
 ]);

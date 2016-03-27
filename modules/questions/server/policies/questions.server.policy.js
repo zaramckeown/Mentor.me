@@ -35,6 +35,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/mentor/questions',
       permissions: ['get']
+    }, {
+      resources: '/api/student/questions',
+      permissions: ['get']
     }]
   }]);
 };
