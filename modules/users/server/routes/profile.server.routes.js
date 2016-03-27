@@ -18,6 +18,8 @@ module.exports = function (app) {
   app.route('/api/recommendedMentor/:userId')
     .get(profilePolicy.isAllowed, profile.recommendedMentors);
 
+  app.route('/api/points/:userId').post(profilePolicy.isAllowed, profile.points);
+
   // Finish by binding the user middleware
   app.param('userId', profile.userByID);
 };

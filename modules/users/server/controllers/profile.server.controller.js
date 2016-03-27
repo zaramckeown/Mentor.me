@@ -167,3 +167,21 @@ exports.userByID = function (req, res, next, id) {
     next();
   });
 };
+
+exports.points = function(req, res) {
+  User.findById(req.params.userId).exec(function(err, users) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    users.points += 1;
+    users.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+    });
+  });
+};

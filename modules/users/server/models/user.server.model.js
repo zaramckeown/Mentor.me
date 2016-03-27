@@ -134,6 +134,10 @@ var UserSchema = new Schema({
       checkedInterviews: false,
       questionsChecked: false
     }
+  },
+  points: {
+    type: Number,
+    default: 0
   }
 });
 

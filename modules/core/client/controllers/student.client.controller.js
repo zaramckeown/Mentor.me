@@ -12,11 +12,21 @@ angular.module('core').controller('StudentController', ['$scope', 'Authenticatio
 
     });
 
+    $scope.passForQuestion = function() {
+
+    };
+
+    $scope.passForMentor = function() {
+
+    };
+
     $http.get('/api/student/questions').then(function(successCallback) {
 
       $scope.newQuestions = successCallback.data;
     }, function(errorCallback) {
 
     });
+
+
   }
 ]);

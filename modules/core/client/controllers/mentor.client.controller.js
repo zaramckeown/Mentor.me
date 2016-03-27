@@ -16,5 +16,17 @@ angular.module('core').controller('MentorController', ['$scope', 'Authentication
     }, function (errorCallback) {
       console.log(errorCallback);
     });
+
+    $scope.passForMessages = function() {
+
+
+
+     // $scope.newQuestions;
+
+    };
+
+    $scope.passForQuestions = function () {
+
+    };
   }
 ]);

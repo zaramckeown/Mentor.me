@@ -53,6 +53,10 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
           }
         }
       }
+
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+        $http.post('/api/points/'+$scope.currentUser);
+      }
     };
 
     $scope.downvote = function (questionId) {
@@ -75,7 +79,9 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
           }
         }
       }
-
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+        $http.post('/api/points/'+$scope.currentUser);
+      }
     };
 
     $scope.addComment = function () {
@@ -87,7 +93,6 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       if ($scope.comment === '') {
         return;
       }
-
       // Redirect after save
       comment.$save({ id: $stateParams.questionId }, function (response) {
         location.reload();
@@ -96,6 +101,10 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+          $http.post('/api/points/'+$scope.currentUser);
+      }
     };
 
     $scope.upvoteComment = function (questionId, commentId) {
@@ -130,6 +139,10 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         location.reload();
       } else {
         $scope.votedComment();
+      }
+
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+        $http.post('/api/points/'+$scope.currentUser);
       }
     };
 
@@ -166,6 +179,10 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
         location.reload();    
       } else {
         $scope.votedComment();
+      }
+
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+        $http.post('/api/points/'+$scope.currentUser);
       }
     };
 

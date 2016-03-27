@@ -27,6 +27,9 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+      if ($scope.authentication.user.roles[0] === 'mentor') {
+        $http.post('/api/points/'+$scope.authentication.user.id);
+      }
     };
 
     $scope.removeConvo = function (message) {
