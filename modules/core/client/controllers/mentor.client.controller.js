@@ -11,5 +11,10 @@ angular.module('core').controller('MentorController', ['$scope', 'Authentication
       console.log(errorCallback);
     });
 
+    $http.get('/api/messages').then(function(successCallback) {
+      $scope.messages = successCallback.data;
+    }, function (errorCallback) {
+      console.log(errorCallback);
+    });
   }
 ]);
