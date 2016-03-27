@@ -241,6 +241,8 @@ UserSchema.statics.generateRandomPassphrase = function () {
 };
 
 mongoose.model('User', UserSchema);
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+UserSchema.plugin(deepPopulate);
 UserSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.password;

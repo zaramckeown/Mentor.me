@@ -30,6 +30,71 @@ exports.list = function (req, res) {
   });
 };
 
+exports.topMentors = function(req, res) {
+
+};
+
+exports.recommendedMentors = function(req,res) {
+
+  User.findById(req.params.userId).deepPopulate('profile').exec(function (err, users) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+  //userProfile.profile.interests
+
+    var userSchoolsCoursename = [];
+    var userSchoolName = [];
+
+    for(var count = 0; count < users.profile.education.length; count++) {
+      userSchoolsCoursename.push(users.profile.education.courseTitle);
+      userSchoolName.push(users.profile.education.schoolName);
+    }
+
+    var userExperience = [];
+
+    for(var countExperience = 0; countExperience < users.profile.experience.length; countExperience++) {
+      userExperience.push(users.profile.experience.company);
+    }
+
+//{ '$and': [ { "roles":{ $all:[ 'mentor' ]} }]}
+    //{ "roles":{ $all:[ 'mentor' ]} }
+    User.find({ "$or": [{ "profile.interests": { "$in" : users.profile.interests } },
+      { "profile.location": users.profile.location}, { "profile.education.courseTitle": { "$in" : userSchoolsCoursename } },
+      { "profile.education.schoolName": { "$in" : userSchoolName } }, { "profile.experience.company": userExperience }]},  '-salt -password' +
+      ' -accessToken' +
+      ' -refreshToken').where('roles', 'mentor').exec(function(err, mentors) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+      //console.log(mentors);
+      /*for(var userCheck = 0; userCheck < mentors.length; userCheck++) {
+        //console.log(mentors[userCheck]);
+        if(mentors[userCheck].id === req.params.userId) {
+          mentors.splice(userCheck, 1);
+        }
+      }*/
+      if (!mentors)
+      {
+        User.find({}, '-salt -password -accessToken -refreshToken').where('roles', 'mentor').populate('user', 'displayName').exec(function (err, users) {
+          if (err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          }
+          res.json(users);
+        });
+      }
+      else {
+        res.json(mentors);
+      }
+    });
+  });
+};
+
 exports.search = function(req, res){
 
   var findQuery = {};

@@ -15,6 +15,9 @@ module.exports = function (app) {
   // Setting up the users profile api
   app.route('/api/users/:userId').get(profilePolicy.isAllowed, profile.read);
 
+  app.route('/api/recommendedMentor/:userId')
+    .get(profilePolicy.isAllowed, profile.recommendedMentors);
+
   // Finish by binding the user middleware
   app.param('userId', profile.userByID);
 };

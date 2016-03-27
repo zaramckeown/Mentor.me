@@ -15,6 +15,23 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
     .state('home', {
       url: '/',
+      abstract: true,
+      template: '<ui-view/>',
+      controller: 'HomeController'
+    })
+    .state('home.mentor', {
+      url:'',
+      controller: 'MentorController',
+      templateUrl: 'modules/core/client/views/mentor.client.view.html'
+    })
+    .state('home.student', {
+      url:'',
+      controller: 'StudentController',
+      templateUrl: 'modules/core/client/views/student.client.view.html'
+    })
+    .state('home.default', {
+      url:'',
+      controller: 'DefaultController',
       templateUrl: 'modules/core/client/views/home.client.view.html'
     })
     .state('not-found', {

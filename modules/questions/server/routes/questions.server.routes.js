@@ -33,6 +33,12 @@ module.exports = function (app) {
   app.route('/api/questions/:id/comments')
     .post(questions.addComment);
 
+  app.route('/api/mentor/questions')
+    .get(questionsPolicy.isAllowed, questions.mentor);
+
+  app.route('/api/student/questions')
+    .get(questionsPolicy.isAllowed, questions.students);
+
   // Finish by binding the article middleware
   app.param('questionId', questions.questionByID);
 };

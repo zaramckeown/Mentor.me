@@ -13,27 +13,6 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
-    allows: [{
-      resources: '/api/questions',
-      permissions: '*'
-    }, {
-      resources: '/api/questions/:questionId',
-      permissions: '*'
-    }, {
-      resources: '/api/questions/:questionId/upvote',
-      permissions: ['*']
-    }, {
-      resources: '/api/questions/:questionId/downvote',
-      permissions: ['*']
-    }, {
-      resources: '/api/questions/:questionId/upvotecomments',
-      permissions: ['*']
-    }, {
-      resources: '/api/questions/:questionId/downvotecomments',
-      permissions: ['*']
-    }]
-  }, {
     roles: ['student', 'mentor'],
     allows: [{
       resources: '/api/questions',
@@ -53,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/questions/:id/downvoteComments/:commentId',
       permissions: ['post']
+    }, {
+      resources: '/api/mentor/questions',
+      permissions: ['get']
     }]
   }]);
 };
