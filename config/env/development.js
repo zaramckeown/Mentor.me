@@ -50,13 +50,13 @@ module.exports = {
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || 'APP_ID',
-    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    clientID: process.env.LINKEDIN_ID || '77cz9xhbz9rocu',
+    clientSecret: process.env.LINKEDIN_SECRET || '3DCDZOBLRbqNiP9S',
     callbackURL: '/api/auth/linkedin/callback'
   },
   github: {
-    clientID: process.env.GITHUB_ID || 'APP_ID',
-    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    clientID: process.env.GITHUB_ID || 'e7171e40265aee3b2f8f',
+    clientSecret: process.env.GITHUB_SECRET || 'd18b6f548abdec56cec30d267418c35db41b8afe',
     callbackURL: '/api/auth/github/callback'
   },
   paypal: {

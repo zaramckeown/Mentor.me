@@ -31,7 +31,15 @@ exports.list = function (req, res) {
 };
 
 exports.topMentors = function(req, res) {
-
+  User.find({}, '-salt -password -accessToken -refreshToken').sort('-points').where('roles', 'mentor').
+  populate('user', 'displayName').exec(function (err, users) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(users);
+  });
 };
 
 exports.recommendedMentors = function(req,res) {
