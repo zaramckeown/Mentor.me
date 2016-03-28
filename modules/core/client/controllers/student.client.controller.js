@@ -12,6 +12,12 @@ angular.module('core').controller('StudentController', ['$scope', 'Authenticatio
 
     });
 
+    $http.get('/api/topMentor').then(function(successCallback) {
+      $scope.topMentors = successCallback.data;
+    }, function (errorCallback) {
+      console.log(errorCallback);
+    });
+
     $scope.passForQuestion = function() {
 
     };

@@ -9,7 +9,7 @@ angular.module('users.profile.routes').config(['$stateProvider',
         url: '/mentorSearch',
         template: '<ui-view/>',
         data: {
-          roles: ['admin', 'student']
+          roles: ['mentor', 'student']
         }
       })
       .state('profile.search', {
