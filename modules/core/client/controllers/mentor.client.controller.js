@@ -17,6 +17,12 @@ angular.module('core').controller('MentorController', ['$scope', 'Authentication
       console.log(errorCallback);
     });
 
+    $http.get('/api/topMentor').then(function(successCallback) {
+      $scope.topMentors = successCallback.data;
+    }, function (errorCallback) {
+      console.log(errorCallback);
+    });
+
     $scope.passForMessages = function() {
 
 

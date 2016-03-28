@@ -32,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/points/:userId',
       permissions: ['post']
+    }, {
+      resources: '/api/topMentor',
+      permissions: ['get']
     }]
   }]);
 };
