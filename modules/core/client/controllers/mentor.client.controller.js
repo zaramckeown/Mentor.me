@@ -23,16 +23,12 @@ angular.module('core').controller('MentorController', ['$scope', 'Authentication
       console.log(errorCallback);
     });
 
-    $scope.passForMessages = function() {
-
-
-
-     // $scope.newQuestions;
-
+    $scope.passForMessages = function(index) {
+      $scope.messages.splice(index, 1);
     };
 
-    $scope.passForQuestions = function () {
-
+    $scope.passForQuestions = function (index) {
+      $scope.newQuestions.splice(index, 1);
     };
   }
 ]);

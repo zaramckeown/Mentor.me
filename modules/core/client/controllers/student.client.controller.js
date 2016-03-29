@@ -18,14 +18,6 @@ angular.module('core').controller('StudentController', ['$scope', 'Authenticatio
       console.log(errorCallback);
     });
 
-    $scope.passForQuestion = function() {
-
-    };
-
-    $scope.passForMentor = function() {
-
-    };
-
     $http.get('/api/student/questions').then(function(successCallback) {
 
       $scope.newQuestions = successCallback.data;
@@ -33,6 +25,12 @@ angular.module('core').controller('StudentController', ['$scope', 'Authenticatio
 
     });
 
+    $scope.passForQuestion = function(index) {
+      $scope.newQuestions.splice(index, 1);
+    };
 
+    $scope.passForMentor = function(index) {
+      $scope.mentors.splice(index, 1);
+    };
   }
 ]);
