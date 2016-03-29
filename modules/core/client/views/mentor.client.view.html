@@ -22,9 +22,11 @@
                 </div>
               </div>
               <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold; ">
-                <div ng-repeat="messagesRecieved in newMessages.messages| orderBy: messagesRecieved.created: true | limitTo: 1">
-                  <div style="padding-top: 10px; padding-left: 10px;"
-                       ng-bind="messagesRecieved.sender.displayName"></div>
+                <div ng-if="newMessages.recipient._id === authentication.user.id">
+                  <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.sender.displayName"></div>
+                </div>
+                <div ng-if="newMessages.sender._id === authentication.user.id">
+                  <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.recipient.displayName"></div>
                 </div>
               </div>
             </div>
