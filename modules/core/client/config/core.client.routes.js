@@ -20,18 +20,15 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       controller: 'HomeController'
     })
     .state('home.mentor', {
-      url:'',
-      controller: 'MentorController',
+      url:'student',
       templateUrl: 'modules/core/client/views/mentor.client.view.html'
     })
     .state('home.student', {
-      url:'',
-      controller: 'StudentController',
+      url:'mentor',
       templateUrl: 'modules/core/client/views/student.client.view.html'
     })
     .state('home.default', {
       url:'',
-      controller: 'DefaultController',
       templateUrl: 'modules/core/client/views/home.client.view.html'
     })
     .state('not-found', {
