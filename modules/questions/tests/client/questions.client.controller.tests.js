@@ -1,17 +1,17 @@
 'use strict';
 
 (function () {
-  // Articles Controller Spec
-  describe('Articles Controller Tests', function () {
+  // Questions Controller Spec
+  describe('Questions Controller Tests', function () {
     // Initialize global variables
-    var ArticlesController,
+    var QuestionsController,
       scope,
       $httpBackend,
       $stateParams,
       $location,
       Authentication,
-      Articles,
-      mockArticle;
+      Questions,
+      mockQuestion;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -38,7 +38,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _Articles_) {
+    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _Questions_) {
       // Set a new global scope
       scope = $rootScope.$new();
 
@@ -47,10 +47,10 @@
       $httpBackend = _$httpBackend_;
       $location = _$location_;
       Authentication = _Authentication_;
-      Articles = _Articles_;
+      Questions = _Questions_;
 
-      // create mock article
-      mockArticle = new Articles({
+      // create mock question
+      mockQuestion = new Questions({
         _id: '525a8422f6d0f87f0e407a33',
         title: 'An Article about MEAN',
         content: 'MEAN rocks!'
@@ -58,51 +58,51 @@
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user']
+        roles: ['student']
       };
 
-      // Initialize the Articles controller.
-      ArticlesController = $controller('ArticlesController', {
+      // Initialize the Questions controller.
+      QuestionsController = $controller('QuestionsController', {
         $scope: scope
       });
     }));
 
-    it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function (Articles) {
-      // Create a sample articles array that includes the new article
-      var sampleArticles = [mockArticle];
+    it('$scope.find() should create an array with at least one question object fetched from XHR', inject(function (Questions) {
+      // Create a sample questions array that includes the new question
+      var sampleQuestion = [mockQuestion];
 
       // Set GET response
-      $httpBackend.expectGET('api/articles').respond(sampleArticles);
+      $httpBackend.expectGET('api/questions').respond(sampleQuestion);
 
       // Run controller functionality
       scope.find();
       $httpBackend.flush();
 
       // Test scope value
-      expect(scope.articles).toEqualData(sampleArticles);
+      expect(scope.questions).toEqualData(sampleQuestion);
     }));
 
-    it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
+    it('$scope.findOne() should create an array with one question object fetched from XHR using a questionId URL parameter', inject(function (Questions) {
       // Set the URL parameter
-      $stateParams.articleId = mockArticle._id;
+      $stateParams.questionId = mockQuestion._id;
 
       // Set GET response
-      $httpBackend.expectGET(/api\/articles\/([0-9a-fA-F]{24})$/).respond(mockArticle);
+      $httpBackend.expectGET(/api\/questions\/([0-9a-fA-F]{24})$/).respond(mockQuestion);
 
       // Run controller functionality
       scope.findOne();
       $httpBackend.flush();
 
       // Test scope value
-      expect(scope.article).toEqualData(mockArticle);
+      expect(scope.question).toEqualData(mockQuestion);
     }));
 
     describe('$scope.create()', function () {
-      var sampleArticlePostData;
+      var sampleQuestionPostData;
 
       beforeEach(function () {
-        // Create a sample article object
-        sampleArticlePostData = new Articles({
+        // Create a sample question object
+        sampleQuestionPostData = new Questions({
           title: 'An Article about MEAN',
           content: 'MEAN rocks!'
         });
@@ -114,9 +114,9 @@
         spyOn($location, 'path');
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (Questions) {
         // Set POST response
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.expectPOST('api/questions', sampleQuestionPostData).respond(mockQuestion);
 
         // Run controller functionality
         scope.create(true);
@@ -126,13 +126,13 @@
         expect(scope.title).toEqual('');
         expect(scope.content).toEqual('');
 
-        // Test URL redirection after the article was created
-        expect($location.path.calls.mostRecent().args[0]).toBe('articles/' + mockArticle._id);
+        // Test URL redirection after the question was created
+        expect($location.path.calls.mostRecent().args[0]).toBe('questions/' + mockQuestion._id);
       }));
 
       it('should set scope.error if save error', function () {
         var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('api/articles', sampleArticlePostData).respond(400, {
+        $httpBackend.expectPOST('api/questions', sampleQuestionPostData).respond(400, {
           message: errorMessage
         });
 
@@ -145,25 +145,25 @@
 
     describe('$scope.update()', function () {
       beforeEach(function () {
-        // Mock article in scope
-        scope.article = mockArticle;
+        // Mock question in scope
+        scope.question = mockQuestion;
       });
 
-      it('should update a valid article', inject(function (Articles) {
+      it('should update a valid question', inject(function (Questions) {
         // Set PUT response
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
+        $httpBackend.expectPUT(/api\/questions\/([0-9a-fA-F]{24})$/).respond();
 
         // Run controller functionality
         scope.update(true);
         $httpBackend.flush();
 
         // Test URL location to new object
-        expect($location.path()).toBe('/articles/' + mockArticle._id);
+        expect($location.path()).toBe('/questions/' + mockQuestion._id);
       }));
 
-      it('should set scope.error to error response message', inject(function (Articles) {
+      it('should set scope.error to error response message', inject(function (Questions) {
         var errorMessage = 'error';
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
+        $httpBackend.expectPUT(/api\/questions\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
         });
 
@@ -172,39 +172,6 @@
 
         expect(scope.error).toBe(errorMessage);
       }));
-    });
-
-    describe('$scope.remove(article)', function () {
-      beforeEach(function () {
-        // Create new articles array and include the article
-        scope.articles = [mockArticle, {}];
-
-        // Set expected DELETE response
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
-
-        // Run controller functionality
-        scope.remove(mockArticle);
-      });
-
-      it('should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
-        expect(scope.articles.length).toBe(1);
-      }));
-    });
-
-    describe('scope.remove()', function () {
-      beforeEach(function () {
-        spyOn($location, 'path');
-        scope.article = mockArticle;
-
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
-
-        scope.remove();
-        $httpBackend.flush();
-      });
-
-      it('should redirect to articles', function () {
-        expect($location.path).toHaveBeenCalledWith('articles');
-      });
     });
   });
 }());
