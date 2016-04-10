@@ -66,18 +66,15 @@ exports.recommendedMentors = function(req,res) {
       userExperience.push(users.profile.experience.company);
     }
 
-//{ '$and': [ { "roles":{ $all:[ 'mentor' ]} }]}
-    //{ "roles":{ $all:[ 'mentor' ]} }
     User.find({ "$or": [{ "profile.interests": { "$in" : users.profile.interests } },
-      { "profile.location": users.profile.location}, { "profile.education.courseTitle": { "$in" : userSchoolsCoursename } },
-      { "profile.education.schoolName": { "$in" : userSchoolName } }, { "profile.experience.company": userExperience }]},  '-salt -password' +
-      ' -accessToken' +
-      ' -refreshToken').where('roles', 'mentor').exec(function(err, mentors) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
+      { "profile.location": users.profile.location }, { "profile.education.courseTitle": { "$in" : userSchoolsCoursename } },
+      { "profile.education.schoolName": { "$in" : userSchoolName } }, { "profile.experience.company": userExperience }] },
+      '-salt -password -accessToken -refreshToken').where('roles', 'mentor').exec(function(err, mentors) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        }
       //console.log(mentors);
       /*for(var userCheck = 0; userCheck < mentors.length; userCheck++) {
         //console.log(mentors[userCheck]);
@@ -85,21 +82,21 @@ exports.recommendedMentors = function(req,res) {
           mentors.splice(userCheck, 1);
         }
       }*/
-      if (!mentors)
-      {
-        User.find({}, '-salt -password -accessToken -refreshToken').where('roles', 'mentor').populate('user', 'displayName').exec(function (err, users) {
-          if (err) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(err)
-            });
-          }
-          res.json(users);
-        });
-      }
-      else {
-        res.json(mentors);
-      }
-    });
+        if (!mentors)
+        {
+          User.find({}, '-salt -password -accessToken -refreshToken').where('roles', 'mentor').populate('user', 'displayName').exec(function (err, users) {
+            if (err) {
+              return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+              });
+            }
+            res.json(users);
+          });
+        }
+        else {
+          res.json(mentors);
+        }
+      });
   });
 };
 
