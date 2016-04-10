@@ -90,7 +90,7 @@ describe('User Model Unit Tests:', function () {
 
       _user1.save(function (err) {
         should.not.exist(err);
-        _user1.roles = ['user', 'admin'];
+        _user1.roles = ['student', 'mentor'];
         _user1.save(function (err) {
           should.not.exist(err);
           _user1.remove(function (err) {
@@ -357,25 +357,6 @@ describe('User Model Unit Tests:', function () {
           });
         } else {
           should.exist(err);
-          done();
-        }
-      });
-
-    });
-
-    it('should allow email address - "123@123"', function (done) {
-      var _user1 = new User(user1);
-
-      _user1.email = '123@123';
-      _user1.save(function (err) {
-        if (!err) {
-          _user1.remove(function (err_remove) {
-            should.not.exist(err);
-            should.not.exist(err_remove);
-            done();
-          });
-        } else {
-          should.not.exist(err);
           done();
         }
       });
