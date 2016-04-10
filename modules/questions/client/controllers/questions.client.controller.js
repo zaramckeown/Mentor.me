@@ -103,7 +103,7 @@ angular.module('questions').controller('QuestionsController', ['$scope', '$http'
       });
 
       if ($scope.authentication.user.roles[0] === 'mentor') {
-          $http.post('/api/points/'+$scope.currentUser);
+        $http.post('/api/points/' + $scope.currentUser);
       }
     };
 
