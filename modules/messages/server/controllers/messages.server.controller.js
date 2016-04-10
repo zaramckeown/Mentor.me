@@ -57,7 +57,7 @@ exports.list = function (req, res) {
 
 exports.findAllMessagesForUser = function (req, res) {
 
-  Conversations.find({ $or : [{ $and : [{ recipient : req.user._id }, { recipientDeleted : { $ne: true } }, { 'messages.1': { $exists: true } } ] }, { $and : [  { sender : req.user._id }, { senderDeleted : { $ne: true } } ] } ] }).deepPopulate('messages,sender, recipient, messages.sender').exec(function (err, messages) {
+  Conversations.find({ $or : [{ $and : [{ recipient : req.user._id }, { recipientDeleted : { $ne: true } }, { 'messages.1': { $exists: true } } ] }, { $and : [ { sender : req.user._id }, { senderDeleted : { $ne: true } } ] } ] }).deepPopulate('messages,sender, recipient, messages.sender').exec(function (err, messages) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -110,19 +110,6 @@ exports.removeMessage = function(req, res) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        Conversations.find(  { $or : [   { $and : [  { recipient : req.user._id }, { recipientDeleted : { $ne: true } } ] } ,  { $and : [  { sender : req.user._id }, { senderDeleted : { $ne: true } } ] }  ] }  ).deepPopulate('messages,sender, recipient').exec(function (err, messages) {
-          if (err) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(err)
-            });
-          } else if (!messages) {
-            return res.status(404).send({
-              message: 'No recipient with that identifier has been found'
-            });
-          }
-          res.json(messages);
         });
       }
     });
