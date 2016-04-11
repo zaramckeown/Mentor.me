@@ -100,8 +100,10 @@
 
     it('$scope.removeConvo() should delete a message object', inject(function (Messages) {
 
+      scope.messages = mockMessage;
       // Set the URL parameter
       $httpBackend.expectPOST('/api/messages/'+mockMessage._id).respond(204);
+      expect(scope.messages.length);
 
       scope.removeConvo(mockMessage);
       $httpBackend.flush();
@@ -125,6 +127,7 @@
       });
 
       it('should send a POST request with the form input values and then locate to new object URL', inject(function (Messages) {
+
         // Set POST response
         $httpBackend.expectPOST('api/messages', sampleMessagePostData).respond(mockMessage);
 

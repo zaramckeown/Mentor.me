@@ -32,7 +32,6 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     };
 
     $scope.removeConvo = function (message) {
-      console.log($scope.showMessages);
       $http.post('/api/messages/' + message._id).then(
         function (response) {
           for (var i = 0; i < $scope.messages.length; i++) {
