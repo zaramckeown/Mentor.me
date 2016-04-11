@@ -32,14 +32,23 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     };
 
     $scope.removeConvo = function (message) {
-      $scope.messages = null;
-      $scope.showMessages = null;
-      $http.post('/api/messages/' + message._id).then(function successCallback(response) {
-        $window.location.href = 'messages/';
+      console.log($scope.showMessages);
+      $http.post('/api/messages/' + message._id).then(
+        function (response) {
+          for (var i = 0; i < $scope.messages.length; i++) {
+            if ($scope.messages[i]._id === message._id) {
+              $scope.messages.splice([i], 1);
 
-      }, function errorCallback(response) {
-        console.log(response);
-      });
+              $scope.showMessages = Messages.messageByIdLookUp.get({
+                messageId: $scope.messages[0]._id
+              });
+            }
+          }
+        },
+        function (response) {
+          $scope.error = response.message;
+        }
+      );
     };
 
     $scope.find = function (messageId) {

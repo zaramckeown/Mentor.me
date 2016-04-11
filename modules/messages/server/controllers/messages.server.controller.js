@@ -112,6 +112,7 @@ exports.removeMessage = function(req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       }
+      res.json(messages);
     });
   });
 };
