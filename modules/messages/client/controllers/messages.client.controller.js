@@ -6,19 +6,18 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     $scope.authentication = Authentication;
 
     // Create new Message
-    $scope.create = function (messageId) {
+    $scope.create = function (convoId) {
 
       // Create new Message object
       var message = new Messages.lookup({
-        created: new Date(),
         content: this.content,
-        messageId: messageId
+        conversationId: convoId
       });
 
       // Redirect after save
       message.$save(function (response) {
         $scope.showMessages = Messages.messageByIdLookUp.get({
-          messageId: messageId
+          messageId: convoId
         });
         $location.path('messages/');
 
