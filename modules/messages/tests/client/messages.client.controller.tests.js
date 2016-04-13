@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  // Articles Controller Spec
+  // Messages Controller Spec
   describe('Messages Controller Tests', function () {
     // Initialize global variables
     var MessagesController,
@@ -53,7 +53,7 @@
       Authentication = _Authentication_;
       Messages = _Messages_;
 
-      // create mock article
+      // create mock message
       mockMessage = new Messages.lookup({
         _id: '525a8422f6d0f87f0e407a33',
         sender: '525a8422f6d0f87f0e407a55',
@@ -152,6 +152,14 @@
         $httpBackend.flush();
 
         expect(scope.error).toBe(errorMessage);
+      });
+
+      it('Should include CRUD methods', function() {
+        expect(scope.find).toBeDefined();
+        expect(scope.create).toBeDefined();
+        expect(scope.removeConvo).toBeDefined();
+        expect(scope.findMessages).toBeDefined();
+        expect(scope.formatDate).toBeDefined();
       });
     });
 
