@@ -17,8 +17,8 @@
       expect(Menus.menus.topbar).toBeDefined();
     });
 
-    it('should have default roles to user and admin', function() {
-      expect(Menus.defaultRoles).toEqual(['user', 'admin']);
+    it('should have default roles to mentor and student', function() {
+      expect(Menus.defaultRoles).toEqual(['student', 'mentor']);
     });
 
     describe('addMenu', function() {
@@ -428,3 +428,4 @@
     });
   });
 })();
+
