@@ -1,7 +1,8 @@
 'use strict';
 
 var validator = require('validator');
-
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport();
 /**
  * Render the main application page
  */
@@ -28,6 +29,24 @@ exports.renderIndex = function (req, res) {
     user: safeUserObject
   });
 };
+
+/**
+ * Send an email when the contact from is submitted
+ */
+exports.sendMail = function(req, res) {
+
+  var data = req.body;
+
+  transporter.sendMail({
+    from: data.contactEmail,
+    to: 'zaramckeown@gmail.com',
+    subject: 'Message from ' + data.contactName + ' Mentor.Me',
+    text: data.contactMsg
+  });
+
+  res.json(data);
+};
+
 
 /**
  * Render the server error page
