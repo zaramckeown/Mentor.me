@@ -18,7 +18,9 @@
     "angular-material": "^1.0.3",
     "angularjs-dropdown-multiselect": "^1.5.2",
     "ng-dialog": "^0.5.6",
-    "angular-advanced-searchbox": "^2.1.0"
+    "angular-advanced-searchbox": "^2.1.0",
+    "components-font-awesome": "~4.5.0",
+    "wowjs": "~1.1.0"
   },
   "resolutions": {
     "angular": "~1.3"

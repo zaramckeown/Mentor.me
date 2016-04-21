@@ -10,7 +10,9 @@ module.exports = {
         'public/lib/ng-dialog/css/ngDialog-theme-default.min.css',
         'public/lib/ng-dialog/css/ngDialog.min.css',
         'public/lib/ng-dialog/css/ngDialog-theme-plain.min.css',
-        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css'
+        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css',
+        'public/lib/components-font-awesome/css/font-awesome.min.css',
+        'public/lib/wowjs/css/libs/animate.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.js',
@@ -28,7 +30,8 @@ module.exports = {
         'public/lib/lodash/dist/lodash.js',
         'public/lib/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js',
         'public/lib/ng-dialog/js/ngDialog.js',
-        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js'
+        'public/lib/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js',
+        'public/lib/wowjs/dist/wow.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
@@ -67,4 +70,5 @@ module.exports = {
     policies: 'modules/*/server/policies/*.js',
     views: ['modules/*/server/views/*.html']
   }
+
 };
