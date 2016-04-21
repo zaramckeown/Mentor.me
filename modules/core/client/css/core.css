@@ -459,3 +459,11 @@ fieldset[disabled] .btn-primary.active {
   padding: 15px 30px;
 }
 
+.img-responsive {
+  padding: 100px;
+  color: #f8f8f8;
+  background: url(../img/mentor.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+
