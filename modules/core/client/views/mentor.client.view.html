@@ -1,114 +1,116 @@
-<div class="row" ng-controller="MentorController">
-  <div class="col-xs-10">
-    <div class="col-xs-12">
-      <h4>Recent Messages</h4>
-      <br>
-      <div class="list-group">
-        <div class="col-xs-12 col-sm-4" ng-repeat="newMessages in messages | limitTo:3">
-          <div class="list-group-item" style="width: 80%;">
-            <div class="row">
-              <div class="col-xs-2" style="padding: 0; margin: 0 !important; width: auto; padding-left: 5px">
-                <div ng-if="newMessages.recipient._id === authentication.user.id">
-                  <img style="min-height: 80px; max-height: 80px; width: 80px"
-                       ng-src="{{newMessages.sender.profileImageURL}}"
-                       alt="{{newMessages.sender.displayName}}"
-                       class="img-thumbnail img-circle user-profile-picture">
+<div class="container" ng-controller="MentorController">
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="col-xs-12">
+        <h4>Recent Messages</h4>
+        <br>
+        <div class="list-group">
+          <div class="col-xs-12 col-sm-4" ng-repeat="newMessages in messages | limitTo:3">
+            <div class="list-group-item" style="width: 80%;">
+              <div class="row">
+                <div class="col-xs-2" style="padding: 0; margin: 0 !important; width: auto; padding-left: 5px">
+                  <div ng-if="newMessages.recipient._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px"
+                         ng-src="{{newMessages.sender.profileImageURL}}"
+                         alt="{{newMessages.sender.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
+                  <div ng-if="newMessages.sender._id === authentication.user.id">
+                    <img style="min-height: 80px; max-height: 80px; width: 80px;"
+                         ng-src="{{newMessages.recipient.profileImageURL}}"
+                         alt="{{newMessages.recipient.displayName}}"
+                         class="img-thumbnail img-circle user-profile-picture">
+                  </div>
                 </div>
-                <div ng-if="newMessages.sender._id === authentication.user.id">
-                  <img style="min-height: 80px; max-height: 80px; width: 80px;"
-                       ng-src="{{newMessages.recipient.profileImageURL}}"
-                       alt="{{newMessages.recipient.displayName}}"
-                       class="img-thumbnail img-circle user-profile-picture">
+                <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold; ">
+                  <div ng-if="newMessages.recipient._id === authentication.user.id">
+                    <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.sender.displayName"></div>
+                  </div>
+                  <div ng-if="newMessages.sender._id === authentication.user.id">
+                    <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.recipient.displayName"></div>
+                  </div>
                 </div>
               </div>
-              <div class="col-xs-7" style="padding: 0 !important; margin: 0 !important; font-weight: bold; ">
-                <div ng-if="newMessages.recipient._id === authentication.user.id">
-                  <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.sender.displayName"></div>
+              </br>
+
+              <div class="row">
+                <div class="col-xs-6">
+                  <div ng-repeat="messagesRecieved in newMessages.messages| orderBy: messagesRecieved.created: true | limitTo: 1">
+                    <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="messagesRecieved.content"></div>
+                  </div>
                 </div>
-                <div ng-if="newMessages.sender._id === authentication.user.id">
-                  <div style="padding-top: 10px; padding-left: 10px;" ng-bind="newMessages.recipient.displayName"></div>
+              </div>
+
+              </br>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-6"  style="padding: 0 !important; margin: 0 !important;">
+                  <a style="padding-right: 5px;" ng-click="passForMessages($index)"> <md-button
+                    class="md-raised">Pass
+                  </md-button> </a>
                 </div>
+                <a ui-sref="messages.view({messageId: newMessages._id})"> <md-button class="md-raised" style="background-color:
+                  #00A000">View</md-button></a>
               </div>
             </div>
-            </br>
+          </div>
+        </div>
+      </div>
 
-            <div class="row">
-              <div class="col-xs-6">
-                <div ng-repeat="messagesRecieved in newMessages.messages| orderBy: messagesRecieved.created: true | limitTo: 1">
-                  <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="messagesRecieved.content"></div>
+      <div class="col-xs-12">
+        <br>
+        <h4>Recommended Questions</h4>
+        <div class="list-group">
+          <div class="col-xs-12 col-sm-4" ng-repeat="question in newQuestions | limitTo:3">
+            <br>
+            <div class="list-group-item" style="width: 80%;">
+              <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 text-center">
+                  <h4 ng-bind="question.title"></h4>
                 </div>
               </div>
-            </div>
 
-            </br>
+              </br>
 
-            <div class="row">
-              <div class="col-xs-12 col-sm-6"  style="padding: 0 !important; margin: 0 !important;">
-                <a style="padding-right: 5px;" ng-click="passForMessages($index)"> <md-button
-                  class="md-raised">Pass
-                </md-button> </a>
+              <div class="row">
+                <div class="col-xs-6">
+                  <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="question.content"></div>
+                </div>
               </div>
-              <a ui-sref="messages.view({messageId: newMessages._id})"> <md-button class="md-raised" style="background-color:
-                #00A000">View</md-button></a>
+
+              </br>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-6"  style="padding: 0 !important; margin: 0 !important;">
+                  <a ng-click="passForQuestions($index)"> <md-button class="md-raised">Pass</md-button> </a>
+                </div>
+                <a ui-sref="questions.view({questionId: question._id})"> <md-button class="md-raised" style="background-color:
+                  #00A000">View</md-button></a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-xs-12">
-      <br>
-      <h4>Recommended Questions</h4>
-      <div class="list-group">
-        <div class="col-xs-12 col-sm-4" ng-repeat="question in newQuestions | limitTo:3">
-          <br>
-          <div class="list-group-item" style="width: 80%;">
-            <div class="row">
-              <div class="col-xs-10 col-xs-offset-1 text-center">
-                <h4 ng-bind="question.title"></h4>
-              </div>
-            </div>
-
-            </br>
-
-            <div class="row">
-              <div class="col-xs-6">
-                <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="question.content"></div>
-              </div>
-            </div>
-
-            </br>
-
-            <div class="row">
-              <div class="col-xs-12 col-sm-6"  style="padding: 0 !important; margin: 0 !important;">
-                <a ng-click="passForQuestions($index)"> <md-button class="md-raised">Pass</md-button> </a>
-              </div>
-              <a ui-sref="questions.view({questionId: question._id})"> <md-button class="md-raised" style="background-color:
-                #00A000">View</md-button></a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-xs-2">
+      <h4>Top Mentors</h4>
     </div>
-  </div>
-  <div class="col-xs-2">
-    <h4>Top Mentors</h4>
-  </div>
-  <div class="col-xs-2" style="padding: 0 !important; margin: 0 !important;" ng-repeat="mentor in topMentors">
-    <div class="col-xs-12 ">
-      <br>
-      <div class="list-group-item">
-        <div class="row">
-          <div class="col-xs-2">
-            {{$index + 1}}.
-          </div>
-          <div class="col-xs-2" style="padding: 0; margin: 0 !important; width: auto; padding-left: 5px">
-            <img style="min-height: 30px; max-height: 30px; width: 30px"
-                 ng-src="{{mentor.profileImageURL}}"
-                 class="img-thumbnail img-circle user-profile-picture">
-          </div>
-          <div class="col-xs-2" style="padding: 0 !important; margin: 0 !important; padding-left: 3px">
-            <a style="padding-left: 6px;" ui-sref="profile.view({userId: mentor._id})" ng-bind="mentor.displayName"></a>
+    <div class="col-xs-2" style="padding: 0 !important; margin: 0 !important;" ng-repeat="mentor in topMentors">
+      <div class="col-xs-12 ">
+        <br>
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-xs-2">
+              {{$index + 1}}.
+            </div>
+            <div class="col-xs-2" style="padding: 0; margin: 0 !important; width: auto; padding-left: 5px">
+              <img style="min-height: 30px; max-height: 30px; width: 30px"
+                   ng-src="{{mentor.profileImageURL}}"
+                   class="img-thumbnail img-circle user-profile-picture">
+            </div>
+            <div class="col-xs-2" style="padding: 0 !important; margin: 0 !important; padding-left: 3px">
+              <a style="padding-left: 6px;" ui-sref="profile.view({userId: mentor._id})" ng-bind="mentor.displayName"></a>
+            </div>
           </div>
         </div>
       </div>
