@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core.profile').controller('DisplayUserProfileController', ['$scope', '$state', 'Authentication', '$stateParams', '$http',
-  function ($scope, $state, Authentication, $stateParams, $http) {
+angular.module('core.profile').controller('DisplayUserProfileController', ['$scope', '$state', 'Authentication', '$stateParams', '$http', 'Profile', '$location',
+  function ($scope, $state, Authentication, $stateParams, $http, Profile, $location) {
     $scope.authentication = Authentication;
 
     var path = '/api/users/' + $stateParams.userId;
@@ -31,6 +31,35 @@ angular.module('core.profile').controller('DisplayUserProfileController', ['$sco
         $scope.awardD.sdt.push({ dt : new Date($scope.user.profile.awards[i].date) });
       }
     });
+
+    $scope.sendMessage = function (userId) {
+
+      $scope.messages = Profile.Messages.get({ recipientId: userId },
+        function (successResponse) {
+          var result = JSON.stringify($scope.messages);
+          //console.log(Object.keys(result).length);
+
+          if (Object.keys(result).length === 2) {
+            var path = '/api/messages/create/' + userId;
+            $http.post(path).then(function (success) {
+              var messageId = success.data._id;
+              $location.path('messages/' + messageId);
+            }, function (error) {
+              console.log(error);
+            });
+          }
+          else {
+            //console.log(successResponse);
+            var messageId = successResponse._id;
+            $location.path('messages/' + messageId);
+          }
+        },
+        function (errorResponse) {
+          // failure callback
+          console.log(errorResponse);
+        }
+      );
+    };
   }
 ]);
 

@@ -1,7 +1,16 @@
 <section class="container" ng-controller="DisplayUserProfileController">
   <div class="page-header">
-    <h1 class=" themecolor">{{user.firstName}} {{user.lastName}}'s Profile </h1>
+    <div class="row">
+      <div class="col-xs-6">
+        <h1 class=" themecolor">{{user.firstName}} {{user.lastName}}'s Profile </h1>
+      </div>
+      <div class="col-xs-6" style="padding-top: 30px;">
+        <button style="float: right" ng-click="sendMessage(user._id)" type="button"
+                class="btn btn-success btn-lg">Message</button></div>
+    </div>
   </div>
+
+
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
