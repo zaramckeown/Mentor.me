@@ -6,7 +6,14 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
     $scope.authentication = Authentication;
 
     // Create new Message
-    $scope.create = function (convoId) {
+    $scope.create = function (convoId, isValid) {
+
+      $scope.error = null;
+
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'messageForm');
+        return false;
+      }
 
       // Create new Message object
       var message = new Messages.lookup({
