@@ -1,0 +1,55 @@
+<div data-ng-controller="ContactFormController" class="container">
+  <div class="row">
+    <div class="box">
+      <div class="col-lg-12">
+        <h2 class="intro-text text-center">Contact
+          <strong>form</strong>
+        </h2>
+        <hr>
+        <form name="contactForm" data-ng-submit="sendMail(contactForm.$valid)">
+          <div class="row">
+
+            <fieldset>
+              <div class="form-group col-lg-4" show-errors>
+                <label for="contactName">Name</label>
+                <input name="contactName" type="text" id="contactName" class="form-control"
+                       ng-model="contactName" required>
+                <div ng-messages="contactForm.contactName.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Name is required.</p>
+                </div>
+              </div>
+
+              <div class="form-group col-lg-4" show-errors>
+                <label for="contactEmail">Email</label>
+                <input name="contactEmail" type="text" id="contactEmail" class="form-control"
+                       ng-model="contactEmail" required>
+                <div ng-messages="contactForm.contactEmail.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Email is required.</p>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="form-group col-lg-12" show-errors>
+                <label for="contactMsg">Email</label>
+                <textarea name="contactMsg" class="form-control" rows="6" id="contactMsg" ng-model="contactMsg" required></textarea>
+                <div ng-messages="contactForm.contactMsg.$error" role="alert">
+                  <p class="help-block error-text" ng-message="required">Message is required.</p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-default">
+              </div>
+
+              <div ng-show="error" class="text-danger">
+                <strong ng-bind="error"></strong>
+              </div>
+
+            </fieldset>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
