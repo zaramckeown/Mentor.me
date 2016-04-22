@@ -1,6 +1,6 @@
-<section  ng-controller="MessagesController" ng-init="findMessages()">
+<section class="container" ng-controller="MessagesController" ng-init="findMessages()">
   <div class="page-header">
-    <h1>Messages</h1>
+    <h1 class=" themecolor">Messages</h1>
   </div>
 
   <div ng-hide="authentication.user.roles[0] === 'mentor' && !showMessages || !messages.length">
