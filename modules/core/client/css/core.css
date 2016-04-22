@@ -466,4 +466,6 @@ fieldset[disabled] .btn-primary.active {
   background-size: cover;
 }
 
-
+.themecolor {
+  color: #eb3c3a;
+}
