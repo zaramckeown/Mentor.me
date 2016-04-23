@@ -39,9 +39,10 @@
               </br>
 
               <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                   <div ng-repeat="messagesRecieved in newMessages.messages| orderBy: messagesRecieved.created: true | limitTo: 1">
-                    <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="messagesRecieved.content"></div>
+                    <div style="overflow: hidden; text-overflow: ellipsis;" ng-bind="messagesRecieved.content | cut:true:50:' ...'"></div>
+
                   </div>
                 </div>
               </div>
