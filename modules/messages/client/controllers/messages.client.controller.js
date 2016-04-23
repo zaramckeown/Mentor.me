@@ -77,6 +77,17 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
           $scope.showMessages = Messages.messageByIdLookUp.get({
             messageId: $stateParams.userId
           });
+
+          if (!data[0].messages.length) {
+            $scope.content = "Below is a potential template to initiate the conversation: \n\nHi ______, \n\nMy name" +
+              " is" +
+              " _________. I am" +
+              " currently" +
+              " studying ______" +
+              " at _______." +
+              " \n" +
+              "I am wondering  if you could help me with ____________. \n\nThanks, \n_______.";
+          }
         }
         else {
 
@@ -85,13 +96,25 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
 
             for (var count = 0; count < data.length; count++){
               convoId = data[0]._id;
+              if (!data[0].messages.length) {
+                $scope.content = "Below is a potential template to initiate the conversation: \n\nHi ______, \n\nMy name" +
+                  " is" +
+                  " _________. I am" +
+                  " currently" +
+                  " studying ______" +
+                  " at _______." +
+                  " \n" +
+                  "I am wondering  if you could help me with ____________. \n\nThanks, \n_______.";
+              }
             }
 
             $scope.showMessages = Messages.messageByIdLookUp.get({
               messageId: convoId
             });
+
           }
           else{
+
             $scope.messages = null;
             $scope.showMessages = null;
           }
