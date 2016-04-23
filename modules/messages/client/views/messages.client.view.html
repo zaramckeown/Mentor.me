@@ -144,18 +144,25 @@
                         <p class="help-block error-text" ng-message="required">Message is required.</p>
                       </div>
                     </div>
-                    <div ng-show="!showMessages.messages.length">
+                  </div>
+                  <div ng-if="!showMessages.messages.length">
+                    <div class="form-group" show-errors>
+                    <br>
                       <br>
                       <br>
-                      <br>
-                      <textarea name="template" ng-model="content" id="template" class="form-control" cols="30" rows="10"
-                                required>
+                      <label for="template"></label>
+                      <textarea ng-minlength="150" name="template" ng-model="content" id="template"
+                                                              class="form-control" cols="30"
+                                                              rows="10" ng-required="!showMessages.messages.length">
                       </textarea>
                       <div ng-messages="messageForm.template.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Message is required.</p>
                       </div>
+                      <div role="alert">
+                        <span class="error help-block error-text" ng-show="messageForm.template.$error.minlength">
+                          150 characters or more required for initial message.</span>
+                      </div>
                     </div>
-
                   </div>
                   <div class="form-group">
                     <input type="submit" class="btn btn-default">
