@@ -84,7 +84,8 @@ exports.recommendedMentors = function(req,res) {
       }*/
         if (!mentors)
         {
-          User.find({}, '-salt -password -accessToken -refreshToken').where('roles', 'mentor').populate('user', 'displayName').exec(function (err, users) {
+          User.find({}, '-salt -password -accessToken -refreshToken').sort('-points').where('roles', 'mentor').
+          populate('user', 'displayName').exec(function (err, users) {
             if (err) {
               return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
