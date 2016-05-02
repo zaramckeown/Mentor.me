@@ -15,7 +15,7 @@
         controller: 'ChatController',
         controllerAs: 'vm',
         data: {
-          roles: ['student','mentor', 'admin']
+          roles: ['student', 'mentor', 'admin']
         }
       });
   }

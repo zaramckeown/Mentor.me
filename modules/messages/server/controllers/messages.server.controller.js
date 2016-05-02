@@ -10,7 +10,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a question
+ * Create a message
  */
 exports.create = function (req, res) {
   var conversations = new Conversations();
