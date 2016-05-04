@@ -10,11 +10,7 @@ module.exports = {
   // Binding to 127.0.0.1 is safer in production.
   host: process.env.HOST || '0.0.0.0',
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
-    options: {
-      user: '',
-      pass: ''
-    },
+    uri:'mongodb://<zara>:<snowball12>@ds013212.mlab.com:13212/mentorme',
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
@@ -53,13 +49,13 @@ module.exports = {
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || 'APP_ID',
-    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    clientID: process.env.LINKEDIN_ID || '77cz9xhbz9rocu',
+    clientSecret: process.env.LINKEDIN_SECRET || '3DCDZOBLRbqNiP9S',
     callbackURL: '/api/auth/linkedin/callback'
   },
   github: {
-    clientID: process.env.GITHUB_ID || 'APP_ID',
-    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    clientID: process.env.GITHUB_ID || 'e7171e40265aee3b2f8f',
+    clientSecret: process.env.GITHUB_SECRET || 'd18b6f548abdec56cec30d267418c35db41b8afe',
     callbackURL: '/api/auth/github/callback'
   },
   paypal: {
