@@ -1,5 +1,5 @@
 'use strict';
-new WOW().init();
+//new WOW().init();
 angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$state',
   function ($scope, Authentication, $state) {
     // This provides Authentication context.
