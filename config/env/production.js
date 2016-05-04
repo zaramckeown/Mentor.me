@@ -1,9 +1,14 @@
 'use strict';
 
 module.exports = {
+  secure: {
+    ssl: true,
+    privateKey: './config/sslcerts/key.pem',
+    certificate: './config/sslcerts/cert.pem'
+  },
   port: process.env.PORT || 8443,
   // Binding to 127.0.0.1 is safer in production.
-  host: process.env.HOST || '127.0.0.1',
+  host: process.env.HOST || '0.0.0.0',
   db: {
     uri: 'mongodb://admin:snowball12@ds013212.mlab.com:13212/mentorme',
     // Enable mongoose debug mode
@@ -20,7 +25,7 @@ module.exports = {
         directoryPath: process.env.LOG_DIR_PATH || process.cwd(),
         fileName: process.env.LOG_FILE || 'access.log',
         rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
-          active: process.env.LOG_ROTATING_ACTIVE === 'true' ? true : false, // activate to use rotating logs 
+          active: process.env.LOG_ROTATING_ACTIVE === 'true' ? true : false, // activate to use rotating logs
           fileName: process.env.LOG_ROTATING_FILE || 'access-%DATE%.log', // if rotating logs are active, this fileName setting will be used
           frequency: process.env.LOG_ROTATING_FREQUENCY || 'daily',
           verbose: process.env.LOG_ROTATING_VERBOSE === 'true' ? true : false
@@ -44,8 +49,8 @@ module.exports = {
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || '77cz9xhbz9rocu',
-    clientSecret: process.env.LINKEDIN_SECRET || '3DCDZOBLRbqNiP9S',
+    clientID: process.env.LINKEDIN_ID || 'APP_ID',
+    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/linkedin/callback'
   },
   github: {
