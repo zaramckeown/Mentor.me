@@ -8,7 +8,7 @@ module.exports = {
   },
   port: process.env.PORT || 8443,
   // Binding to 127.0.0.1 is safer in production.
-  host: process.env.HOST || '0.0.0.0',
+  host: process.env.HOST || '127.0.0.1',
   db: {
     uri: 'mongodb://admin:snowball12@ds013212.mlab.com:13212/mentorme',
     // Enable mongoose debug mode

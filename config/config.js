@@ -52,7 +52,7 @@ var getGlobbedPaths = function (globPatterns, excludes) {
  * Validate NODE_ENV existence
  */
 var validateEnvironmentVariable = function () {
-  var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
+  var environmentFiles = glob.sync('./config/env/' + 'production' + '.js');
   console.log();
   if (!environmentFiles.length) {
     if (process.env.NODE_ENV) {
