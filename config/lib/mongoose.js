@@ -22,7 +22,7 @@ module.exports.loadModels = function (callback) {
 module.exports.connect = function (cb) {
   var _this = this;
 
-  var db = mongoose.connect("mongodb://localhost/MentorMe/mean", function (err) {
+  var db = mongoose.connect("mongodb://admin:snowball12@ds013212.mlab.com:13212/mentorme", function (err) {
     // Log Error
     if (err) {
       console.error(chalk.red('Could not connect to MongoDB!'));
