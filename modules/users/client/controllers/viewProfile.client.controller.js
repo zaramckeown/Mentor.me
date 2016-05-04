@@ -62,6 +62,3 @@ angular.module('core.profile').controller('DisplayUserProfileController', ['$sco
     };
   }
 ]);
-
-
-

@@ -1,6 +1,7 @@
-/**
+/*
+/!**
  * Chat client controller tests
- */
+ *!/
 (function () {
   'use strict';
 
@@ -92,3 +93,4 @@
     });
   });
 })();
+*/

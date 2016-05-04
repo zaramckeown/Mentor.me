@@ -1,4 +1,3 @@
-/*
 'use strict';
 
 var should = require('should'),
@@ -9,15 +8,15 @@ var should = require('should'),
   Article = mongoose.model('Article'),
   express = require(path.resolve('./config/lib/express'));
 
-/!**
+/**
  * Globals
- *!/
+ */
 var app, agent, credentials, user, article;
 
-/!**
+/**
  * Article routes tests
- *!/
-describe('Articale CRUD tests', function () {
+ */
+describe('Article CRUD tests', function () {
 
   before(function (done) {
     // Get application
@@ -320,4 +319,3 @@ describe('Articale CRUD tests', function () {
     });
   });
 });
-*/

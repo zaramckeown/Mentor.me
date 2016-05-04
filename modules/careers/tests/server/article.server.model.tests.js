@@ -1,22 +1,21 @@
-/*
 'use strict';
 
-/!**
+/**
  * Module dependencies.
- *!/
+ */
 var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   Article = mongoose.model('Article');
 
-/!**
+/**
  * Globals
- *!/
+ */
 var user, article;
 
-/!**
+/**
  * Unit tests
- *!/
+ */
 describe('Article Model Unit Tests:', function () {
 
   beforeEach(function (done) {
@@ -65,4 +64,3 @@ describe('Article Model Unit Tests:', function () {
     });
   });
 });
-*/

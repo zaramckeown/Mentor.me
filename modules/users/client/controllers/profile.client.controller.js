@@ -24,16 +24,28 @@ angular.module('core.profile').controller('MentorListController', ['$scope', '$f
       { key: "interests", name: "Interest", placeholder: "Interest..." },
       { key: "helpswith", name: "Helps with", placeholder: "Helps with...", suggestedValues: ['cv', 'general advice', 'interviews'], restrictToSuggestedValues: true }
     ];
+
+    $scope.$on('advanced-searchbox:addedSearchParam', function (event, searchParameter) {
+      ///
+    });
+
+    $scope.$on('advanced-searchbox:removedSearchParam', function (event, searchParameter) {
+      ///
+    });
+
+    $scope.$on('advanced-searchbox:removedAllSearchParam', function (event) {
+      ///
+    });
+
     $scope.$on('advanced-searchbox:enteredEditMode', function (event, searchParameter) {
       ///
     });
 
     $scope.$on('advanced-searchbox:leavedEditMode', function (event, searchParameter) {
-
+      ///
     });
 
     $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
-
       Profile.Search.query(model, function(result)
       {
         $scope.users = result;
