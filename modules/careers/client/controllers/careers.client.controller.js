@@ -1,8 +1,8 @@
 'use strict';
 
 // Articles controller
-angular.module('careers').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-  function ($scope, $stateParams, $location, Authentication, Articles) {
+angular.module('careers').controller('CareersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Careers', '$sce',
+  function ($scope, $stateParams, $location, Authentication, Careers, $sce) {
     $scope.authentication = Authentication;
 
     // Create new Article
@@ -10,42 +10,46 @@ angular.module('careers').controller('ArticlesController', ['$scope', '$statePar
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'articleForm');
+        $scope.$broadcast('show-errors-check-validity', 'careersForm');
 
         return false;
       }
 
       // Create new Article object
-      var article = new Articles({
+      var career = new Careers({
         title: this.title,
-        content: this.content
+        content: this.content,
+        link: this.link,
+        company: this.company
       });
 
       // Redirect after save
-      article.$save(function (response) {
-        $location.path('articles/' + response._id);
+      career.$save(function (response) {
+        $location.path('careers/' + response._id);
 
         // Clear form fields
         $scope.title = '';
         $scope.content = '';
+        $scope.company = '';
+        $scope.link = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
     // Remove existing Article
-    $scope.remove = function (article) {
-      if (article) {
-        article.$remove();
+    $scope.remove = function (careers) {
+      if (careers) {
+        careers.$remove();
 
-        for (var i in $scope.articles) {
-          if ($scope.articles[i] === article) {
-            $scope.articles.splice(i, 1);
+        for (var i in $scope.careers) {
+          if ($scope.careers[i] === careers) {
+            $scope.careers.splice(i, 1);
           }
         }
       } else {
-        $scope.article.$remove(function () {
-          $location.path('articles');
+        $scope.careers.$remove(function () {
+          $location.path('careers');
         });
       }
     };
@@ -55,15 +59,15 @@ angular.module('careers').controller('ArticlesController', ['$scope', '$statePar
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'articleForm');
+        $scope.$broadcast('show-errors-check-validity', 'careersForm');
 
         return false;
       }
 
-      var article = $scope.article;
+      var careers = $scope.careers;
 
-      article.$update(function () {
-        $location.path('articles/' + article._id);
+      careers.$update(function () {
+        $location.path('careers/' + careers._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -71,14 +75,26 @@ angular.module('careers').controller('ArticlesController', ['$scope', '$statePar
 
     // Find a list of Articles
     $scope.find = function () {
-      $scope.articles = Articles.query();
+      $scope.careers = Careers.query();
     };
 
     // Find existing Article
     $scope.findOne = function () {
-      $scope.article = Articles.get({
-        articleId: $stateParams.articleId
+      $scope.careers = Careers.get({
+        careersId: $stateParams.careersId
       });
+    };
+
+    $scope.redirect = function (link) {
+      var substring = "http";
+      if (link.indexOf(substring) > -1) {
+        return $sce.trustAsResourceUrl(link);
+      }
+      else {
+        link = "https://"+ link;
+        return $sce.trustAsResourceUrl(link);
+      }
+
     };
   }
 ]);

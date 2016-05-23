@@ -1,20 +1,25 @@
-<section ng-controller="ArticlesController" ng-init="find()">
-  <div class="page-header">
-    <h1>Articles</h1>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="article in articles" ui-sref="articles.view({articleId: article._id})" class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="article.created | date:'mediumDate'"></span>
-        by
-        <span ng-bind="article.user.displayName"></span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
-      <p class="list-group-item-text" ng-bind="article.content"></p>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="articles.$resolved && !articles.length">
-    No articles yet, why don't you <a ui-sref="articles.create">create one</a>?
-  </div>
+<section class="container">
+  <section ng-controller="CareersController" ng-init="find()">
+    <div class="page-header">
+      <h1>Careers</h1>
+    </div>
+    <div class="list-group">
+      <a ng-repeat="careers in careers" ui-sref="careers.view({careersId: careers._id})" class="list-group-item">
+        <small class="list-group-item-text">
+          Posted on
+          <span ng-bind="careers.created | date:'mediumDate'"></span>
+          by
+          <span ng-bind="careers.user.displayName"></span>
+        </small>
+        <h4 class="list-group-item-heading" ng-bind="careers.title"></h4>
+        <p class="list-group-item-text" ng-bind="careers.company"></p>
+      </a>
+    </div>
+    <div class="alert alert-warning text-center" ng-if="careers.$resolved && !careers.length">
+      No careers posted yet, why dont you post one? <a ui-sref="careers.create">create one</a>?
+    </div>
+  </section>
 </section>
+
+
+

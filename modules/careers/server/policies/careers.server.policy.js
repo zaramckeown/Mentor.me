@@ -18,7 +18,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/careers',
       permissions: '*'
     }, {
-      resources: '/api/careers/:careerId',
+      resources: '/api/careers/:careersId',
       permissions: '*'
     }]
   }, {
@@ -49,7 +49,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an article is being processed and the current user created it then allow any manipulation
-  if (req.article && req.user && req.article.user.id === req.user.id) {
+  if (req.article && req.user && req.careers.user.id === req.user.id) {
     return next();
   }
 

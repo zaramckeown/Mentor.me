@@ -13,11 +13,11 @@ module.exports = function (app) {
     .post(careers.create);
 
   // Single article routes
-  app.route('/api/careers/:careerId').all(careersPolicy.isAllowed)
+  app.route('/api/careers/:careersId').all(careersPolicy.isAllowed)
     .get(careers.read)
     .put(careers.update)
     .delete(careers.delete);
 
   // Finish by binding the article middleware
-  app.param('careerId', careers.careerByID);
+  app.param('careersId', careers.careerByID);
 };

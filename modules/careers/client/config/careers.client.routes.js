@@ -22,11 +22,11 @@ angular.module('careers').config(['$stateProvider',
         }
       })
       .state('careers.view', {
-        url: '/:articleId',
+        url: '/:careersId',
         templateUrl: 'modules/careers/client/views/view-careers.client.view.html'
       })
       .state('careers.edit', {
-        url: '/:articleId/edit',
+        url: '/:careersId/edit',
         templateUrl: 'modules/careers/client/views/edit-careers.client.view.html',
         data: {
           roles: ['student', 'mentor']

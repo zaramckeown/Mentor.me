@@ -1,22 +1,32 @@
-<section ng-controller="ArticlesController" ng-init="findOne()">
-  <div class="page-header">
-    <h1 ng-bind="article.title"></h1>
-  </div>
-  <div class="pull-right" ng-show="authentication.user._id == article.user._id">
-    <a class="btn btn-primary" ui-sref="articles.edit({articleId: article._id})">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="remove();">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="article.created | date:'mediumDate'"></span>
-      by
-      <span ng-bind="article.user.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="article.content"></p>
+<section class="container">
+  <section ng-controller="CareersController" ng-init="findOne()">
+    <div class="page-header">
+      <h1 ng-bind="careers.title"></h1>
+    </div>
+    <div class="pull-right" ng-show="authentication.user._id == careers.user._id">
+      <a class="btn btn-primary" ui-sref="careers.edit({careersId: careers._id})">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-primary" ng-click="remove();">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <small>
+      <em class="text-muted">
+        Posted on
+        <span ng-bind="careers.created | date:'mediumDate'"></span>
+        by
+        <span ng-bind="careers.user.displayName"></span>
+      </em>
+    </small>
+
+    <p style="padding-top: 20px;">Company Name</p>
+    <p class="lead" ng-bind="careers.company"></p>
+
+    <p style="padding-top: 20px;">Job Description</p>
+    <p class="lead" ng-bind="careers.content"></p>
+
+    <a style="padding-top: 20px;" target="_blank" ng-href="{{ redirect(careers.link) }}">Application Link</a>
+
+  </section>
 </section>

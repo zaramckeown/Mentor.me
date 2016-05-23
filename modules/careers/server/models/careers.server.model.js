@@ -28,6 +28,12 @@ var CareersSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  link: {
+    type: String
+  },
+  company: {
+    type: String
   }
 });
 
