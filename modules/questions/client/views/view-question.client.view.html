@@ -88,7 +88,8 @@
             </div>
 
             <div class="col-xs-10">
-              <span style="font-weight: 900" ng-bind="comment.user.displayName"></span>
+              <a style="font-weight: 900;" ui-sref="profile.view({userId: comment.user._id})"
+                 ng-bind="comment.user.displayName"></a>
               - <span ng-bind="comment.created | date:'mediumDate'"></span>
               <p class="lead" style="width: 900px;"
                  ng-bind="comment.body"></p>
